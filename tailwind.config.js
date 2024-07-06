@@ -87,6 +87,11 @@ module.exports = {
                 "collapsible-down": "collapsible-down 0.2s ease-in-out",
                 "collapsible-up": "collapsible-up 0.2s ease-in-out",
             },
+            fontFamily: {
+                sans: "var(--sans-font)",
+                serif: "var(--serif-font)",
+                mono: "var(--mono-font)",
+            }
         },
     },
     plugins: [

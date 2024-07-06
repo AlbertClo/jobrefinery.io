@@ -22,8 +22,8 @@ const mode = useColorMode()
         <header class="absolute inset-x-0 top-0 z-50">
             <nav class="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
                 <Link href="/" class="flex lg:flex-1 text-2xl font-bold text-gradient-to-tr from-yellow-400 to-red-600">
-                    <h1 class="text-primary sm:text-xl text-2xl lg:text-3xl font-semibold">
-                        Job<span class="text-foreground">Refinery</span>
+                    <h1 class="text-primary sm:text-xl text-2xl lg:text-3xl font-bold">
+                        Job<span class="text-foreground font-serif font-thin">Refinery</span>
                     </h1>
                 </Link>
                 <div class="flex lg:hidden">
