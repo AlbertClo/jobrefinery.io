@@ -1,6 +1,6 @@
 <script setup>
 import { Link } from '@inertiajs/vue3'
-import {Button} from '@/components/ui/button'
+import {Button} from '@/components/shadcn/button'
 import GuestLayout from "@/Layouts/GuestLayout.vue";
 
 </script>
@@ -12,10 +12,10 @@ import GuestLayout from "@/Layouts/GuestLayout.vue";
                 <div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
                     <div class="text-center">
                         <h1 class="text-4xl font-bold tracking-tight text-foreground sm:text-6xl">
-                            Your <span class="font-serif font-light">unfair advantage</span><br>job hunting
+                            Your <span class="font-serif font-light">unfair advantage</span><br> in job hunting
                         </h1>
                         <p class="mt-6 text-lg leading-8 text-popover-foreground">
-                            Find more relevant jobs. Land a better job.
+                            Get a feed of relevant jobs in your inbox, collected from across the web.
                         </p>
                         <div class="mt-10 flex items-center justify-center gap-x-6">
                             <Link :href="route('register')" class="flex flex-row gap-4">

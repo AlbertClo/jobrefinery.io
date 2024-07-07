@@ -1,11 +1,12 @@
-<script setup>
-import {ref} from 'vue'
+<script setup lang="ts">
+import {ref, watch} from 'vue'
 import {Dialog, DialogPanel} from '@headlessui/vue'
 import {Bars3Icon, XMarkIcon} from '@heroicons/vue/24/outline'
-import {useColorMode} from "@vueuse/core";
-import {Button} from '@/components/ui/button'
+import {useCycleList} from "@vueuse/core";
+import {Button} from '@/components/shadcn/button'
+import {Link} from '@inertiajs/vue3'
 import {Icon} from "@iconify/vue";
-import { Link } from '@inertiajs/vue3'
+import ThemeCyclerButton from "@/components/job-refinery/theme-switchers/theme-cycler-button/ThemeCyclerButton.vue";
 
 const navigation = [
     {name: 'Jobs', href: '#'},
@@ -14,7 +15,16 @@ const navigation = [
 
 const mobileMenuOpen = ref(false)
 
-const mode = useColorMode()
+// const themes = ['theme-midnight', 'theme-arizona'];
+// const {state: selectedTheme, next: selectNextTheme} = useCycleList(themes, {initialValue: themes[0]})
+// document.documentElement.classList.add(themes[0]);
+// watch(selectedTheme, async (newTheme, oldTheme) => {
+//     // remove old theme
+//     document.documentElement.classList.remove(oldTheme);
+//
+//     // add new theme
+//     document.documentElement.classList.add(newTheme);
+// })
 </script>
 
 <template>
@@ -39,13 +49,7 @@ const mode = useColorMode()
                        class="text-sm font-semibold leading-6 text-popover-foreground">{{ item.name }}</a>
                 </div>
                 <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-                    <Button variant="outline" class="mr-8" @click="mode = mode === 'dark' ? 'light' : 'dark'">
-                        <Icon icon="radix-icons:moon"
-                              class="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"/>
-                        <Icon icon="radix-icons:sun"
-                              class="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"/>
-                        <span class="sr-only">Toggle theme</span>
-                    </Button>
+                    <ThemeCyclerButton variant="outline" class="mr-4" />
                     <a href="#"
                        class="flex items-center justify-center text-sm font-semibold text-popover-foreground">
                         Sign in <span aria-hidden="true">&rarr;</span>
@@ -57,13 +61,6 @@ const mode = useColorMode()
                 <DialogPanel
                     class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white dark:bg-stone-950 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
                     <div class="flex justify-end">
-                        <Button variant="outline" class="mr-8" @click="mode = mode === 'dark' ? 'light' : 'dark'">
-                            <Icon icon="radix-icons:moon"
-                                  class="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"/>
-                            <Icon icon="radix-icons:sun"
-                                  class="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"/>
-                            <span class="sr-only">Toggle theme</span>
-                        </Button>
                         <button type="button" class="-m-2.5 rounded-md p-2.5 text-stone-700 dark:text-stone-100"
                                 @click="mobileMenuOpen = false">
                             <span class="sr-only">Close menu</span>
@@ -92,7 +89,7 @@ const mode = useColorMode()
 
         <div class="flex items-center justify-center min-h-screen">
 
-        <slot></slot>
+            <slot></slot>
 
         </div>
     </div>

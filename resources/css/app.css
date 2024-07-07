@@ -8,6 +8,14 @@
 
 @layer base {
     :root {
+        --radius: 0.3rem;
+
+        --sans-font: Lato, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        --serif-font: Cardo, ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+        --mono-font: JetBrains Mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+
+    .theme-midnight {
         --midnight: hsl(238, 100%, 6%);
         --dark: hsl(238, 32%, 16%);
         --dusk: hsl(238, 24%, 23%);
@@ -47,14 +55,9 @@
         --border: var(--dusk);
         --input: var(--dusk);
         --ring: var(--neon-yellow);
-        --radius: 0.3rem;
-
-        --sans-font: Lato, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-        --serif-font: Cardo, ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-        --mono-font: JetBrains Mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     }
 
-    .dark {
+    .theme-rustic-earth {
         --white: hsl(0 0% 100%);
         --dark-brown: hsl(25, 33%, 23%);
         --very-dark-brown: hsl(32, 23%, 13%);
@@ -64,7 +67,8 @@
         --black-soil: hsl(24 9.8% 10%);
         --warm-grey: hsl(25 5.3% 44.7%);
         --coral: hsl(0 84.2% 60.2%);
-        --dull-orange: hsl(33, 76%, 63%);
+        --olive-green: hsl(87, 33%, 45%);
+        --mushroom: hsl(21, 27%, 72%);
 
         --background: var(--white);
         --foreground: var(--dark-brown);
@@ -75,25 +79,24 @@
         --popover: var(--white);
         --popover-foreground: var(--clay);;
 
-        --primary: var(--orange);
+        --primary: var(--olive-green);
         --primary-foreground: var(--pale-grey);
 
-        --secondary: var(--pale-grey);
+        --secondary: var(--mushroom);
         --secondary-foreground: var(--black-soil);
 
         --muted: var(--pale-grey);
         --muted-foreground: var(--warm-grey);
 
         --accent: var(--pale-grey);
-        --accent-foreground: var(--dull-orange);
+        --accent-foreground: var(--orange);
 
         --destructive: var(--coral);
         --destructive-foreground: var(--pale-grey);
 
         --border: var(--pale-grey);
         --input: var(--pale-grey);
-        --ring: var(--orange);
-        --radius: 0.25rem;
+        --ring: var(--olive-green);
     }
 }
 
