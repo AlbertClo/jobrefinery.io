@@ -1,6 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Cardo:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Cardo:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -10,9 +10,13 @@
     :root {
         --radius: 0.3rem;
 
-        --sans-font: Lato, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-        --serif-font: Cardo, ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-        --mono-font: JetBrains Mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        --sans-font: Lato, ui-sans-serif, system-ui, sans-serif,
+            "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+            "Noto Color Emoji";
+        --serif-font: Cardo, ui-serif, Georgia, Cambria, "Times New Roman",
+            Times, serif;
+        --mono-font: JetBrains Mono, ui-monospace, SFMono-Regular, Menlo, Monaco,
+            Consolas, "Liberation Mono", "Courier New", monospace;
     }
 
     .theme-midnight {
@@ -77,7 +81,7 @@
         --card-foreground: var(--very-dark-brown);
 
         --popover: var(--white);
-        --popover-foreground: var(--clay);;
+        --popover-foreground: var(--clay);
 
         --primary: var(--olive-green);
         --primary-foreground: var(--pale-grey);
@@ -99,7 +103,6 @@
         --ring: var(--olive-green);
     }
 }
-
 
 @layer base {
     * {

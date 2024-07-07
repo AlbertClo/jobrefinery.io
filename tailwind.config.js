@@ -1,4 +1,4 @@
-const animate = require("tailwindcss-animate")
+const animate = require("tailwindcss-animate");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -63,20 +63,20 @@ module.exports = {
             },
             keyframes: {
                 "accordion-down": {
-                    from: {height: 0},
-                    to: {height: "var(--radix-accordion-content-height)"},
+                    from: { height: 0 },
+                    to: { height: "var(--radix-accordion-content-height)" },
                 },
                 "accordion-up": {
-                    from: {height: "var(--radix-accordion-content-height)"},
-                    to: {height: 0},
+                    from: { height: "var(--radix-accordion-content-height)" },
+                    to: { height: 0 },
                 },
                 "collapsible-down": {
-                    from: {height: 0},
-                    to: {height: 'var(--radix-collapsible-content-height)'},
+                    from: { height: 0 },
+                    to: { height: "var(--radix-collapsible-content-height)" },
                 },
                 "collapsible-up": {
-                    from: {height: 'var(--radix-collapsible-content-height)'},
-                    to: {height: 0},
+                    from: { height: "var(--radix-collapsible-content-height)" },
+                    to: { height: 0 },
                 },
             },
             animation: {
@@ -89,11 +89,8 @@ module.exports = {
                 sans: "var(--sans-font)",
                 serif: "var(--serif-font)",
                 mono: "var(--mono-font)",
-            }
+            },
         },
     },
-    plugins: [
-        animate,
-        require('@tailwindcss/forms'),
-    ],
-}
+    plugins: [animate, require("@tailwindcss/forms")],
+};
