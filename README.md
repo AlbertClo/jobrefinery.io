@@ -34,6 +34,12 @@ Run database migrations
 ./vendor/bin/sail artisan migrate
 ```
 
+Run Larastan for static analysis
+
+```
+./vendor/bin/sail composer analyse
+```
+
 Install NPM dependencies
 
 ```
