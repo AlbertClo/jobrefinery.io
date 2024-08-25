@@ -13,16 +13,14 @@ return new class extends Migration
     {
         Schema::create('cached_pages', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('job_site_id')->nullable();
-            $table->uuid('parent_id')->nullable();
+            $table->foreignUuid('job_site_id', 'job_sites', 'id')->index()->constrained()->onDelete('cascade');
+            $table->foreignUuid('parent_id')->nullable()->index();
             $table->string('url_full');
             $table->string('url_origin');
             $table->string('url_pathname');
             $table->json('query_params')->nullable();
             $table->text('document');
             $table->timestamp('created_at')->useCurrent();
-
-            $table->foreign('job_site_id')->references('id')->on('job_sites')->onDelete('cascade');
         });
 
         Schema::table('cached_pages', function (Blueprint $table) {

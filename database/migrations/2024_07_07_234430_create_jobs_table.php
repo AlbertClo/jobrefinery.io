@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('cached_page_id')->constrained('cached_pages', 'id');
-            $table->foreignUuid('job_site_id')->constrained('job_sites', 'id');
+            $table->foreignUuid('cached_page_id')->index()->constrained('cached_pages', 'id');
+            $table->foreignUuid('job_site_id')->index()->constrained('job_sites', 'id');
             $table->string('original_url');
             $table->boolean('requires_work_permit')->default(false);
-            $table->string('work_permit_country_code')->nullable()->constrained('countries', 'code');
+            $table->string('work_permit_country_code')->index()->nullable()->constrained('countries', 'code');
             $table->text('original_description');
             $table->text('llm_summary');
             $table->decimal('salary_from', 10, 2)->nullable();

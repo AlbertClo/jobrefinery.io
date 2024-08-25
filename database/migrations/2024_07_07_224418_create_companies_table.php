@@ -11,9 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('scrapers', function (Blueprint $table) {
+        Schema::create('companies', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('classname')->comment('The namespace and class name of the scraper for this job site');
+            $table->string('name');
+            $table->string('url')->nullable();
+            $table->string('linkedin_url')->nullable();
+            $table->string('country_code')->index()->nullable()->constrained('countries', 'code');
+
             $table->timestamps();
         });
     }
@@ -23,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('scrapers');
+        Schema::dropIfExists('companies');
     }
 };

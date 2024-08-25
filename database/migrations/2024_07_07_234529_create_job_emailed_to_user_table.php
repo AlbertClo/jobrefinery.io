@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('job_emailed_to_user', function (Blueprint $table) {
-            $table->foreignUuid('job_id')->constrained()->onDelete('cascade');
-            $table->foreignUuid('user_id')->constrained()->onDelete('cascade');
+            $table->foreignUuid('job_id')->index()->constrained()->onDelete('cascade');
+            $table->foreignUuid('user_id')->index()->constrained()->onDelete('cascade');
             $table->timestamp('created_at')->useCurrent();
         });
     }

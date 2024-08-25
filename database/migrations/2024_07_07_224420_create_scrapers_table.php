@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('job_sites', function (Blueprint $table) {
+        Schema::create('scrapers', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('company_id')->index()->constrained('companies', 'id');
-            $table->enum('type', ['company careers page', 'job board']);
-            $table->string('name');
-            $table->string('url');
+            $table->foreignUuid('job_site_id')->index()->constrained('job_sites', 'id');
+            $table->string('classname')->comment('The namespace and class name of the scraper for this job site');
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('job_sites');
+        Schema::dropIfExists('scrapers');
     }
 };
