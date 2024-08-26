@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Scraper extends Model
 {
@@ -13,8 +13,8 @@ class Scraper extends Model
 
     protected $fillable = ['classname'];
 
-    public function jobSites(): HasMany
+    public function jobSites(): BelongsTo
     {
-        return $this->hasMany(JobSite::class);
+        return $this->belongsTo(JobSite::class, 'job_site_id');
     }
 }

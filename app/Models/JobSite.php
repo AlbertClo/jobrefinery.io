@@ -12,11 +12,11 @@ class JobSite extends Model
 {
     use HasFactory, HasUuids, HasUuids;
 
-    protected $fillable = ['scraper_id', 'type', 'name', 'url'];
+    protected $fillable = ['company_id', 'type', 'name', 'url'];
 
-    public function scraper(): BelongsTo
+    public function company(): BelongsTo
     {
-        return $this->belongsTo(Scraper::class);
+        return $this->belongsTo(Company::class);
     }
 
     public function cachedPages(): HasMany

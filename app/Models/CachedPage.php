@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class CachedPage extends Model
 {
@@ -27,23 +30,23 @@ class CachedPage extends Model
         'created_at' => 'datetime',
     ];
 
-    public function jobSite()
+    public function jobSite(): BelongsTo
     {
         return $this->belongsTo(JobSite::class);
     }
 
-    public function parent()
+    public function parent(): BelongsTo
     {
         return $this->belongsTo(CachedPage::class, 'parent_id');
     }
 
-    public function children()
+    public function children(): HasMany
     {
         return $this->hasMany(CachedPage::class, 'parent_id');
     }
 
-    public function job()
+    public function job(): HasMany
     {
-        return $this->hasOne(Job::class);
+        return $this->hasMany(Job::class, 'cached_page_id');
     }
 }

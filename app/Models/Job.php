@@ -31,7 +31,7 @@ class Job extends Model
 
     public function cachedPage(): BelongsTo
     {
-        return $this->belongsTo(CachedPage::class);
+        return $this->belongsTo(CachedPage::class, 'cached_page_id');
     }
 
     public function jobSite(): BelongsTo

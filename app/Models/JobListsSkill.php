@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class JobListSkill extends Pivot
+class JobListsSkill extends Pivot
 {
     protected $table = 'job_lists_skills';
 
