@@ -40,6 +40,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'remember_token',
     ];
 
+    public function roles(): BelongsToMany
+    {
+        return $this->belongsToMany(Role::class, 'user_has_role');
+    }
+
     /**
      * Get the attributes that should be cast.
      *

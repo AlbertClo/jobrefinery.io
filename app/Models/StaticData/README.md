@@ -20,7 +20,7 @@ E.g.:
 ```php
 class RoleData implements StaticDataContract
 {
-    public const ADMIN = "Admin";
+    public const ADMIN = "admin";
     public const ADMIN_ID = "9ad2e3f0-9a2b-4a32-872f-a97a4dcb446c";
 
     public static function getModelClass(): string
@@ -33,9 +33,8 @@ class RoleData implements StaticDataContract
         return [
             [
                 "id" => self::ADMIN_ID,
-                "name" => self::ADMIN,
-                "guard_name" => "web",
-                "created_at" => "2023-12-11 14:39:40",
+                "slug" => self::ADMIN,
+                "name" => 'Admin',
             ],
         ];
     }
