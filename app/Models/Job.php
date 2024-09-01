@@ -8,6 +8,63 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
+/**
+ * @property string $id
+ * @property string $cached_page_id
+ * @property string $job_site_id
+ * @property string $city_id
+ * @property string $original_url
+ * @property bool $requires_work_permit
+ * @property string|null $work_permit_country_code
+ * @property bool $is_remote
+ * @property bool $is_hybrid
+ * @property int|null $days_in_office_per_week
+ * @property string $original_description
+ * @property string $llm_summary
+ * @property string|null $salary_from
+ * @property string|null $salary_to
+ * @property string|null $salary_currency
+ * @property string|null $salary_in_usd_from
+ * @property string|null $salary_in_usd_to
+ * @property string|null $timezone_from
+ * @property string|null $timezone_to
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\CachedPage $cachedPage
+ * @property-read \App\Models\City $cities
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $emailedToUsers
+ * @property-read int|null $emailed_to_users_count
+ * @property-read \App\Models\JobSite $jobSite
+ * @property-read \App\Models\Currency|null $salaryCurrency
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Skill> $skills
+ * @property-read int|null $skills_count
+ * @property-read \App\Models\Country|null $workPermitCountry
+ * @method static \Illuminate\Database\Eloquent\Builder|Job newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Job newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Job query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereCachedPageId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereCityId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereDaysInOfficePerWeek($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereIsHybrid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereIsRemote($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereJobSiteId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereLlmSummary($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereOriginalDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereOriginalUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereRequiresWorkPermit($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereSalaryCurrency($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereSalaryFrom($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereSalaryInUsdFrom($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereSalaryInUsdTo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereSalaryTo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereTimezoneFrom($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereTimezoneTo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereWorkPermitCountryCode($value)
+ * @mixin \Eloquent
+ */
 class Job extends Model
 {
     use HasFactory, HasUuids;
