@@ -66,3 +66,18 @@ Run Vite to compile and watch our fontend assets
 -   [TypeScript](https://www.typescriptlang.org/) - Typed JavaScript.
 -   [Docker](https://www.docker.com/) - Containers for local development and production deployments.
 -   [Laravel Sail](https://laravel.com/docs/11.x/sail) - To manage Docker containers for local development.
+
+## IDE Helper
+https://github.com/barryvdh/laravel-ide-helper?tab=readme-ov-file#usage
+
+Run the following commands to generate the IDE helper files
+
+```
+./vendor/bin/sail artisan ide-helper:generate - PHPDoc generation for Laravel Facades
+./vendor/bin/sail artisan ide-helper:models - PHPDocs for models
+./vendor/bin/sail artisan ide-helper:meta - PhpStorm Meta file
+```
+To update a specific model
+```
+./vendor/bin/sail artisan ide-helper:models "App\Models\User"
+```
