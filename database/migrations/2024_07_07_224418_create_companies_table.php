@@ -16,9 +16,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('url')->nullable();
             $table->string('linkedin_url')->nullable();
-            $table->string('country_code')->index()->nullable()->constrained('countries', 'code');
-
+            $table->string('country_code')->nullable()->index();
             $table->timestamps();
+
+            $table->foreign('country_code')->references('code')->on('countries');
         });
     }
 

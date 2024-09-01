@@ -18,6 +18,9 @@ class Job extends Model
         'original_url',
         'requires_work_permit',
         'work_permit_country_code',
+        'is_remote',
+        'is_hybrid',
+        'days_in_office_per_week',
         'original_description',
         'llm_summary',
         'salary_from',
@@ -37,6 +40,11 @@ class Job extends Model
     public function jobSite(): BelongsTo
     {
         return $this->belongsTo(JobSite::class);
+    }
+
+    public function cities(): BelongsTo
+    {
+        return $this->belongsTo(City::class, 'city_id');
     }
 
     public function workPermitCountry(): BelongsTo

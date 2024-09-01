@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('currency_code')->nullable()->constrained('currencies', 'code');
             $table->timestamps();
+
+            $table->foreign('currency_code')->references('code')->on('currencies');
         });
     }
 

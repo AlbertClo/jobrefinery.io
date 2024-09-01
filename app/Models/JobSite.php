@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class JobSite extends Model
 {
-    use HasFactory, HasUuids, HasUuids;
+    use HasFactory, HasUuids;
 
     protected $fillable = ['company_id', 'type', 'name', 'url'];
 

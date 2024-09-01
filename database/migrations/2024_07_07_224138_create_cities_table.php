@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('job_sites', function (Blueprint $table) {
+        Schema::create('cities', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('company_id')->nullable()->index()->constrained('companies', 'id');
-            $table->enum('type', ['company careers page', 'job board']);
             $table->string('name');
-            $table->string('url');
+            $table->string('country_code')->nullable()->index();
             $table->timestamps();
+
+            $table->foreign('country_code')->references('code')->on('countries');
         });
     }
 
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('job_sites');
+        Schema::dropIfExists('cities');
     }
 };
