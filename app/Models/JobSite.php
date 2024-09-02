@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string|null $company_id
  * @property string $type
  * @property string $name
+ * @property string $slug
  * @property string $url
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -28,6 +29,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder|JobSite whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|JobSite whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|JobSite whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobSite whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|JobSite whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|JobSite whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|JobSite whereUrl($value)

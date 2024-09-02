@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignUuid('company_id')->nullable()->index()->constrained('companies', 'id');
             $table->enum('type', ['company careers page', 'job board']);
             $table->string('name');
+            $table->string('slug');
             $table->string('url');
             $table->timestamps();
         });
