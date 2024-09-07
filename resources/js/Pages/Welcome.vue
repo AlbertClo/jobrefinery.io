@@ -2,6 +2,15 @@
 import { Link } from "@inertiajs/vue3";
 import { Button } from "@/components/shadcn/button";
 import GuestLayout from "@/Layouts/GuestLayout.vue";
+import { defineProps } from "vue";
+
+const props = defineProps({
+    canLogin: Boolean,
+    canRegister: Boolean,
+    laravelVersion: String,
+    phpVersion: String,
+    test: String,
+});
 </script>
 
 <template>
@@ -32,11 +41,11 @@ import GuestLayout from "@/Layouts/GuestLayout.vue";
                                 :href="route('register')"
                                 class="flex flex-row gap-4"
                             >
-                                <Button variant="default"> default </Button>
-                                <Button variant="secondary"> secondary </Button>
-                                <Button variant="outline"> outline </Button>
-                                <Button variant="ghost"> ghost </Button>
-                                <Button variant="link"> link </Button>
+                                <Button variant="default"> default</Button>
+                                <Button variant="secondary"> secondary</Button>
+                                <Button variant="outline"> outline</Button>
+                                <Button variant="ghost"> ghost</Button>
+                                <Button variant="link"> link</Button>
                                 <Button variant="destructive">
                                     destructive
                                 </Button>
