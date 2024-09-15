@@ -7,13 +7,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
+ * 
+ *
  * @property string $id
  * @property string $cached_page_id
  * @property string $job_site_id
  * @property string $city_id
  * @property string $original_url
+ * @property string $direct_link
+ * @property \Illuminate\Support\Carbon|null $post_date
  * @property bool $requires_work_permit
  * @property string|null $work_permit_country_code
  * @property bool $is_remote
@@ -63,16 +68,29 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @method static \Illuminate\Database\Eloquent\Builder|Job whereTimezoneTo($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Job whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Job whereWorkPermitCountryCode($value)
+ * @property string|null $original_description_html
+ * @property string|null $original_description_text
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Job onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereDirectLink($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereOriginalDescriptionHtml($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereOriginalDescriptionText($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job wherePostDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Job withoutTrashed()
  * @mixin \Eloquent
  */
 class Job extends Model
 {
-    use HasFactory, HasUuids;
+    use HasFactory, HasUuids, SoftDeletes;
 
     protected $fillable = [
         'cached_page_id',
         'job_site_id',
         'original_url',
+        'direct_link',
+        'post_date',
         'requires_work_permit',
         'work_permit_country_code',
         'is_remote',

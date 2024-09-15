@@ -6,8 +6,11 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
+ * 
+ *
  * @property string $id
  * @property string $name
  * @property string|null $url
@@ -27,11 +30,16 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder|Company whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Company whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Company whereUrl($value)
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Company onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Company whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Company withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Company withoutTrashed()
  * @mixin \Eloquent
  */
 class Company extends Model
 {
-    use HasFactory, HasUuids;
+    use HasFactory, HasUuids, SoftDeletes;
 
     public function jobSites(): HasMany
     {

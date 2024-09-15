@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('url')->nullable();
             $table->string('linkedin_url')->nullable();
             $table->string('country_code')->nullable()->index();
+            $table->softDeletes();
             $table->timestamps();
 
             $table->foreign('country_code')->references('code')->on('countries');

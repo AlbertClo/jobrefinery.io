@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 /**
+ * 
+ *
  * @property string $job_id
  * @property string $user_id
  * @property \Illuminate\Support\Carbon $created_at

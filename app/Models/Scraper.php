@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
+ * 
+ *
  * @property string $id
  * @property string $job_site_id
  * @property string $classname The namespace and class name of the scraper for this job site

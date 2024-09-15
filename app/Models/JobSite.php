@@ -7,8 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
+ * 
+ *
  * @property string $id
  * @property string|null $company_id
  * @property string $type
@@ -33,11 +36,16 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder|JobSite whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|JobSite whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|JobSite whereUrl($value)
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @method static \Illuminate\Database\Eloquent\Builder|JobSite onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|JobSite whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobSite withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|JobSite withoutTrashed()
  * @mixin \Eloquent
  */
 class JobSite extends Model
 {
-    use HasFactory, HasUuids;
+    use HasFactory, HasUuids, SoftDeletes;
 
     protected $fillable = ['company_id', 'type', 'name', 'url'];
 

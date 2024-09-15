@@ -15,15 +15,18 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('cached_page_id')->index()->constrained('cached_pages', 'id');
             $table->foreignUuid('job_site_id')->index()->constrained('job_sites', 'id');
-            $table->foreignUuid('city_id')->index()->constrained('cities', 'id');
-            $table->string('original_url');
-            $table->boolean('requires_work_permit')->default(false);
+            $table->foreignUuid('city_id')->nullable()->index()->constrained('cities', 'id');
+            $table->string('original_url')->nullable();
+            $table->string('direct_link')->nullable()->unique();
+            $table->timestamp('post_date')->nullable();
+            $table->boolean('requires_work_permit')->nullable();
             $table->string('work_permit_country_code')->nullable()->index();
-            $table->boolean('is_remote')->default(false);
-            $table->boolean('is_hybrid')->default(false);
+            $table->boolean('is_remote')->nullable();
+            $table->boolean('is_hybrid')->nullable();
             $table->integer('days_in_office_per_week')->nullable();
-            $table->text('original_description');
-            $table->text('llm_summary');
+            $table->text('original_description_html')->nullable();
+            $table->text('original_description_text')->nullable();
+            $table->text('llm_summary')->nullable();
             $table->decimal('salary_from', 10, 2)->nullable();
             $table->decimal('salary_to', 10, 2)->nullable();
             $table->string('salary_currency')->nullable()->constrained('currencies', 'code');
@@ -31,6 +34,7 @@ return new class extends Migration
             $table->decimal('salary_in_usd_to', 10, 2)->nullable();
             $table->string('timezone_from')->nullable();
             $table->string('timezone_to')->nullable();
+            $table->softDeletes();
             $table->timestamps();
 
             $table->foreign('work_permit_country_code')->references('code')->on('countries');
