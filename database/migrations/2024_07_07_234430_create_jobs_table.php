@@ -34,6 +34,7 @@ return new class extends Migration
             $table->decimal('salary_in_usd_to', 10, 2)->nullable();
             $table->string('timezone_from')->nullable();
             $table->string('timezone_to')->nullable();
+            $table->timestamp('made_visible_at')->nullable();
             $table->softDeletes();
             $table->timestamps();
 
