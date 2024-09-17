@@ -1,0 +1,22 @@
+id: 65483
+name: JobRefinery
+environments:
+    production:
+        network: job-refinery-production
+        database: job-refinery-production-db
+        warm: 2
+        concurrency: 100
+        queue-concurrency: 50
+        queues:
+            - default-job-refinery-production: 50
+        memory: 1024
+        timeout: 30
+        cli-memory: 512
+        cli-timeout: 30
+        runtime: 'php-8.3:al2'
+        build:
+            - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
+            - 'npm ci && npm run build && rm -rf node_modules'
+        deploy:
+            - 'php artisan migrate --force --no-interaction'
+            - 'php artisan db:seed --force --no-interaction'
