@@ -2,6 +2,7 @@ id: 65483
 name: JobRefinery
 environments:
     production:
+        domain: jobrefinery.io
         network: job-refinery-production
         database: job-refinery-production-db
         warm: 2
