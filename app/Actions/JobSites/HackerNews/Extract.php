@@ -82,11 +82,12 @@ class Extract
 
         if ($cachedPage === null) {
             $command->error('No cached page found for "Hacker News Who is hiring"');
-            return 1;
+
+            return $command::FAILURE;
         }
 
         $this->handle($cachedPage);
 
-        return 0;
+        return $command::SUCCESS;
     }
 }
