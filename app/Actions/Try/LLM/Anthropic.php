@@ -24,6 +24,9 @@ class Anthropic
     public string $commandHelp = 'This command asks Anthropic to generate a response';
     public bool $commandHidden = false;
 
+    /**
+     * @throws ConnectionException
+     */
     public function asCommand(Command $command): void
     {
         $response = $this->handle($command->argument('prompt'), $command->option('terse', false));

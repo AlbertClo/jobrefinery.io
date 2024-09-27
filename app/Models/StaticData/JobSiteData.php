@@ -6,8 +6,8 @@ use App\Models\StaticData\Contracts\StaticDataContract;
 
 class JobSiteData implements StaticDataContract
 {
-    public const HACKER_NEWS = "hacker-news";
-    public const HACKER_NEWS_ID = "462bb2e2-06a1-4297-a9c0-3fa4a1e4c61f";
+    public const string HACKER_NEWS = "hacker-news";
+    public const string HACKER_NEWS_ID = "462bb2e2-06a1-4297-a9c0-3fa4a1e4c61f";
 
     public static function getModelClass(): string
     {
