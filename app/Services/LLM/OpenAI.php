@@ -6,38 +6,38 @@ use Http;
 use Illuminate\Http\Client\ConnectionException;
 use stdClass;
 
-class Anthropic
+class OpenAI
 {
     private string $apiKey;
-    private string $baseUrl = 'https://api.anthropic.com/v1/messages';
+    private string $baseUrl = 'https://api.openai.com/v1/chat/completions';
 
     public function __construct()
     {
-        $this->apiKey = config('services.anthropic.api_key');
+        $this->apiKey = config('services.openai.api_key');
     }
 
     /**
      * @throws ConnectionException
      */
-    public function promptHaiku(string $prompt): object
+    public function prompt4oMini($prompt): object
     {
-        return $this->prompt($prompt, 'claude-3-haiku-20240307');
+        return $this->prompt($prompt, 'gpt-4o-mini');
     }
 
     /**
      * @throws ConnectionException
      */
-    public function promptSonnet($prompt): object
+    public function prompt4Turbo($prompt): object
     {
-        return $this->prompt($prompt, 'claude-3-5-sonnet-20240620');
+        return $this->prompt($prompt, 'gpt-4-turbo');
     }
 
     /**
      * @throws ConnectionException
      */
-    public function promptOpus($prompt): object
+    public function prompt4o($prompt): object
     {
-        return $this->prompt($prompt, 'claude-3-opus-20240229');
+        return $this->prompt($prompt, 'gpt-4o');
     }
 
     /**
@@ -46,15 +46,14 @@ class Anthropic
     public function prompt(string $prompt, string $model): object
     {
         $response = Http::withHeaders([
-            "x-api-key" => $this->apiKey,
-            "anthropic-version" => "2023-06-01",
+            "Authorization" => "Bearer $this->apiKey",
         ])->post($this->baseUrl, [
             "model" => $model,
-            "max_tokens" => 1024,
             "messages" => [
                 ["role" => "user", "content" => $prompt]
             ]
         ]);
+
 
         return $this->formatResponse($response);
     }
@@ -64,10 +63,10 @@ class Anthropic
         $response = json_decode($response->body());
 
         $object = new stdClass();
-        $object->answer = $response->content[0]->text;
+        $object->answer = $response->choices[0]->message->content;
         $object->token_cost = new stdClass();
-        $object->token_cost->input_tokens = $response->usage->input_tokens;
-        $object->token_cost->output_tokens = $response->usage->output_tokens;
+        $object->token_cost->input_tokens = $response->usage->prompt_tokens;
+        $object->token_cost->output_tokens = $response->usage->completion_tokens;
 
         return $object;
     }

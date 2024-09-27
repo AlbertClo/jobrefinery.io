@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Http\Client\ConnectionException;
 use Lorisleiva\Actions\Concerns\AsAction;
 
-class Anthropic
+class OpenAI
 {
     use AsAction;
 
@@ -15,11 +15,11 @@ class Anthropic
      */
     public function handle(string $prompt, bool $terse): object
     {
-        $anthropic = new \App\Services\LLM\Anthropic();
-        return $anthropic->promptHaiku($prompt . ($terse ? '. Be terse.' : ''));
+        $anthropic = new \App\Services\LLM\OpenAI();
+        return $anthropic->prompt4oMini($prompt . ($terse ? '. Be terse.' : ''));
     }
 
-    public string $commandSignature = 'try:llm:anthropic {prompt : e.g. What is the capital of France?} {--terse : Be terse}';
+    public string $commandSignature = 'try:llm:openai {prompt : e.g. What is the capital of France?} {--terse : Be terse}';
     public string $commandDescription = 'Asks Anthropic to generate a response';
     public string $commandHelp = 'This command asks Anthropic to generate a response';
     public bool $commandHidden = false;
