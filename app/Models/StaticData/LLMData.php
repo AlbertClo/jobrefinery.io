@@ -13,6 +13,7 @@ class LLMData implements StaticDataContract
     public const string GPT_4_TURBO = "gpt-4-turbo";
     public const string GPT_4O = "gpt-4o";
     public const string META_LLAMA_3_8B_INSTRUCT = "meta/meta-llama-3-8b-instruct";
+    public const string MISTRAL_7B_INSTRUCT_V_0_2 = "mistralai/mistral-7b-instruct-v0.2";
 
     public static function getModelClass(): string
     {
@@ -73,6 +74,14 @@ class LLMData implements StaticDataContract
             [
                 "slug" => self::META_LLAMA_3_8B_INSTRUCT,
                 "name" => 'Meta Llama 3.8B Instruct',
+                "provider" => 'Replicate',
+                "description" => null,
+                "input_token_cost_per_million" => 0.05,
+                "output_token_cost_per_million" => 0.25,
+            ],
+            [
+                "slug" => self::MISTRAL_7B_INSTRUCT_V_0_2,
+                "name" => 'Mistral 7B Instruct v0.2',
                 "provider" => 'Replicate',
                 "description" => null,
                 "input_token_cost_per_million" => 0.05,

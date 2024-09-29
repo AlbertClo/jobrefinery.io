@@ -27,6 +27,14 @@ class Replicate
         return $this->prompt($prompt, LLMData::META_LLAMA_3_8B_INSTRUCT);
     }
 
+    /**
+     * @throws ConnectionException
+     */
+    public function promptMistral7bInstructV0_2($prompt): object
+    {
+        return $this->prompt($prompt, LLMData::MISTRAL_7B_INSTRUCT_V_0_2);
+    }
+
     public function promptAsync(string $prompt, string $model): object
     {
         $uuid = Str::uuid();
