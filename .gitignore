@@ -20,3 +20,4 @@ yarn-error.log
 /.idea
 /.vscode
 /.vapor
+_ide_helper.php

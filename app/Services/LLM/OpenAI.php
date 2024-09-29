@@ -2,6 +2,7 @@
 
 namespace App\Services\LLM;
 
+use App\Models\StaticData\LLMData;
 use Http;
 use Illuminate\Http\Client\ConnectionException;
 use stdClass;
@@ -21,7 +22,7 @@ class OpenAI
      */
     public function prompt4oMini($prompt): object
     {
-        return $this->prompt($prompt, 'gpt-4o-mini');
+        return $this->prompt($prompt, LLMData::GPT_4O_MINI);
     }
 
     /**
@@ -29,7 +30,7 @@ class OpenAI
      */
     public function prompt4Turbo($prompt): object
     {
-        return $this->prompt($prompt, 'gpt-4-turbo');
+        return $this->prompt($prompt, LLMData::GPT_4_TURBO);
     }
 
     /**
@@ -37,7 +38,7 @@ class OpenAI
      */
     public function prompt4o($prompt): object
     {
-        return $this->prompt($prompt, 'gpt-4o');
+        return $this->prompt($prompt, LLMData::GPT_4O);
     }
 
     /**

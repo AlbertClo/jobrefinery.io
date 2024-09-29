@@ -2,6 +2,7 @@
 
 namespace App\Services\LLM;
 
+use App\Models\StaticData\LLMData;
 use Http;
 use Illuminate\Http\Client\ConnectionException;
 use stdClass;
@@ -21,7 +22,7 @@ class Anthropic
      */
     public function promptHaiku(string $prompt): object
     {
-        return $this->prompt($prompt, 'claude-3-haiku-20240307');
+        return $this->prompt($prompt, LLMData::CLAUDE_3_HAIKU);
     }
 
     /**
@@ -29,7 +30,7 @@ class Anthropic
      */
     public function promptSonnet($prompt): object
     {
-        return $this->prompt($prompt, 'claude-3-5-sonnet-20240620');
+        return $this->prompt($prompt, LLMData::CLAUDE_3_SONNET);
     }
 
     /**
@@ -37,7 +38,7 @@ class Anthropic
      */
     public function promptOpus($prompt): object
     {
-        return $this->prompt($prompt, 'claude-3-opus-20240229');
+        return $this->prompt($prompt, LLMData::CLAUDE_3_OPUS);
     }
 
     /**

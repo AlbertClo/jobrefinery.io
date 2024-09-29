@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -79,6 +80,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Job wherePostDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Job withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Job withoutTrashed()
+ * @property string|null $made_visible_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\LLMResponse> $llmResponses
+ * @property-read int|null $llm_responses_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereMadeVisibleAt($value)
  * @mixin \Eloquent
  */
 class Job extends Model
@@ -142,5 +147,10 @@ class Job extends Model
     public function emailedToUsers(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'job_emailed_to_user')->withTimestamps();
+    }
+
+    public function llmResponses(): MorphMany
+    {
+        return $this->morphMany(LLMResponse::class, 'relatedEntity');
     }
 }

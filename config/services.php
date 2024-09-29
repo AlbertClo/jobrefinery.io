@@ -43,4 +43,9 @@ return [
         'api_key' => env('OPENAI_API_KEY'),
     ],
 
+    'replicate' => [
+        'api_key' => env('REPLICATE_API_KEY'),
+        'webhook_url' => env('REPLICATE_WEBHOOK_BASE_URL') . '/api/webhooks/replicate/prompts/',
+    ],
+
 ];

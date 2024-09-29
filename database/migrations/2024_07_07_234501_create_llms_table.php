@@ -12,10 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('llms', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->string('slug')->primary();
             $table->string('name');
-            $table->string('description');
-            $table->string('company');
+            $table->string('provider')->nullable();
+            $table->string('description')->nullable();
+            $table->decimal('input_token_cost_per_million', 12, 6)->nullable();
+            $table->decimal('output_token_cost_per_million', 12, 6)->nullable();
             $table->timestamps();
         });
     }

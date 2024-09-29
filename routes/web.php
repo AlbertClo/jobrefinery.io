@@ -1,5 +1,6 @@
 <?php
 
+use App\Actions\Webhooks\Replicate;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
