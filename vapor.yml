@@ -5,7 +5,7 @@ environments:
         domain: jobrefinery.io
         network: job-refinery-production
         database: job-refinery-production-db
-        warm: 2
+        warm: 1
         concurrency: 100
         queue-concurrency: 50
         queues:
