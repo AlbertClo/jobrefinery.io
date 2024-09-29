@@ -27,7 +27,7 @@ class Prompts
             $llm->output_token_cost_per_million * $outputTokens / 1000000;
 
         $llmResponse = LLMResponse::find($id);
-        $llmResponse->response = implode(' ', $request->get('output'));
+        $llmResponse->response = $this->decodeTokens(implode(' ', $request->get('output')));
         $llmResponse->response_timestamp = now();
         $llmResponse->input_tokens = $inputTokens;
         $llmResponse->output_tokens = $outputTokens;
@@ -35,5 +35,18 @@ class Prompts
         $llmResponse->save();
 
         return response()->noContent();
+    }
+
+    private function decodeTokens($text): string
+    {
+        $punctuationMarks = ['.', ',', ':', ';', '!', '?', '*', '-'];
+
+        foreach ($punctuationMarks as $mark) {
+            $text = preg_replace('/\s+\\' . $mark . '/', $mark, $text);
+        }
+
+        $text = preg_replace('/(\w)\s+-\s+(\w)/', '$1-$2', $text);
+
+        return $text;
     }
 }

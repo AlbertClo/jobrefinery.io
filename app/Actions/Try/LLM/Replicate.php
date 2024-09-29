@@ -31,8 +31,8 @@ class Replicate
     {
         $response = $this->handle($command->argument('prompt'), $command->option('terse', false));
 
-//        $command->info($response->answer);
-//        $command->info('Input tokens: ' .$response->token_cost->input_tokens);
-//        $command->info('Output tokens: ' .$response->token_cost->output_tokens);
+        $command->info($response->answer);
+        $command->info('Input tokens: ' .$response->token_cost->input_tokens);
+        $command->info('Output tokens: ' .$response->token_cost->output_tokens);
     }
 }

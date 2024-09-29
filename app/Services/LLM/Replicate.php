@@ -41,44 +41,47 @@ class Replicate
             "input" => [
                 "stream" => false,
                 "prompt" => $prompt,
-                "max_new_tokens" => 512,
+                "max_new_tokens" => 2048,
                 "prompt_template" => "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\n{system_prompt}<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n{prompt}<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
             ]
         ]);
 
-        $llmPrompt = new LLMResponse();
-        $llmPrompt->id = $uuid;
-        $llmPrompt->prompt = $prompt;
-        $llmPrompt->prompt_timestamp = now();
-        $llmPrompt->llm = $model;
-        $llmPrompt->save();
+        $LLMResponse = new LLMResponse();
+        $LLMResponse->id = $uuid;
+        $LLMResponse->prompt = $prompt;
+        $LLMResponse->prompt_timestamp = now();
+        $LLMResponse->llm = $model;
+        $LLMResponse->save();
 
-        return $llmPrompt;
+        return $LLMResponse;
     }
 
     /**
      * @throws ConnectionException
      */
-    public function prompt(string $prompt, string $url): object
+    public function prompt(string $prompt, string $model): object
     {
-        return $this->promptAsync($prompt, $url);
+        $LLMResponse = $this->promptAsync($prompt, $model);
 
-        // long poll database for response
+        $maxTotalWaitTime = 10;
+        $sleepTime = 1;
+        sleep($sleepTime);
+        $LLMResponse = $LLMResponse->fresh();
+        while ($LLMResponse->response === null && now()->lte(now()->addSeconds($maxTotalWaitTime))) {
+            $LLMResponse = $LLMResponse->fresh();
+            sleep($sleepTime);
+        }
 
-        //return $this->formatResponse($response);
+        return $this->formatResponse($LLMResponse);
     }
 
     private function formatResponse(object $response): object
     {
-        $response = json_decode($response->body());
-
-        dd($response);
-
         $object = new stdClass();
-        $object->answer = $response->choices[0]->message->content;
+        $object->answer = $response->response;
         $object->token_cost = new stdClass();
-        $object->token_cost->input_tokens = $response->usage->prompt_tokens;
-        $object->token_cost->output_tokens = $response->usage->completion_tokens;
+        $object->token_cost->input_tokens = $response->input_tokens;
+        $object->token_cost->output_tokens = $response->output_tokens;
 
         return $object;
     }
