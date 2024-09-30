@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string $cached_page_id
@@ -151,6 +151,6 @@ class Job extends Model
 
     public function llmResponses(): MorphMany
     {
-        return $this->morphMany(LLMResponse::class, 'relatedEntity');
+        return $this->morphMany(LLMResponse::class, 'related_entity');
     }
 }

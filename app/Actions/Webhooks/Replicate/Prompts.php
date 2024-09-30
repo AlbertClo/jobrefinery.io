@@ -2,6 +2,7 @@
 
 namespace App\Actions\Webhooks\Replicate;
 
+use App\Actions\Jobs\UseLLMResponse;
 use App\Models\LLM;
 use App\Models\LLMResponse;
 use Illuminate\Http\Request;
@@ -34,10 +35,12 @@ class Prompts
         $llmResponse->cost = $cost;
         $llmResponse->save();
 
+        UseLLMResponse::dispatch($llmResponse);
+
         return response()->noContent();
     }
 
-    private function decodeTokens($text): string
+    private function decodeTokens(string $text): string
     {
         $punctuationMarks = ['.', ',', ':', ';', '!', '?', '*', '-'];
 

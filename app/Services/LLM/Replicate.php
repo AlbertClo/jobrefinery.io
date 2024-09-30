@@ -3,8 +3,8 @@
 namespace App\Services\LLM;
 
 use App\Models\LLMResponse;
-use App\Models\StaticData\LLMData;
 use Http;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Str;
 use stdClass;
@@ -19,27 +19,11 @@ class Replicate
         $this->apiKey = config('services.replicate.api_key');
     }
 
-    /**
-     * @throws ConnectionException
-     */
-    public function promptMetaLlama38bInstruct($prompt): object
-    {
-        return $this->prompt($prompt, LLMData::META_LLAMA_3_8B_INSTRUCT);
-    }
-
-    /**
-     * @throws ConnectionException
-     */
-    public function promptMistral7bInstructV0_2($prompt): object
-    {
-        return $this->prompt($prompt, LLMData::MISTRAL_7B_INSTRUCT_V_0_2);
-    }
-
-    public function promptAsync(string $prompt, string $model): object
+    public function promptAsync(string $llm, string $prompt, Model $relatedEntity = null): object
     {
         $uuid = Str::uuid();
 
-        $url = "{$this->baseUrl}/v1/models/{$model}/predictions";
+        $url = "{$this->baseUrl}/v1/models/{$llm}/predictions";
 
         $response = Http::withHeaders([
             "Authorization" => "Bearer $this->apiKey",
@@ -58,18 +42,17 @@ class Replicate
         $LLMResponse->id = $uuid;
         $LLMResponse->prompt = $prompt;
         $LLMResponse->prompt_timestamp = now();
-        $LLMResponse->llm = $model;
+        $LLMResponse->llm = $llm;
         $LLMResponse->save();
+
+        $relatedEntity?->llmResponses()->save($LLMResponse);
 
         return $LLMResponse;
     }
 
-    /**
-     * @throws ConnectionException
-     */
-    public function prompt(string $prompt, string $model): object
+    public function prompt(string $llm, string $prompt, Model $relatedEntity = null): object
     {
-        $LLMResponse = $this->promptAsync($prompt, $model);
+        $LLMResponse = $this->promptAsync($llm, $prompt, $relatedEntity);
 
         $maxTotalWaitTime = 10;
         $sleepTime = 1;

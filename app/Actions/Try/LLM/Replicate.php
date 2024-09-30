@@ -2,6 +2,7 @@
 
 namespace App\Actions\Try\LLM;
 
+use App\Models\StaticData\LLMData;
 use Illuminate\Console\Command;
 use Illuminate\Http\Client\ConnectionException;
 use Lorisleiva\Actions\Concerns\AsAction;
@@ -16,7 +17,7 @@ class Replicate
     public function handle(string $prompt, bool $terse): object
     {
         $anthropic = new \App\Services\LLM\Replicate();
-        return $anthropic->promptMetaLlama38bInstruct($prompt . ($terse ? '. Be terse.' : ''));
+        return $anthropic->prompt(LLMData::META_LLAMA_3_8B_INSTRUCT, $prompt . ($terse ? '. Be terse.' : ''));
     }
 
     public string $commandSignature = 'try:llm:replicate {prompt : e.g. What is the capital of France?} {--terse : Be terse}';
