@@ -61,6 +61,6 @@ class JobSite extends Model
 
     public function jobs(): HasMany
     {
-        return $this->hasMany(Job::class);
+        return $this->hasMany(JobSpec::class);
     }
 }

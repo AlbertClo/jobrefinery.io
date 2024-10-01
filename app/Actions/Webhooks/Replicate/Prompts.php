@@ -2,7 +2,7 @@
 
 namespace App\Actions\Webhooks\Replicate;
 
-use App\Actions\Jobs\UseLLMResponse;
+use App\Actions\JobSpecs\UseLLMResponse;
 use App\Models\LLM;
 use App\Models\LLMResponse;
 use Illuminate\Http\Request;
@@ -44,11 +44,18 @@ class Prompts
     {
         $punctuationMarks = ['.', ',', ':', ';', '!', '?', '*', '-'];
 
+        // Remove spaces between punctuation marks
         foreach ($punctuationMarks as $mark) {
             $text = preg_replace('/\s+\\' . $mark . '/', $mark, $text);
         }
 
+        // Remove spaces between words
         $text = preg_replace('/(\w)\s+-\s+(\w)/', '$1-$2', $text);
+
+        // Remove spaces between numbers
+        $text = preg_replace_callback('/(\d+)\s+(\d+)/', function($matches) {
+            return $matches[1] . $matches[2];
+        }, $text);
 
         return $text;
     }

@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Actions\Jobs;
+namespace App\Actions\JobSpecs;
 
 use App\Models\City;
-use App\Models\Job;
+use App\Models\Company;
+use App\Models\JobSpec;
 use App\Models\LLMResponse;
 use App\Models\Skill;
 use Exception;
@@ -21,11 +22,11 @@ class UseLLMResponse
      */
     public function handle(LLMResponse $llmResponse): void
     {
-        $responseAnswer = $this->llmJsonResponseToArray($llmResponse->response);
+        $responseAnswer = $this->llmJsonResponseToArray($llmResponse);
 
-        $job = Job::find($llmResponse->related_entity_id);
-        if ($job === null) {
-            throw new Exception("Error: Could not find job with id {$llmResponse->related_entity_id}");
+        $jobSpec = JobSpec::find($llmResponse->related_entity_id);
+        if ($jobSpec === null) {
+            throw new Exception("Error: Could not find jobSpec with id {$llmResponse->related_entity_id}");
         }
 
         if ($responseAnswer['city'] !== null) {
@@ -38,7 +39,18 @@ class UseLLMResponse
                 $city->country_code = $responseAnswer['work_permit_country_code'];
                 $city->save();
             }
-            $job->city_id = $city->id;
+            $jobSpec->city_id = $city->id;
+        }
+
+        if ($responseAnswer['company'] !== null) {
+            $company = Company::where('name', $responseAnswer['company'])
+                ->first();
+            if ($company === null) {
+                $company = new Company();
+                $company->name = $responseAnswer['company'];
+                $company->save();
+            }
+            $jobSpec->company_id = $company->id;
         }
 
         if ($responseAnswer['salary_period'] !== 'annual') {
@@ -53,32 +65,33 @@ class UseLLMResponse
             'AUD' => 0.69,
         ];
 
-        $job->requires_work_permit = (bool)$responseAnswer['requires_work_permit'];
-        $job->work_permit_country_code = $responseAnswer['work_permit_country_code'];
-        $job->is_remote = (bool)$responseAnswer['is_remote'];
-        $job->is_hybrid = (bool)$responseAnswer['is_hybrid'];
-        $job->days_in_office_per_week = $responseAnswer['days_in_office_per_week'];
-        $job->salary_from = $responseAnswer['salary_from'] ?? null;
-        $job->salary_to = $responseAnswer['salary_to'] ?? null;
-        $job->salary_currency = $responseAnswer['salary_currency'];
-        $job->timezone_from = $responseAnswer['timezone_from'];
-        $job->timezone_to = $responseAnswer['timezone_to'];
+        $jobSpec->heading = $responseAnswer['heading'];
+        $jobSpec->requires_work_permit = (bool)$responseAnswer['requires_work_permit'];
+        $jobSpec->work_permit_country_code = $responseAnswer['work_permit_country_code'];
+        $jobSpec->is_remote = (bool)$responseAnswer['is_remote'];
+        $jobSpec->is_hybrid = (bool)$responseAnswer['is_hybrid'];
+        $jobSpec->days_in_office_per_week = $responseAnswer['days_in_office_per_week'];
+        $jobSpec->salary_from = $responseAnswer['salary_from'] ?? null;
+        $jobSpec->salary_to = $responseAnswer['salary_to'] ?? null;
+        $jobSpec->salary_currency = $responseAnswer['salary_currency'];
+        $jobSpec->timezone_from = $responseAnswer['timezone_from'];
+        $jobSpec->timezone_to = $responseAnswer['timezone_to'];
 
-        if (in_array($job->salary_currency, array_keys($exchangeRates))) {
-            if ($job->salary_from !== null) {
-                $job->salary_in_usd_from = $job->salary_from * $exchangeRates[$job->salary_currency];
+        if (in_array($jobSpec->salary_currency, array_keys($exchangeRates))) {
+            if ($jobSpec->salary_from !== null) {
+                $jobSpec->salary_in_usd_from = $jobSpec->salary_from * $exchangeRates[$jobSpec->salary_currency];
             }
-            if ($job->salary_to !== null) {
-                $job->salary_in_usd_to = $job->salary_to * $exchangeRates[$job->salary_currency];
+            if ($jobSpec->salary_to !== null) {
+                $jobSpec->salary_in_usd_to = $jobSpec->salary_to * $exchangeRates[$jobSpec->salary_currency];
             }
         }
 
         foreach ($responseAnswer['skills'] as $skillName) {
             $skill = Skill::where('name', $skillName)->firstOrCreate(['name' => $skillName]);
-            $job->skills()->attach($skill, ['skill_importance' => 'preferred']);
+            $jobSpec->skills()->attach($skill, ['skill_importance' => 'preferred']);
         }
 
-        $job->save();
+        $jobSpec->save();
     }
 
     /**
@@ -89,7 +102,7 @@ class UseLLMResponse
         $this->handle($llmResponse);
     }
 
-    public string $commandSignature = 'jobs:use-llm-response {jobId?}';
+    public string $commandSignature = 'job-specs:use-llm-response {jobSpecId?}';
     public string $commandDescription = 'Fill in the job data that we need to get from an LLM';
     public string $commandHelp = 'Fill in the job data that we need to get from an LLM';
     public bool $commandHidden = false;
@@ -112,10 +125,10 @@ class UseLLMResponse
     /**
      * @throws Exception
      */
-    function llmJsonResponseToArray($string): array
+    function llmJsonResponseToArray(LLMResponse $llmResponse): array
     {
         // Remove triple quotes if present
-        $string = preg_replace('/^"""|"""$/m', '', $string);
+        $string = preg_replace('/^"""|"""$/m', '', $llmResponse->response);
 
         // Remove markdown code block syntax if present
         $string = preg_replace('/^```json\s*\n|\n```$/m', '', $string);
@@ -127,10 +140,15 @@ class UseLLMResponse
         $data = json_decode($string, true);
 
         if ($data === null && json_last_error() !== JSON_ERROR_NONE) {
-            throw new Exception("Error: Unable to parse JSON string");
+            throw new Exception("Error: Unable to parse JSON string" . json_last_error_msg());
         }
 
-        return $this->cleanArray($data);
+        // If it's replicate we need to try to remove unnecessary spaces
+        if (strtolower($llmResponse->relatedLLM->provider) === 'replicate') {
+            $data = $this->cleanArray($data);
+        }
+
+        return $data;
     }
 
     // Function to recursively clean keys and values

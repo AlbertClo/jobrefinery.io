@@ -35,7 +35,7 @@ class Skill extends Model
 
     public function jobs(): BelongsToMany
     {
-        return $this->belongsToMany(Job::class, 'job_lists_skills')
+        return $this->belongsToMany(JobSpec::class, 'job_spec_lists_skills')
             ->withPivot('skill_importance')
             ->withTimestamps();
     }

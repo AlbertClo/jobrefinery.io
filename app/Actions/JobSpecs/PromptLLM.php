@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Actions\Jobs;
+namespace App\Actions\JobSpecs;
 
-use App\Models\Job;
+use App\Models\JobSpec;
 use App\Models\StaticData\JobSiteData;
 use App\Models\StaticData\LLMData;
 use Illuminate\Console\Command;
@@ -12,10 +12,10 @@ class PromptLLM
 {
     use AsAction;
 
-    public function handle(Job $job): void
+    public function handle(JobSpec $jobSpec): void
     {
         $extraPromptInfo = '';
-        if ($job->job_site_id === JobSiteData::HACKER_NEWS_ID) {
+        if ($jobSpec->job_site_id === JobSiteData::HACKER_NEWS_ID) {
             $extraPromptInfo = "This job description is from a Hacker News \"Ask HN: Who is hiring?\" Post.";
         }
 
@@ -23,9 +23,11 @@ class PromptLLM
             I'm going to give you a job description. I need you to extract the following info from the job description
             and return it as a JSON object.
 
+            heading (e.g. Full Stack Developer)
             requires_work_permit (boolean)
             work_permit_country_code (ISO 3166 alpha-3 code, e.g. USA)
             city (e.g. San Francisco, New York)
+            company (e.g. Google)
             is_remote (boolean)
             is_hybrid (boolean)
             days_in_office_per_week (integer, e.g. 4)
@@ -42,9 +44,11 @@ class PromptLLM
             Example:
 
             {
+                \"heading\": \"Full Stack Developer\",
                 \"requires_work_permit\": true,
                 \"work_permit_country_code\": \"USA\",
                 \"city\": \"San Francisco\",
+                \"company\": \"Google\",
                 \"is_remote\": true,
                 \"is_hybrid\": false,
                 \"days_in_office_per_week\": 0,
@@ -62,35 +66,43 @@ class PromptLLM
             {$extraPromptInfo}
 
             Here is the job description:
-            {$job->original_description_text}
+            {$jobSpec->original_description_text}
         ";
 
         $replicate = new \App\Services\LLM\Replicate();
-        $replicate->promptAsync(LLMData::META_LLAMA_3_8B_INSTRUCT, $prompt, $job);
+        $replicate->promptAsync(LLMData::META_LLAMA_3_8B_INSTRUCT, $prompt, $jobSpec);
+
+//        $openai = new \App\Services\LLM\OpenAI();
+//        $LLMResponse = $openai->prompt(LLMData::GPT_4O_MINI, $prompt, $jobSpec);
+//        UseLLMResponse::dispatch($LLMResponse);
+
+//        $anthropic = new \App\Services\LLM\Anthropic();
+//        $LLMResponse = $anthropic->prompt(LLMData::CLAUDE_3_HAIKU, $prompt, $jobSpec);
+//        UseLLMResponse::dispatch($LLMResponse);
     }
 
-    public function asJob(Job $job): void
+    public function asJob(JobSpec $jobSpec): void
     {
-        $this->handle($job);
+        $this->handle($jobSpec);
     }
 
-    public string $commandSignature = 'jobs:prompt-llm {jobId}';
+    public string $commandSignature = 'job-specs:prompt-llm {jobSpecId}';
     public string $commandDescription = 'Fill in the job data that we need to get from an LLM';
     public string $commandHelp = 'Fill in the job data that we need to get from an LLM';
     public bool $commandHidden = false;
 
     public function asCommand(Command $command): int
     {
-        $jobId = $command->argument('jobId');
-        if ($jobId === null) {
-            $command->error('No job id provided');
+        $jobSpecId = $command->argument('jobSpecId');
+        if ($jobSpecId === null) {
+            $command->error('No jobSpec id provided');
 
             return $command::FAILURE;
         }
 
-        $job = Job::findOrFail($jobId);
+        $jobSpec = JobSpec::findOrFail($jobSpecId);
 
-        $this->handle($job);
+        $this->handle($jobSpec);
 
         return $command::SUCCESS;
     }

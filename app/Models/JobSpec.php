@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- *
+ * 
  *
  * @property string $id
  * @property string $cached_page_id
@@ -84,9 +84,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\LLMResponse> $llmResponses
  * @property-read int|null $llm_responses_count
  * @method static \Illuminate\Database\Eloquent\Builder|Job whereMadeVisibleAt($value)
+ * @property string|null $heading
+ * @method static \Illuminate\Database\Eloquent\Builder|JobSpec whereHeading($value)
+ * @property string|null $company_id
+ * @method static \Illuminate\Database\Eloquent\Builder|JobSpec whereCompanyId($value)
  * @mixin \Eloquent
  */
-class Job extends Model
+class JobSpec extends Model
 {
     use HasFactory, HasUuids, SoftDeletes;
 
@@ -139,7 +143,7 @@ class Job extends Model
 
     public function skills(): BelongsToMany
     {
-        return $this->belongsToMany(Skill::class, 'job_lists_skills')
+        return $this->belongsToMany(Skill::class, 'job_spec_lists_skills')
             ->withPivot('skill_importance')
             ->withTimestamps();
     }

@@ -2,10 +2,12 @@
 
 namespace App\Services\LLM;
 
-use App\Models\StaticData\LLMData;
+use App\Models\LLM;
+use App\Models\LLMResponse;
 use Http;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Client\ConnectionException;
-use stdClass;
+use Illuminate\Support\Str;
 
 class OpenAI
 {
@@ -20,55 +22,38 @@ class OpenAI
     /**
      * @throws ConnectionException
      */
-    public function prompt4oMini($prompt): object
+    public function prompt(string $llm, string $prompt, Model $relatedEntity = null): object
     {
-        return $this->prompt($prompt, LLMData::GPT_4O_MINI);
-    }
+        $uuid = Str::uuid();
 
-    /**
-     * @throws ConnectionException
-     */
-    public function prompt4Turbo($prompt): object
-    {
-        return $this->prompt($prompt, LLMData::GPT_4_TURBO);
-    }
-
-    /**
-     * @throws ConnectionException
-     */
-    public function prompt4o($prompt): object
-    {
-        return $this->prompt($prompt, LLMData::GPT_4O);
-    }
-
-    /**
-     * @throws ConnectionException
-     */
-    public function prompt(string $prompt, string $model): object
-    {
         $response = Http::withHeaders([
             "Authorization" => "Bearer $this->apiKey",
         ])->post($this->baseUrl, [
-            "model" => $model,
+            "model" => $llm,
             "messages" => [
                 ["role" => "user", "content" => $prompt]
             ]
         ]);
 
+        $responseBody = json_decode($response->body());
 
-        return $this->formatResponse($response);
-    }
+        $llmModel = LLM::where('slug', $llm)->first();
+        $cost = $llmModel->input_token_cost_per_million * $responseBody->usage->prompt_tokens / 1000000 +
+            $llmModel->output_token_cost_per_million * $responseBody->usage->completion_tokens / 1000000;
+        $LLMResponse = new LLMResponse();
+        $LLMResponse->id = $uuid;
+        $LLMResponse->prompt = $prompt;
+        $LLMResponse->prompt_timestamp = now();
+        $LLMResponse->llm = $llm;
+        $LLMResponse->response = $responseBody->choices[0]->message->content;
+        $LLMResponse->response_timestamp = now();
+        $LLMResponse->input_tokens = $responseBody->usage->prompt_tokens;
+        $LLMResponse->output_tokens = $responseBody->usage->completion_tokens;
+        $LLMResponse->cost = $cost;
+        $LLMResponse->save();
 
-    private function formatResponse(object $response): object
-    {
-        $response = json_decode($response->body());
+        $relatedEntity?->llmResponses()->save($LLMResponse);
 
-        $object = new stdClass();
-        $object->answer = $response->choices[0]->message->content;
-        $object->token_cost = new stdClass();
-        $object->token_cost->input_tokens = $response->usage->prompt_tokens;
-        $object->token_cost->output_tokens = $response->usage->completion_tokens;
-
-        return $object;
+        return $LLMResponse;
     }
 }

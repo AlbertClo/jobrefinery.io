@@ -9,12 +9,19 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 /**
- *
+ * 
  *
  * @property string $id
  * @property string $name
  * @property string $description
  * @property string $company
+ * @property string $prompt
+ * @property string $prompt_timestamp
+ * @property string $response
+ * @property string $response_timestamp
+ * @property int $input_tokens
+ * @property int $output_tokens
+ * @property string|null $cost
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|LLM newModelQuery()
@@ -26,14 +33,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
  * @method static \Illuminate\Database\Eloquent\Builder|LLM whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LLM whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LLM whereUpdatedAt($value)
- * @property string $prompt
- * @property string $prompt_timestamp
- * @property string $response
- * @property string $response_timestamp
  * @property \App\Models\LLM|null $llm
- * @property int $input_tokens
- * @property int $output_tokens
- * @property string $cost
  * @property string|null $related_entity_id
  * @property string|null $related_entity_type
  * @property-read Model|\Eloquent|null $relatedEntity
@@ -47,6 +47,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
  * @method static \Illuminate\Database\Eloquent\Builder|LLMResponse whereRelatedEntityType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LLMResponse whereResponse($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LLMResponse whereResponseTimestamp($value)
+ * @property-read \App\Models\LLM|null $relatedLLM
  * @mixin \Eloquent
  */
 class LLMResponse extends Model
@@ -70,7 +71,7 @@ class LLMResponse extends Model
         'related_entity_type',
     ];
 
-    public function llm(): BelongsTo
+    public function relatedLLM(): BelongsTo
     {
         return $this->belongsTo(LLM::class, 'llm', 'slug');
     }

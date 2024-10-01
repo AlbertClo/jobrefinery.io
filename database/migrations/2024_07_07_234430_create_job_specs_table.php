@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('jobs', function (Blueprint $table) {
+        Schema::create('job_specs', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('cached_page_id')->index()->constrained('cached_pages', 'id');
             $table->foreignUuid('job_site_id')->index()->constrained('job_sites', 'id');
             $table->foreignUuid('city_id')->nullable()->index()->constrained('cities', 'id');
+            $table->foreignUuid('company_id')->nullable()->index()->constrained('companies', 'id');
             $table->string('original_url')->nullable();
             $table->string('direct_link')->nullable()->unique();
             $table->timestamp('post_date')->nullable();
+            $table->string('heading')->nullable();
             $table->boolean('requires_work_permit')->nullable();
             $table->string('work_permit_country_code')->nullable()->index();
             $table->boolean('is_remote')->nullable();
@@ -47,6 +49,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('jobs');
+        Schema::dropIfExists('job_specs');
     }
 };

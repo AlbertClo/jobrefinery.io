@@ -2,9 +2,14 @@
 
 namespace App\Services\LLM;
 
+use App\Actions\JobSpecs\UseLLMResponse;
+use App\Models\LLM;
+use App\Models\LLMResponse;
 use App\Models\StaticData\LLMData;
 use Http;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Client\ConnectionException;
+use Illuminate\Support\Str;
 use stdClass;
 
 class Anthropic
@@ -20,56 +25,42 @@ class Anthropic
     /**
      * @throws ConnectionException
      */
-    public function promptHaiku(string $prompt): object
+    public function prompt(string $llm, string $prompt, Model $relatedEntity = null): object
     {
-        return $this->prompt($prompt, LLMData::CLAUDE_3_HAIKU);
-    }
+        $uuid = Str::uuid();
 
-    /**
-     * @throws ConnectionException
-     */
-    public function promptSonnet($prompt): object
-    {
-        return $this->prompt($prompt, LLMData::CLAUDE_3_SONNET);
-    }
-
-    /**
-     * @throws ConnectionException
-     */
-    public function promptOpus($prompt): object
-    {
-        return $this->prompt($prompt, LLMData::CLAUDE_3_OPUS);
-    }
-
-    /**
-     * @throws ConnectionException
-     */
-    public function prompt(string $prompt, string $model): object
-    {
         $response = Http::withHeaders([
             "x-api-key" => $this->apiKey,
             "anthropic-version" => "2023-06-01",
         ])->post($this->baseUrl, [
-            "model" => $model,
+            "model" => $llm,
             "max_tokens" => 1024,
             "messages" => [
                 ["role" => "user", "content" => $prompt]
             ]
         ]);
 
-        return $this->formatResponse($response);
-    }
+        $responseBody = json_decode($response->body());
 
-    private function formatResponse(object $response): object
-    {
-        $response = json_decode($response->body());
+        $llmModel = LLM::where('slug', $llm)->first();
+        $cost = $llmModel->input_token_cost_per_million * $responseBody->usage->input_tokens / 1000000 +
+            $llmModel->output_token_cost_per_million * $responseBody->usage->output_tokens / 1000000;
+        $LLMResponse = new LLMResponse();
+        $LLMResponse->id = $uuid;
+        $LLMResponse->prompt = $prompt;
+        $LLMResponse->prompt_timestamp = now();
+        $LLMResponse->llm = $llm;
+        $LLMResponse->response = $responseBody->content[0]->text;
+        $LLMResponse->response_timestamp = now();
+        $LLMResponse->input_tokens = $responseBody->usage->input_tokens;
+        $LLMResponse->output_tokens = $responseBody->usage->output_tokens;
+        $LLMResponse->cost = $cost;
+        $LLMResponse->save();
 
-        $object = new stdClass();
-        $object->answer = $response->content[0]->text;
-        $object->token_cost = new stdClass();
-        $object->token_cost->input_tokens = $response->usage->input_tokens;
-        $object->token_cost->output_tokens = $response->usage->output_tokens;
+        $relatedEntity?->llmResponses()->save($LLMResponse);
 
-        return $object;
+        UseLLMResponse::dispatch($LLMResponse);
+
+        return $LLMResponse;
     }
 }

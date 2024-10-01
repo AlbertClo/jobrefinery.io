@@ -5,9 +5,7 @@ namespace App\Services\LLM;
 use App\Models\LLMResponse;
 use Http;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Str;
-use stdClass;
 
 class Replicate
 {
@@ -63,17 +61,6 @@ class Replicate
             sleep($sleepTime);
         }
 
-        return $this->formatResponse($LLMResponse);
-    }
-
-    private function formatResponse(object $response): object
-    {
-        $object = new stdClass();
-        $object->answer = $response->response;
-        $object->token_cost = new stdClass();
-        $object->token_cost->input_tokens = $response->input_tokens;
-        $object->token_cost->output_tokens = $response->output_tokens;
-
-        return $object;
+        return $LLMResponse;
     }
 }

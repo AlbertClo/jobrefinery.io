@@ -78,6 +78,6 @@ class CachedPage extends Model
 
     public function job(): HasMany
     {
-        return $this->hasMany(Job::class, 'cached_page_id');
+        return $this->hasMany(JobSpec::class, 'cached_page_id');
     }
 }

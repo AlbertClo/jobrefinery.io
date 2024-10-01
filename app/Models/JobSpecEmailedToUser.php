@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 /**
  * 
  *
- * @property string $job_id
+ * @property string $job_spec_id
  * @property string $user_id
  * @property \Illuminate\Support\Carbon $created_at
  * @property-read \App\Models\Job $job
@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
  * @method static \Illuminate\Database\Eloquent\Builder|JobEmailedToUser whereUserId($value)
  * @mixin \Eloquent
  */
-class JobEmailedToUser extends Pivot
+class JobSpecEmailedToUser extends Pivot
 {
     protected $table = 'job_emailed_to_user';
 
@@ -38,7 +38,7 @@ class JobEmailedToUser extends Pivot
 
     public function job(): BelongsTo
     {
-        return $this->belongsTo(Job::class);
+        return $this->belongsTo(JobSpec::class);
     }
 
     public function user(): BelongsTo

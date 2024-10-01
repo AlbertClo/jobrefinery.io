@@ -3,7 +3,7 @@
 namespace App\Actions\JobSites\HackerNews;
 
 use App\Models\CachedPage;
-use App\Models\Job;
+use App\Models\JobSpec;
 use App\Models\StaticData\JobSiteData;
 use Illuminate\Console\Command;
 use Lorisleiva\Actions\Concerns\AsAction;
@@ -55,7 +55,7 @@ class Extract
         $chunkSize = 1;
         $jobPosts = array_chunk($jobPosts, $chunkSize);
         foreach ($jobPosts as $chunk) {
-            Job::upsert($chunk, ['direct_link']);
+            JobSpec::upsert($chunk, ['direct_link']);
         }
     }
 
