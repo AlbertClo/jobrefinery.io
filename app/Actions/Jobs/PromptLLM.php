@@ -6,7 +6,6 @@ use App\Models\Job;
 use App\Models\StaticData\JobSiteData;
 use App\Models\StaticData\LLMData;
 use Illuminate\Console\Command;
-use Illuminate\Http\Client\ConnectionException;
 use Lorisleiva\Actions\Concerns\AsAction;
 
 class PromptLLM
@@ -36,6 +35,7 @@ class PromptLLM
             salary_currency (ISO 4217 currency code, e.g. USD)
             timezone_from (IANA timezone name, e.g. America/Los_Angeles, or a UTC offset, e.g. +08:00)
             timezone_to (IANA timezone name, e.g. America/Los_Angeles, or a UTC offset, e.g. +08:00)
+            skills (array of skill names)
 
             If you can't find info for a specific field, fill in 'null'.
 
@@ -53,7 +53,8 @@ class PromptLLM
                 \"salary_period\": \"annual\",
                 \"salary_currency\": null,
                 \"timezone_from\": null,
-                \"timezone_to\": null
+                \"timezone_to\": null,
+                \"skills\": [ \"PHP\", \"JavaScript\" ]
             }
 
             Your response should contain only the JSON object.
@@ -68,9 +69,6 @@ class PromptLLM
         $replicate->promptAsync(LLMData::META_LLAMA_3_8B_INSTRUCT, $prompt, $job);
     }
 
-    /**
-     * @throws ConnectionException
-     */
     public function asJob(Job $job): void
     {
         $this->handle($job);

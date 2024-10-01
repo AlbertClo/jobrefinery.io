@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('job_lists_skills', function (Blueprint $table) {
             $table->foreignUuid('job_id')->index()->constrained('jobs')->onDelete('cascade');
             $table->foreignUuid('skill_id')->index()->constrained('skills')->onDelete('cascade');
-            $table->enum('skill_importance', ['required', 'preferred', 'nice to have']);
+            $table->enum('skill_importance', ['required', 'preferred', 'nice to have'])->nullable();
             $table->timestamps();
         });
     }

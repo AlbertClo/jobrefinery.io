@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->enum(
                 'type',
                 ['programming language', 'framework', 'methodology', 'tool', 'platform', 'library', 'database', 'other']
-            );
+            )->nullable();
             $table->timestamps();
         });
     }
