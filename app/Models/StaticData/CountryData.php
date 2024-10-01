@@ -256,6 +256,8 @@ class CountryData implements StaticDataContract
     public const ZMB = 'ZMB';
     public const ZWE = 'ZWE';
 
+    public const EU = 'EU';
+
     public static function getModelClass(): string
     {
         return \App\Models\Country::class;
@@ -272,7 +274,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::ALA,
                 'name' => 'Åland Islands',
-                'currency_code' => 'EUR',
+                'currency_code' => CurrencyData::EUR,
             ],
             [
                 'code' => self::ALB,
@@ -287,12 +289,12 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::ASM,
                 'name' => 'American Samoa',
-                'currency_code' => 'USD',
+                'currency_code' => CurrencyData::USD,
             ],
             [
                 'code' => self::AND,
                 'name' => 'Andorra',
-                'currency_code' => 'EUR',
+                'currency_code' => CurrencyData::EUR,
             ],
             [
                 'code' => self::AGO,
@@ -332,12 +334,12 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::AUS,
                 'name' => 'Australia',
-                'currency_code' => 'AUD',
+                'currency_code' => CurrencyData::AUD,
             ],
             [
                 'code' => self::AUT,
                 'name' => 'Austria',
-                'currency_code' => 'EUR',
+                'currency_code' => CurrencyData::EUR,
             ],
             [
                 'code' => self::AZE,
@@ -372,7 +374,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::BEL,
                 'name' => 'Belgium',
-                'currency_code' => 'EUR',
+                'currency_code' => CurrencyData::EUR,
             ],
             [
                 'code' => self::BLZ,
@@ -402,7 +404,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::BES,
                 'name' => 'Bonaire, Sint Eustatius and Saba',
-                'currency_code' => 'USD',
+                'currency_code' => CurrencyData::USD,
             ],
             [
                 'code' => self::BIH,
@@ -427,7 +429,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::IOT,
                 'name' => 'British Indian Ocean Territory',
-                'currency_code' => 'USD',
+                'currency_code' => CurrencyData::USD,
             ],
             [
                 'code' => self::BRN,
@@ -497,12 +499,12 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::CXR,
                 'name' => 'Christmas Island',
-                'currency_code' => 'AUD',
+                'currency_code' => CurrencyData::AUD,
             ],
             [
                 'code' => self::CCK,
                 'name' => 'Cocos (Keeling) Islands',
-                'currency_code' => 'AUD',
+                'currency_code' => CurrencyData::AUD,
             ],
             [
                 'code' => self::COL,
@@ -542,7 +544,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::HRV,
                 'name' => 'Croatia',
-                'currency_code' => 'EUR',
+                'currency_code' => CurrencyData::EUR,
             ],
             [
                 'code' => self::CUB,
@@ -557,7 +559,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::CYP,
                 'name' => 'Cyprus',
-                'currency_code' => 'EUR',
+                'currency_code' => CurrencyData::EUR,
             ],
             [
                 'code' => self::CZE,
@@ -587,7 +589,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::ECU,
                 'name' => 'Ecuador',
-                'currency_code' => 'USD',
+                'currency_code' => CurrencyData::USD,
             ],
             [
                 'code' => self::EGY,
@@ -597,7 +599,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::SLV,
                 'name' => 'El Salvador',
-                'currency_code' => 'USD',
+                'currency_code' => CurrencyData::USD,
             ],
             [
                 'code' => self::GNQ,
@@ -612,7 +614,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::EST,
                 'name' => 'Estonia',
-                'currency_code' => 'EUR',
+                'currency_code' => CurrencyData::EUR,
             ],
             [
                 'code' => self::SWZ,
@@ -642,17 +644,17 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::FIN,
                 'name' => 'Finland',
-                'currency_code' => 'EUR',
+                'currency_code' => CurrencyData::EUR,
             ],
             [
                 'code' => self::FRA,
                 'name' => 'France',
-                'currency_code' => 'EUR',
+                'currency_code' => CurrencyData::EUR,
             ],
             [
                 'code' => self::GUF,
                 'name' => 'French Guiana',
-                'currency_code' => 'EUR',
+                'currency_code' => CurrencyData::EUR,
             ],
             [
                 'code' => self::PYF,
@@ -662,7 +664,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::ATF,
                 'name' => 'French Southern Territories',
-                'currency_code' => 'EUR',
+                'currency_code' => CurrencyData::EUR,
             ],
             [
                 'code' => self::GAB,
@@ -682,7 +684,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::DEU,
                 'name' => 'Germany',
-                'currency_code' => 'EUR',
+                'currency_code' => CurrencyData::EUR,
             ],
             [
                 'code' => self::GHA,
@@ -697,7 +699,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::GRC,
                 'name' => 'Greece',
-                'currency_code' => 'EUR',
+                'currency_code' => CurrencyData::EUR,
             ],
             [
                 'code' => self::GRL,
@@ -712,12 +714,12 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::GLP,
                 'name' => 'Guadeloupe',
-                'currency_code' => 'EUR',
+                'currency_code' => CurrencyData::EUR,
             ],
             [
                 'code' => self::GUM,
                 'name' => 'Guam',
-                'currency_code' => 'USD',
+                'currency_code' => CurrencyData::USD,
             ],
             [
                 'code' => self::GTM,
@@ -727,7 +729,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::GGY,
                 'name' => 'Guernsey',
-                'currency_code' => 'GBP',
+                'currency_code' => CurrencyData::GBP,
             ],
             [
                 'code' => self::GIN,
@@ -752,12 +754,12 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::HMD,
                 'name' => 'Heard Island and McDonald Islands',
-                'currency_code' => 'AUD',
+                'currency_code' => CurrencyData::AUD,
             ],
             [
                 'code' => self::VAT,
                 'name' => 'Holy See',
-                'currency_code' => 'EUR',
+                'currency_code' => CurrencyData::EUR,
             ],
             [
                 'code' => self::HND,
@@ -802,12 +804,12 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::IRL,
                 'name' => 'Ireland',
-                'currency_code' => 'EUR',
+                'currency_code' => CurrencyData::EUR,
             ],
             [
                 'code' => self::IMN,
                 'name' => 'Isle of Man',
-                'currency_code' => 'GBP',
+                'currency_code' => CurrencyData::GBP,
             ],
             [
                 'code' => self::ISR,
@@ -817,7 +819,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::ITA,
                 'name' => 'Italy',
-                'currency_code' => 'EUR',
+                'currency_code' => CurrencyData::EUR,
             ],
             [
                 'code' => self::JAM,
@@ -832,7 +834,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::JEY,
                 'name' => 'Jersey',
-                'currency_code' => 'GBP',
+                'currency_code' => CurrencyData::GBP,
             ],
             [
                 'code' => self::JOR,
@@ -852,7 +854,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::KIR,
                 'name' => 'Kiribati',
-                'currency_code' => 'AUD',
+                'currency_code' => CurrencyData::AUD,
             ],
             [
                 'code' => self::PRK,
@@ -882,7 +884,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::LVA,
                 'name' => 'Latvia',
-                'currency_code' => 'EUR',
+                'currency_code' => CurrencyData::EUR,
             ],
             [
                 'code' => self::LBN,
@@ -912,12 +914,12 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::LTU,
                 'name' => 'Lithuania',
-                'currency_code' => 'EUR',
+                'currency_code' => CurrencyData::EUR,
             ],
             [
                 'code' => self::LUX,
                 'name' => 'Luxembourg',
-                'currency_code' => 'EUR',
+                'currency_code' => CurrencyData::EUR,
             ],
             [
                 'code' => self::MAC,
@@ -952,17 +954,17 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::MLT,
                 'name' => 'Malta',
-                'currency_code' => 'EUR',
+                'currency_code' => CurrencyData::EUR,
             ],
             [
                 'code' => self::MHL,
                 'name' => 'Marshall Islands',
-                'currency_code' => 'USD',
+                'currency_code' => CurrencyData::USD,
             ],
             [
                 'code' => self::MTQ,
                 'name' => 'Martinique',
-                'currency_code' => 'EUR',
+                'currency_code' => CurrencyData::EUR,
             ],
             [
                 'code' => self::MRT,
@@ -977,7 +979,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::MYT,
                 'name' => 'Mayotte',
-                'currency_code' => 'EUR',
+                'currency_code' => CurrencyData::EUR,
             ],
             [
                 'code' => self::MEX,
@@ -987,7 +989,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::FSM,
                 'name' => 'Micronesia, Federated States of',
-                'currency_code' => 'USD',
+                'currency_code' => CurrencyData::USD,
             ],
             [
                 'code' => self::MDA,
@@ -997,7 +999,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::MCO,
                 'name' => 'Monaco',
-                'currency_code' => 'EUR',
+                'currency_code' => CurrencyData::EUR,
             ],
             [
                 'code' => self::MNG,
@@ -1007,7 +1009,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::MNE,
                 'name' => 'Montenegro',
-                'currency_code' => 'EUR',
+                'currency_code' => CurrencyData::EUR,
             ],
             [
                 'code' => self::MSR,
@@ -1037,7 +1039,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::NRU,
                 'name' => 'Nauru',
-                'currency_code' => 'AUD',
+                'currency_code' => CurrencyData::AUD,
             ],
             [
                 'code' => self::NPL,
@@ -1047,7 +1049,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::NLD,
                 'name' => 'Netherlands',
-                'currency_code' => 'EUR',
+                'currency_code' => CurrencyData::EUR,
             ],
             [
                 'code' => self::NCL,
@@ -1082,7 +1084,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::NFK,
                 'name' => 'Norfolk Island',
-                'currency_code' => 'AUD',
+                'currency_code' => CurrencyData::AUD,
             ],
             [
                 'code' => self::MKD,
@@ -1092,7 +1094,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::MNP,
                 'name' => 'Northern Mariana Islands',
-                'currency_code' => 'USD',
+                'currency_code' => CurrencyData::USD,
             ],
             [
                 'code' => self::NOR,
@@ -1112,7 +1114,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::PLW,
                 'name' => 'Palau',
-                'currency_code' => 'USD',
+                'currency_code' => CurrencyData::USD,
             ],
             [
                 'code' => self::PSE,
@@ -1157,12 +1159,12 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::PRT,
                 'name' => 'Portugal',
-                'currency_code' => 'EUR',
+                'currency_code' => CurrencyData::EUR,
             ],
             [
                 'code' => self::PRI,
                 'name' => 'Puerto Rico',
-                'currency_code' => 'USD',
+                'currency_code' => CurrencyData::USD,
             ],
             [
                 'code' => self::QAT,
@@ -1172,7 +1174,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::REU,
                 'name' => 'Réunion',
-                'currency_code' => 'EUR',
+                'currency_code' => CurrencyData::EUR,
             ],
             [
                 'code' => self::ROU,
@@ -1192,7 +1194,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::BLM,
                 'name' => 'Saint Barthélemy',
-                'currency_code' => 'EUR',
+                'currency_code' => CurrencyData::EUR,
             ],
             [
                 'code' => self::SHN,
@@ -1212,12 +1214,12 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::MAF,
                 'name' => 'Saint Martin (French part)',
-                'currency_code' => 'EUR',
+                'currency_code' => CurrencyData::EUR,
             ],
             [
                 'code' => self::SPM,
                 'name' => 'Saint Pierre and Miquelon',
-                'currency_code' => 'EUR',
+                'currency_code' => CurrencyData::EUR,
             ],
             [
                 'code' => self::VCT,
@@ -1232,7 +1234,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::SMR,
                 'name' => 'San Marino',
-                'currency_code' => 'EUR',
+                'currency_code' => CurrencyData::EUR,
             ],
             [
                 'code' => self::STP,
@@ -1277,12 +1279,12 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::SVK,
                 'name' => 'Slovakia',
-                'currency_code' => 'EUR',
+                'currency_code' => CurrencyData::EUR,
             ],
             [
                 'code' => self::SVN,
                 'name' => 'Slovenia',
-                'currency_code' => 'EUR',
+                'currency_code' => CurrencyData::EUR,
             ],
             [
                 'code' => self::SLB,
@@ -1302,7 +1304,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::SGS,
                 'name' => 'South Georgia and the South Sandwich Islands',
-                'currency_code' => 'GBP',
+                'currency_code' => CurrencyData::GBP,
             ],
             [
                 'code' => self::SSD,
@@ -1312,7 +1314,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::ESP,
                 'name' => 'Spain',
-                'currency_code' => 'EUR',
+                'currency_code' => CurrencyData::EUR,
             ],
             [
                 'code' => self::LKA,
@@ -1372,7 +1374,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::TLS,
                 'name' => 'Timor-Leste',
-                'currency_code' => 'USD',
+                'currency_code' => CurrencyData::USD,
             ],
             [
                 'code' => self::TGO,
@@ -1412,12 +1414,12 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::TCA,
                 'name' => 'Turks and Caicos Islands',
-                'currency_code' => 'USD',
+                'currency_code' => CurrencyData::USD,
             ],
             [
                 'code' => self::TUV,
                 'name' => 'Tuvalu',
-                'currency_code' => 'AUD',
+                'currency_code' => CurrencyData::AUD,
             ],
             [
                 'code' => self::UGA,
@@ -1437,17 +1439,17 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::GBR,
                 'name' => 'United Kingdom',
-                'currency_code' => 'GBP',
+                'currency_code' => CurrencyData::GBP,
             ],
             [
                 'code' => self::USA,
                 'name' => 'United States',
-                'currency_code' => 'USD',
+                'currency_code' => CurrencyData::USD,
             ],
             [
                 'code' => self::UMI,
                 'name' => 'United States Minor Outlying Islands',
-                'currency_code' => 'USD',
+                'currency_code' => CurrencyData::USD,
             ],
             [
                 'code' => self::URY,
@@ -1477,12 +1479,12 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::VGB,
                 'name' => 'Virgin Islands, British',
-                'currency_code' => 'USD',
+                'currency_code' => CurrencyData::USD,
             ],
             [
                 'code' => self::VIR,
                 'name' => 'Virgin Islands, U.S.',
-                'currency_code' => 'USD',
+                'currency_code' => CurrencyData::USD,
             ],
             [
                 'code' => self::WLF,
@@ -1507,7 +1509,12 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::ZWE,
                 'name' => 'Zimbabwe',
-                'currency_code' => 'ZWL',
+                'currency_code' => CurrencyData::ZWL,
+            ],
+            [
+                'code' => self::EU,
+                'name' => 'European Union',
+                'currency_code' => CurrencyData::EUR,
             ],
         ];
     }

@@ -79,6 +79,10 @@ class PromptLLM
 //        $anthropic = new \App\Services\LLM\Anthropic();
 //        $LLMResponse = $anthropic->prompt(LLMData::CLAUDE_3_HAIKU, $prompt, $jobSpec);
 //        UseLLMResponse::dispatch($LLMResponse);
+
+//                $anthropic = new \App\Services\LLM\Anthropic();
+//        $LLMResponse = $anthropic->prompt(LLMData::CLAUDE_3_SONNET, $prompt, $jobSpec);
+//        UseLLMResponse::dispatch($LLMResponse);
     }
 
     public function asJob(JobSpec $jobSpec): void

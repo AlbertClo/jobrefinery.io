@@ -24,6 +24,8 @@ class UseLLMResponse
     {
         $responseAnswer = $this->llmJsonResponseToArray($llmResponse);
 
+        // dump($responseAnswer);
+
         $jobSpec = JobSpec::find($llmResponse->related_entity_id);
         if ($jobSpec === null) {
             throw new Exception("Error: Could not find jobSpec with id {$llmResponse->related_entity_id}");
@@ -58,9 +60,10 @@ class UseLLMResponse
             $responseAnswer['salary_to'] *= 12;
         }
 
-        $exchangeRates = [
+        $exchangeRatesFromUSD = [
+            'GBP' => 1.33,
+            'EUR' => 1.11,
             'USD' => 1,
-            'EUR' => 1.12,
             'CAD' => 0.74,
             'AUD' => 0.69,
         ];
@@ -77,18 +80,21 @@ class UseLLMResponse
         $jobSpec->timezone_from = $responseAnswer['timezone_from'];
         $jobSpec->timezone_to = $responseAnswer['timezone_to'];
 
-        if (in_array($jobSpec->salary_currency, array_keys($exchangeRates))) {
+        if (in_array($jobSpec->salary_currency, array_keys($exchangeRatesFromUSD))) {
             if ($jobSpec->salary_from !== null) {
-                $jobSpec->salary_in_usd_from = $jobSpec->salary_from * $exchangeRates[$jobSpec->salary_currency];
+                $jobSpec->salary_in_usd_from = $jobSpec->salary_from * $exchangeRatesFromUSD[$jobSpec->salary_currency];
             }
             if ($jobSpec->salary_to !== null) {
-                $jobSpec->salary_in_usd_to = $jobSpec->salary_to * $exchangeRates[$jobSpec->salary_currency];
+                $jobSpec->salary_in_usd_to = $jobSpec->salary_to * $exchangeRatesFromUSD[$jobSpec->salary_currency];
             }
         }
 
-        foreach ($responseAnswer['skills'] as $skillName) {
-            $skill = Skill::where('name', $skillName)->firstOrCreate(['name' => $skillName]);
-            $jobSpec->skills()->attach($skill, ['skill_importance' => 'preferred']);
+        $jobSpec->skills()->detach(); // detach existing skills, if any
+        if (is_array($responseAnswer['skills'])) {
+            foreach ($responseAnswer['skills'] as $skillName) {
+                $skill = Skill::where('name', $skillName)->firstOrCreate(['name' => $skillName]);
+                $jobSpec->skills()->attach($skill, ['skill_importance' => 'preferred']);
+            }
         }
 
         $jobSpec->save();
@@ -163,8 +169,13 @@ class UseLLMResponse
                 // Recursively clean nested arrays
                 $result[$cleanKey] = $this->cleanArray($value);
             } elseif (is_string($value)) {
-                // Remove spaces from string values
-                $result[$cleanKey] = str_replace(' ', '', $value);
+                // Don't remove spaces from these values, only trim
+                if (in_array(strtolower($cleanKey), ['heading', 'city', 'company'])) {
+                    $result[$cleanKey] = trim($value);
+                } else {
+                    // Remove spaces from string values for other keys
+                    $result[$cleanKey] = str_replace(' ', '', $value);
+                }
             } else {
                 // Keep non-string values as is
                 $result[$cleanKey] = $value;
