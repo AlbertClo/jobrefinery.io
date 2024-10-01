@@ -269,7 +269,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::AFG,
                 'name' => 'Afghanistan',
-                'currency_code' => 'AFN',
+                'currency_code' => CurrencyData::AFN,
             ],
             [
                 'code' => self::ALA,
@@ -279,12 +279,12 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::ALB,
                 'name' => 'Albania',
-                'currency_code' => 'ALL',
+                'currency_code' => CurrencyData::ALL,
             ],
             [
                 'code' => self::DZA,
                 'name' => 'Algeria',
-                'currency_code' => 'DZD',
+                'currency_code' => CurrencyData::DZD,
             ],
             [
                 'code' => self::ASM,
@@ -299,12 +299,12 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::AGO,
                 'name' => 'Angola',
-                'currency_code' => 'AOA',
+                'currency_code' => CurrencyData::AOA,
             ],
             [
                 'code' => self::AIA,
                 'name' => 'Anguilla',
-                'currency_code' => 'XCD',
+                'currency_code' => CurrencyData::XCD,
             ],
             [
                 'code' => self::ATA,
@@ -314,22 +314,22 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::ATG,
                 'name' => 'Antigua and Barbuda',
-                'currency_code' => 'XCD',
+                'currency_code' => CurrencyData::XCD,
             ],
             [
                 'code' => self::ARG,
                 'name' => 'Argentina',
-                'currency_code' => 'ARS',
+                'currency_code' => CurrencyData::ARS,
             ],
             [
                 'code' => self::ARM,
                 'name' => 'Armenia',
-                'currency_code' => 'AMD',
+                'currency_code' => CurrencyData::AMD,
             ],
             [
                 'code' => self::ABW,
                 'name' => 'Aruba',
-                'currency_code' => 'AWG',
+                'currency_code' => CurrencyData::AWG,
             ],
             [
                 'code' => self::AUS,
@@ -344,32 +344,32 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::AZE,
                 'name' => 'Azerbaijan',
-                'currency_code' => 'AZN',
+                'currency_code' => CurrencyData::AZN,
             ],
             [
                 'code' => self::BHS,
                 'name' => 'Bahamas',
-                'currency_code' => 'BSD',
+                'currency_code' => CurrencyData::BSD,
             ],
             [
                 'code' => self::BHR,
                 'name' => 'Bahrain',
-                'currency_code' => 'BHD',
+                'currency_code' => CurrencyData::BHD,
             ],
             [
                 'code' => self::BGD,
                 'name' => 'Bangladesh',
-                'currency_code' => 'BDT',
+                'currency_code' => CurrencyData::BDT,
             ],
             [
                 'code' => self::BRB,
                 'name' => 'Barbados',
-                'currency_code' => 'BBD',
+                'currency_code' => CurrencyData::BBD,
             ],
             [
                 'code' => self::BLR,
                 'name' => 'Belarus',
-                'currency_code' => 'BYN',
+                'currency_code' => CurrencyData::BYN,
             ],
             [
                 'code' => self::BEL,
@@ -379,27 +379,27 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::BLZ,
                 'name' => 'Belize',
-                'currency_code' => 'BZD',
+                'currency_code' => CurrencyData::BZD,
             ],
             [
                 'code' => self::BEN,
                 'name' => 'Benin',
-                'currency_code' => 'XOF',
+                'currency_code' => CurrencyData::XOF,
             ],
             [
                 'code' => self::BMU,
                 'name' => 'Bermuda',
-                'currency_code' => 'BMD',
+                'currency_code' => CurrencyData::BMD,
             ],
             [
                 'code' => self::BTN,
                 'name' => 'Bhutan',
-                'currency_code' => 'BTN',
+                'currency_code' => CurrencyData::BTN,
             ],
             [
                 'code' => self::BOL,
                 'name' => 'Bolivia',
-                'currency_code' => 'BOB',
+                'currency_code' => CurrencyData::BOB,
             ],
             [
                 'code' => self::BES,
@@ -409,22 +409,22 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::BIH,
                 'name' => 'Bosnia and Herzegovina',
-                'currency_code' => 'BAM',
+                'currency_code' => CurrencyData::BAM,
             ],
             [
                 'code' => self::BWA,
                 'name' => 'Botswana',
-                'currency_code' => 'BWP',
+                'currency_code' => CurrencyData::BWP,
             ],
             [
                 'code' => self::BVT,
                 'name' => 'Bouvet Island',
-                'currency_code' => 'NOK',
+                'currency_code' => CurrencyData::NOK,
             ],
             [
                 'code' => self::BRA,
                 'name' => 'Brazil',
-                'currency_code' => 'BRL',
+                'currency_code' => CurrencyData::BRL,
             ],
             [
                 'code' => self::IOT,
@@ -434,67 +434,67 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::BRN,
                 'name' => 'Brunei Darussalam',
-                'currency_code' => 'BND',
+                'currency_code' => CurrencyData::BND,
             ],
             [
                 'code' => self::BGR,
                 'name' => 'Bulgaria',
-                'currency_code' => 'BGN',
+                'currency_code' => CurrencyData::BGN,
             ],
             [
                 'code' => self::BFA,
                 'name' => 'Burkina Faso',
-                'currency_code' => 'XOF',
+                'currency_code' => CurrencyData::XOF,
             ],
             [
                 'code' => self::BDI,
                 'name' => 'Burundi',
-                'currency_code' => 'BIF',
+                'currency_code' => CurrencyData::BIF,
             ],
             [
                 'code' => self::CPV,
                 'name' => 'Cabo Verde',
-                'currency_code' => 'CVE',
+                'currency_code' => CurrencyData::CVE,
             ],
             [
                 'code' => self::KHM,
                 'name' => 'Cambodia',
-                'currency_code' => 'KHR',
+                'currency_code' => CurrencyData::KHR,
             ],
             [
                 'code' => self::CMR,
                 'name' => 'Cameroon',
-                'currency_code' => 'XAF',
+                'currency_code' => CurrencyData::XAF,
             ],
             [
                 'code' => self::CAN,
                 'name' => 'Canada',
-                'currency_code' => 'CAD',
+                'currency_code' => CurrencyData::CAD,
             ],
             [
                 'code' => self::CYM,
                 'name' => 'Cayman Islands',
-                'currency_code' => 'KYD',
+                'currency_code' => CurrencyData::KYD,
             ],
             [
                 'code' => self::CAF,
                 'name' => 'Central African Republic',
-                'currency_code' => 'XAF',
+                'currency_code' => CurrencyData::XAF,
             ],
             [
                 'code' => self::TCD,
                 'name' => 'Chad',
-                'currency_code' => 'XAF',
+                'currency_code' => CurrencyData::XAF,
             ],
             [
                 'code' => self::CHL,
                 'name' => 'Chile',
-                'currency_code' => 'CLP',
+                'currency_code' => CurrencyData::CLP,
             ],
             [
                 'code' => self::CHN,
                 'name' => 'China',
-                'currency_code' => 'CNY',
+                'currency_code' => CurrencyData::CNY,
             ],
             [
                 'code' => self::CXR,
@@ -509,37 +509,37 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::COL,
                 'name' => 'Colombia',
-                'currency_code' => 'COP',
+                'currency_code' => CurrencyData::COP,
             ],
             [
                 'code' => self::COM,
                 'name' => 'Comoros',
-                'currency_code' => 'KMF',
+                'currency_code' => CurrencyData::KMF,
             ],
             [
                 'code' => self::COD,
                 'name' => 'Congo, Democratic Republic of the',
-                'currency_code' => 'CDF',
+                'currency_code' => CurrencyData::CDF,
             ],
             [
                 'code' => self::COG,
                 'name' => 'Congo',
-                'currency_code' => 'XAF',
+                'currency_code' => CurrencyData::XAF,
             ],
             [
                 'code' => self::COK,
                 'name' => 'Cook Islands',
-                'currency_code' => 'NZD',
+                'currency_code' => CurrencyData::NZD,
             ],
             [
                 'code' => self::CRI,
                 'name' => 'Costa Rica',
-                'currency_code' => 'CRC',
+                'currency_code' => CurrencyData::CRC,
             ],
             [
                 'code' => self::CIV,
                 'name' => 'Côte d\'Ivoire',
-                'currency_code' => 'XOF',
+                'currency_code' => CurrencyData::XOF,
             ],
             [
                 'code' => self::HRV,
@@ -549,12 +549,12 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::CUB,
                 'name' => 'Cuba',
-                'currency_code' => 'CUP',
+                'currency_code' => CurrencyData::CUP,
             ],
             [
                 'code' => self::CUW,
                 'name' => 'Curaçao',
-                'currency_code' => 'ANG',
+                'currency_code' => CurrencyData::ANG,
             ],
             [
                 'code' => self::CYP,
@@ -564,27 +564,27 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::CZE,
                 'name' => 'Czech Republic',
-                'currency_code' => 'CZK',
+                'currency_code' => CurrencyData::CZK,
             ],
             [
                 'code' => self::DNK,
                 'name' => 'Denmark',
-                'currency_code' => 'DKK',
+                'currency_code' => CurrencyData::DKK,
             ],
             [
                 'code' => self::DJI,
                 'name' => 'Djibouti',
-                'currency_code' => 'DJF',
+                'currency_code' => CurrencyData::DJF,
             ],
             [
                 'code' => self::DMA,
                 'name' => 'Dominica',
-                'currency_code' => 'XCD',
+                'currency_code' => CurrencyData::XCD,
             ],
             [
                 'code' => self::DOM,
                 'name' => 'Dominican Republic',
-                'currency_code' => 'DOP',
+                'currency_code' => CurrencyData::DOP,
             ],
             [
                 'code' => self::ECU,
@@ -594,7 +594,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::EGY,
                 'name' => 'Egypt',
-                'currency_code' => 'EGP',
+                'currency_code' => CurrencyData::EGP,
             ],
             [
                 'code' => self::SLV,
@@ -604,12 +604,12 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::GNQ,
                 'name' => 'Equatorial Guinea',
-                'currency_code' => 'XAF',
+                'currency_code' => CurrencyData::XAF,
             ],
             [
                 'code' => self::ERI,
                 'name' => 'Eritrea',
-                'currency_code' => 'ERN',
+                'currency_code' => CurrencyData::ERN,
             ],
             [
                 'code' => self::EST,
@@ -619,27 +619,27 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::SWZ,
                 'name' => 'Eswatini',
-                'currency_code' => 'SZL',
+                'currency_code' => CurrencyData::SZL,
             ],
             [
                 'code' => self::ETH,
                 'name' => 'Ethiopia',
-                'currency_code' => 'ETB',
+                'currency_code' => CurrencyData::ETB,
             ],
             [
                 'code' => self::FLK,
                 'name' => 'Falkland Islands (Malvinas)',
-                'currency_code' => 'FKP',
+                'currency_code' => CurrencyData::FKP,
             ],
             [
                 'code' => self::FRO,
                 'name' => 'Faroe Islands',
-                'currency_code' => 'DKK',
+                'currency_code' => CurrencyData::DKK,
             ],
             [
                 'code' => self::FJI,
                 'name' => 'Fiji',
-                'currency_code' => 'FJD',
+                'currency_code' => CurrencyData::FJD,
             ],
             [
                 'code' => self::FIN,
@@ -659,7 +659,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::PYF,
                 'name' => 'French Polynesia',
-                'currency_code' => 'XPF',
+                'currency_code' => CurrencyData::XPF,
             ],
             [
                 'code' => self::ATF,
@@ -669,17 +669,17 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::GAB,
                 'name' => 'Gabon',
-                'currency_code' => 'XAF',
+                'currency_code' => CurrencyData::XAF,
             ],
             [
                 'code' => self::GMB,
                 'name' => 'Gambia',
-                'currency_code' => 'GMD',
+                'currency_code' => CurrencyData::GMD,
             ],
             [
                 'code' => self::GEO,
                 'name' => 'Georgia',
-                'currency_code' => 'GEL',
+                'currency_code' => CurrencyData::GEL,
             ],
             [
                 'code' => self::DEU,
@@ -689,12 +689,12 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::GHA,
                 'name' => 'Ghana',
-                'currency_code' => 'GHS',
+                'currency_code' => CurrencyData::GHS,
             ],
             [
                 'code' => self::GIB,
                 'name' => 'Gibraltar',
-                'currency_code' => 'GIP',
+                'currency_code' => CurrencyData::GIP,
             ],
             [
                 'code' => self::GRC,
@@ -704,12 +704,12 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::GRL,
                 'name' => 'Greenland',
-                'currency_code' => 'DKK',
+                'currency_code' => CurrencyData::DKK,
             ],
             [
                 'code' => self::GRD,
                 'name' => 'Grenada',
-                'currency_code' => 'XCD',
+                'currency_code' => CurrencyData::XCD,
             ],
             [
                 'code' => self::GLP,
@@ -724,7 +724,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::GTM,
                 'name' => 'Guatemala',
-                'currency_code' => 'GTQ',
+                'currency_code' => CurrencyData::GTQ,
             ],
             [
                 'code' => self::GGY,
@@ -734,22 +734,22 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::GIN,
                 'name' => 'Guinea',
-                'currency_code' => 'GNF',
+                'currency_code' => CurrencyData::GNF,
             ],
             [
                 'code' => self::GNB,
                 'name' => 'Guinea-Bissau',
-                'currency_code' => 'XOF',
+                'currency_code' => CurrencyData::XOF,
             ],
             [
                 'code' => self::GUY,
                 'name' => 'Guyana',
-                'currency_code' => 'GYD',
+                'currency_code' => CurrencyData::GYD,
             ],
             [
                 'code' => self::HTI,
                 'name' => 'Haiti',
-                'currency_code' => 'HTG',
+                'currency_code' => CurrencyData::HTG,
             ],
             [
                 'code' => self::HMD,
@@ -764,42 +764,42 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::HND,
                 'name' => 'Honduras',
-                'currency_code' => 'HNL',
+                'currency_code' => CurrencyData::HNL,
             ],
             [
                 'code' => self::HKG,
                 'name' => 'Hong Kong',
-                'currency_code' => 'HKD',
+                'currency_code' => CurrencyData::HKD,
             ],
             [
                 'code' => self::HUN,
                 'name' => 'Hungary',
-                'currency_code' => 'HUF',
+                'currency_code' => CurrencyData::HUF,
             ],
             [
                 'code' => self::ISL,
                 'name' => 'Iceland',
-                'currency_code' => 'ISK',
+                'currency_code' => CurrencyData::ISK,
             ],
             [
                 'code' => self::IND,
                 'name' => 'India',
-                'currency_code' => 'INR',
+                'currency_code' => CurrencyData::INR,
             ],
             [
                 'code' => self::IDN,
                 'name' => 'Indonesia',
-                'currency_code' => 'IDR',
+                'currency_code' => CurrencyData::IDR,
             ],
             [
                 'code' => self::IRN,
                 'name' => 'Iran, Islamic Republic of',
-                'currency_code' => 'IRR',
+                'currency_code' => CurrencyData::IRR,
             ],
             [
                 'code' => self::IRQ,
                 'name' => 'Iraq',
-                'currency_code' => 'IQD',
+                'currency_code' => CurrencyData::IQD,
             ],
             [
                 'code' => self::IRL,
@@ -814,7 +814,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::ISR,
                 'name' => 'Israel',
-                'currency_code' => 'ILS',
+                'currency_code' => CurrencyData::ILS,
             ],
             [
                 'code' => self::ITA,
@@ -824,12 +824,12 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::JAM,
                 'name' => 'Jamaica',
-                'currency_code' => 'JMD',
+                'currency_code' => CurrencyData::JMD,
             ],
             [
                 'code' => self::JPN,
                 'name' => 'Japan',
-                'currency_code' => 'JPY',
+                'currency_code' => CurrencyData::JPY,
             ],
             [
                 'code' => self::JEY,
@@ -839,17 +839,17 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::JOR,
                 'name' => 'Jordan',
-                'currency_code' => 'JOD',
+                'currency_code' => CurrencyData::JOD,
             ],
             [
                 'code' => self::KAZ,
                 'name' => 'Kazakhstan',
-                'currency_code' => 'KZT',
+                'currency_code' => CurrencyData::KZT,
             ],
             [
                 'code' => self::KEN,
                 'name' => 'Kenya',
-                'currency_code' => 'KES',
+                'currency_code' => CurrencyData::KES,
             ],
             [
                 'code' => self::KIR,
@@ -859,27 +859,27 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::PRK,
                 'name' => 'Korea, Democratic People\'s Republic of',
-                'currency_code' => 'KPW',
+                'currency_code' => CurrencyData::KPW,
             ],
             [
                 'code' => self::KOR,
                 'name' => 'Korea, Republic of',
-                'currency_code' => 'KRW',
+                'currency_code' => CurrencyData::KRW,
             ],
             [
                 'code' => self::KWT,
                 'name' => 'Kuwait',
-                'currency_code' => 'KWD',
+                'currency_code' => CurrencyData::KWD,
             ],
             [
                 'code' => self::KGZ,
                 'name' => 'Kyrgyzstan',
-                'currency_code' => 'KGS',
+                'currency_code' => CurrencyData::KGS,
             ],
             [
                 'code' => self::LAO,
                 'name' => 'Lao People\'s Democratic Republic',
-                'currency_code' => 'LAK',
+                'currency_code' => CurrencyData::LAK,
             ],
             [
                 'code' => self::LVA,
@@ -889,27 +889,27 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::LBN,
                 'name' => 'Lebanon',
-                'currency_code' => 'LBP',
+                'currency_code' => CurrencyData::LBP,
             ],
             [
                 'code' => self::LSO,
                 'name' => 'Lesotho',
-                'currency_code' => 'LSL',
+                'currency_code' => CurrencyData::LSL,
             ],
             [
                 'code' => self::LBR,
                 'name' => 'Liberia',
-                'currency_code' => 'LRD',
+                'currency_code' => CurrencyData::LRD,
             ],
             [
                 'code' => self::LBY,
                 'name' => 'Libya',
-                'currency_code' => 'LYD',
+                'currency_code' => CurrencyData::LYD,
             ],
             [
                 'code' => self::LIE,
                 'name' => 'Liechtenstein',
-                'currency_code' => 'CHF',
+                'currency_code' => CurrencyData::CHF,
             ],
             [
                 'code' => self::LTU,
@@ -924,32 +924,32 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::MAC,
                 'name' => 'Macao',
-                'currency_code' => 'MOP',
+                'currency_code' => CurrencyData::MOP,
             ],
             [
                 'code' => self::MDG,
                 'name' => 'Madagascar',
-                'currency_code' => 'MGA',
+                'currency_code' => CurrencyData::MGA,
             ],
             [
                 'code' => self::MWI,
                 'name' => 'Malawi',
-                'currency_code' => 'MWK',
+                'currency_code' => CurrencyData::MWK,
             ],
             [
                 'code' => self::MYS,
                 'name' => 'Malaysia',
-                'currency_code' => 'MYR',
+                'currency_code' => CurrencyData::MYR,
             ],
             [
                 'code' => self::MDV,
                 'name' => 'Maldives',
-                'currency_code' => 'MVR',
+                'currency_code' => CurrencyData::MVR,
             ],
             [
                 'code' => self::MLI,
                 'name' => 'Mali',
-                'currency_code' => 'XOF',
+                'currency_code' => CurrencyData::XOF,
             ],
             [
                 'code' => self::MLT,
@@ -969,12 +969,12 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::MRT,
                 'name' => 'Mauritania',
-                'currency_code' => 'MRU',
+                'currency_code' => CurrencyData::MRU,
             ],
             [
                 'code' => self::MUS,
                 'name' => 'Mauritius',
-                'currency_code' => 'MUR',
+                'currency_code' => CurrencyData::MUR,
             ],
             [
                 'code' => self::MYT,
@@ -984,7 +984,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::MEX,
                 'name' => 'Mexico',
-                'currency_code' => 'MXN',
+                'currency_code' => CurrencyData::MXN,
             ],
             [
                 'code' => self::FSM,
@@ -994,7 +994,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::MDA,
                 'name' => 'Moldova, Republic of',
-                'currency_code' => 'MDL',
+                'currency_code' => CurrencyData::MDL,
             ],
             [
                 'code' => self::MCO,
@@ -1004,7 +1004,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::MNG,
                 'name' => 'Mongolia',
-                'currency_code' => 'MNT',
+                'currency_code' => CurrencyData::MNT,
             ],
             [
                 'code' => self::MNE,
@@ -1014,27 +1014,27 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::MSR,
                 'name' => 'Montserrat',
-                'currency_code' => 'XCD',
+                'currency_code' => CurrencyData::XCD,
             ],
             [
                 'code' => self::MAR,
                 'name' => 'Morocco',
-                'currency_code' => 'MAD',
+                'currency_code' => CurrencyData::MAD,
             ],
             [
                 'code' => self::MOZ,
                 'name' => 'Mozambique',
-                'currency_code' => 'MZN',
+                'currency_code' => CurrencyData::MZN,
             ],
             [
                 'code' => self::MMR,
                 'name' => 'Myanmar',
-                'currency_code' => 'MMK',
+                'currency_code' => CurrencyData::MMK,
             ],
             [
                 'code' => self::NAM,
                 'name' => 'Namibia',
-                'currency_code' => 'NAD',
+                'currency_code' => CurrencyData::NAD,
             ],
             [
                 'code' => self::NRU,
@@ -1044,7 +1044,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::NPL,
                 'name' => 'Nepal',
-                'currency_code' => 'NPR',
+                'currency_code' => CurrencyData::NPR,
             ],
             [
                 'code' => self::NLD,
@@ -1054,32 +1054,32 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::NCL,
                 'name' => 'New Caledonia',
-                'currency_code' => 'XPF',
+                'currency_code' => CurrencyData::XPF,
             ],
             [
                 'code' => self::NZL,
                 'name' => 'New Zealand',
-                'currency_code' => 'NZD',
+                'currency_code' => CurrencyData::NZD,
             ],
             [
                 'code' => self::NIC,
                 'name' => 'Nicaragua',
-                'currency_code' => 'NIO',
+                'currency_code' => CurrencyData::NIO,
             ],
             [
                 'code' => self::NER,
                 'name' => 'Niger',
-                'currency_code' => 'XOF',
+                'currency_code' => CurrencyData::XOF,
             ],
             [
                 'code' => self::NGA,
                 'name' => 'Nigeria',
-                'currency_code' => 'NGN',
+                'currency_code' => CurrencyData::NGN,
             ],
             [
                 'code' => self::NIU,
                 'name' => 'Niue',
-                'currency_code' => 'NZD',
+                'currency_code' => CurrencyData::NZD,
             ],
             [
                 'code' => self::NFK,
@@ -1089,7 +1089,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::MKD,
                 'name' => 'North Macedonia',
-                'currency_code' => 'MKD',
+                'currency_code' => CurrencyData::MKD,
             ],
             [
                 'code' => self::MNP,
@@ -1099,17 +1099,17 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::NOR,
                 'name' => 'Norway',
-                'currency_code' => 'NOK',
+                'currency_code' => CurrencyData::NOK,
             ],
             [
                 'code' => self::OMN,
                 'name' => 'Oman',
-                'currency_code' => 'OMR',
+                'currency_code' => CurrencyData::OMR,
             ],
             [
                 'code' => self::PAK,
                 'name' => 'Pakistan',
-                'currency_code' => 'PKR',
+                'currency_code' => CurrencyData::PKR,
             ],
             [
                 'code' => self::PLW,
@@ -1119,42 +1119,42 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::PSE,
                 'name' => 'Palestine, State of',
-                'currency_code' => 'ILS',
+                'currency_code' => CurrencyData::ILS,
             ],
             [
                 'code' => self::PAN,
                 'name' => 'Panama',
-                'currency_code' => 'PAB',
+                'currency_code' => CurrencyData::PAB,
             ],
             [
                 'code' => self::PNG,
                 'name' => 'Papua New Guinea',
-                'currency_code' => 'PGK',
+                'currency_code' => CurrencyData::PGK,
             ],
             [
                 'code' => self::PRY,
                 'name' => 'Paraguay',
-                'currency_code' => 'PYG',
+                'currency_code' => CurrencyData::PYG,
             ],
             [
                 'code' => self::PER,
                 'name' => 'Peru',
-                'currency_code' => 'PEN',
+                'currency_code' => CurrencyData::PEN,
             ],
             [
                 'code' => self::PHL,
                 'name' => 'Philippines',
-                'currency_code' => 'PHP',
+                'currency_code' => CurrencyData::PHP,
             ],
             [
                 'code' => self::PCN,
                 'name' => 'Pitcairn',
-                'currency_code' => 'NZD',
+                'currency_code' => CurrencyData::NZD,
             ],
             [
                 'code' => self::POL,
                 'name' => 'Poland',
-                'currency_code' => 'PLN',
+                'currency_code' => CurrencyData::PLN,
             ],
             [
                 'code' => self::PRT,
@@ -1169,7 +1169,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::QAT,
                 'name' => 'Qatar',
-                'currency_code' => 'QAR',
+                'currency_code' => CurrencyData::QAR,
             ],
             [
                 'code' => self::REU,
@@ -1179,17 +1179,17 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::ROU,
                 'name' => 'Romania',
-                'currency_code' => 'RON',
+                'currency_code' => CurrencyData::RON,
             ],
             [
                 'code' => self::RUS,
                 'name' => 'Russian Federation',
-                'currency_code' => 'RUB',
+                'currency_code' => CurrencyData::RUB,
             ],
             [
                 'code' => self::RWA,
                 'name' => 'Rwanda',
-                'currency_code' => 'RWF',
+                'currency_code' => CurrencyData::RWF,
             ],
             [
                 'code' => self::BLM,
@@ -1199,17 +1199,17 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::SHN,
                 'name' => 'Saint Helena, Ascension and Tristan da Cunha',
-                'currency_code' => 'SHP',
+                'currency_code' => CurrencyData::SHP,
             ],
             [
                 'code' => self::KNA,
                 'name' => 'Saint Kitts and Nevis',
-                'currency_code' => 'XCD',
+                'currency_code' => CurrencyData::XCD,
             ],
             [
                 'code' => self::LCA,
                 'name' => 'Saint Lucia',
-                'currency_code' => 'XCD',
+                'currency_code' => CurrencyData::XCD,
             ],
             [
                 'code' => self::MAF,
@@ -1224,12 +1224,12 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::VCT,
                 'name' => 'Saint Vincent and the Grenadines',
-                'currency_code' => 'XCD',
+                'currency_code' => CurrencyData::XCD,
             ],
             [
                 'code' => self::WSM,
                 'name' => 'Samoa',
-                'currency_code' => 'WST',
+                'currency_code' => CurrencyData::WST,
             ],
             [
                 'code' => self::SMR,
@@ -1239,27 +1239,27 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::STP,
                 'name' => 'Sao Tome and Principe',
-                'currency_code' => 'STN',
+                'currency_code' => CurrencyData::STN,
             ],
             [
                 'code' => self::SAU,
                 'name' => 'Saudi Arabia',
-                'currency_code' => 'SAR',
+                'currency_code' => CurrencyData::SAR,
             ],
             [
                 'code' => self::SEN,
                 'name' => 'Senegal',
-                'currency_code' => 'XOF',
+                'currency_code' => CurrencyData::XOF,
             ],
             [
                 'code' => self::SRB,
                 'name' => 'Serbia',
-                'currency_code' => 'RSD',
+                'currency_code' => CurrencyData::RSD,
             ],
             [
                 'code' => self::SYC,
                 'name' => 'Seychelles',
-                'currency_code' => 'SCR',
+                'currency_code' => CurrencyData::SCR,
             ],
             [
                 'code' => self::SLE,
@@ -1269,12 +1269,12 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::SGP,
                 'name' => 'Singapore',
-                'currency_code' => 'SGD',
+                'currency_code' => CurrencyData::SGD,
             ],
             [
                 'code' => self::SXM,
                 'name' => 'Sint Maarten (Dutch part)',
-                'currency_code' => 'ANG',
+                'currency_code' => CurrencyData::ANG,
             ],
             [
                 'code' => self::SVK,
@@ -1289,17 +1289,17 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::SLB,
                 'name' => 'Solomon Islands',
-                'currency_code' => 'SBD',
+                'currency_code' => CurrencyData::SBD,
             ],
             [
                 'code' => self::SOM,
                 'name' => 'Somalia',
-                'currency_code' => 'SOS',
+                'currency_code' => CurrencyData::SOS,
             ],
             [
                 'code' => self::ZAF,
                 'name' => 'South Africa',
-                'currency_code' => 'ZAR',
+                'currency_code' => CurrencyData::ZAR,
             ],
             [
                 'code' => self::SGS,
@@ -1309,7 +1309,7 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::SSD,
                 'name' => 'South Sudan',
-                'currency_code' => 'SSP',
+                'currency_code' => CurrencyData::SSP,
             ],
             [
                 'code' => self::ESP,
@@ -1319,57 +1319,57 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::LKA,
                 'name' => 'Sri Lanka',
-                'currency_code' => 'LKR',
+                'currency_code' => CurrencyData::LKR,
             ],
             [
                 'code' => self::SDN,
                 'name' => 'Sudan',
-                'currency_code' => 'SDG',
+                'currency_code' => CurrencyData::SDG,
             ],
             [
                 'code' => self::SUR,
                 'name' => 'Suriname',
-                'currency_code' => 'SRD',
+                'currency_code' => CurrencyData::SRD,
             ],
             [
                 'code' => self::SJM,
                 'name' => 'Svalbard and Jan Mayen',
-                'currency_code' => 'NOK',
+                'currency_code' => CurrencyData::NOK,
             ],
             [
                 'code' => self::SWE,
                 'name' => 'Sweden',
-                'currency_code' => 'SEK',
+                'currency_code' => CurrencyData::SEK,
             ],
             [
                 'code' => self::CHE,
                 'name' => 'Switzerland',
-                'currency_code' => 'CHF',
+                'currency_code' => CurrencyData::CHF,
             ],
             [
                 'code' => self::SYR,
                 'name' => 'Syrian Arab Republic',
-                'currency_code' => 'SYP',
+                'currency_code' => CurrencyData::SYP,
             ],
             [
                 'code' => self::TWN,
                 'name' => 'Taiwan, Province of China',
-                'currency_code' => 'TWD',
+                'currency_code' => CurrencyData::TWD,
             ],
             [
                 'code' => self::TJK,
                 'name' => 'Tajikistan',
-                'currency_code' => 'TJS',
+                'currency_code' => CurrencyData::TJS,
             ],
             [
                 'code' => self::TZA,
                 'name' => 'Tanzania, United Republic of',
-                'currency_code' => 'TZS',
+                'currency_code' => CurrencyData::TZS,
             ],
             [
                 'code' => self::THA,
                 'name' => 'Thailand',
-                'currency_code' => 'THB',
+                'currency_code' => CurrencyData::THB,
             ],
             [
                 'code' => self::TLS,
@@ -1379,37 +1379,37 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::TGO,
                 'name' => 'Togo',
-                'currency_code' => 'XOF',
+                'currency_code' => CurrencyData::XOF,
             ],
             [
                 'code' => self::TKL,
                 'name' => 'Tokelau',
-                'currency_code' => 'NZD',
+                'currency_code' => CurrencyData::NZD,
             ],
             [
                 'code' => self::TON,
                 'name' => 'Tonga',
-                'currency_code' => 'TOP',
+                'currency_code' => CurrencyData::TOP,
             ],
             [
                 'code' => self::TTO,
                 'name' => 'Trinidad and Tobago',
-                'currency_code' => 'TTD',
+                'currency_code' => CurrencyData::TTD,
             ],
             [
                 'code' => self::TUN,
                 'name' => 'Tunisia',
-                'currency_code' => 'TND',
+                'currency_code' => CurrencyData::TND,
             ],
             [
                 'code' => self::TUR,
                 'name' => 'Turkey',
-                'currency_code' => 'TRY',
+                'currency_code' => CurrencyData::TRY,
             ],
             [
                 'code' => self::TKM,
                 'name' => 'Turkmenistan',
-                'currency_code' => 'TMT',
+                'currency_code' => CurrencyData::TMT,
             ],
             [
                 'code' => self::TCA,
@@ -1424,17 +1424,17 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::UGA,
                 'name' => 'Uganda',
-                'currency_code' => 'UGX',
+                'currency_code' => CurrencyData::UGX,
             ],
             [
                 'code' => self::UKR,
                 'name' => 'Ukraine',
-                'currency_code' => 'UAH',
+                'currency_code' => CurrencyData::UAH,
             ],
             [
                 'code' => self::ARE,
                 'name' => 'United Arab Emirates',
-                'currency_code' => 'AED',
+                'currency_code' => CurrencyData::AED,
             ],
             [
                 'code' => self::GBR,
@@ -1454,27 +1454,27 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::URY,
                 'name' => 'Uruguay',
-                'currency_code' => 'UYU',
+                'currency_code' => CurrencyData::UYU,
             ],
             [
                 'code' => self::UZB,
                 'name' => 'Uzbekistan',
-                'currency_code' => 'UZS',
+                'currency_code' => CurrencyData::UZS,
             ],
             [
                 'code' => self::VUT,
                 'name' => 'Vanuatu',
-                'currency_code' => 'VUV',
+                'currency_code' => CurrencyData::VUV,
             ],
             [
                 'code' => self::VEN,
                 'name' => 'Venezuela, Bolivarian Republic of',
-                'currency_code' => 'VES',
+                'currency_code' => CurrencyData::VES,
             ],
             [
                 'code' => self::VNM,
                 'name' => 'Viet Nam',
-                'currency_code' => 'VND',
+                'currency_code' => CurrencyData::VND,
             ],
             [
                 'code' => self::VGB,
@@ -1489,22 +1489,22 @@ class CountryData implements StaticDataContract
             [
                 'code' => self::WLF,
                 'name' => 'Wallis and Futuna',
-                'currency_code' => 'XPF',
+                'currency_code' => CurrencyData::XPF,
             ],
             [
                 'code' => self::ESH,
                 'name' => 'Western Sahara',
-                'currency_code' => 'MAD',
+                'currency_code' => CurrencyData::MAD,
             ],
             [
                 'code' => self::YEM,
                 'name' => 'Yemen',
-                'currency_code' => 'YER',
+                'currency_code' => CurrencyData::YER,
             ],
             [
                 'code' => self::ZMB,
                 'name' => 'Zambia',
-                'currency_code' => 'ZMW',
+                'currency_code' => CurrencyData::ZMW,
             ],
             [
                 'code' => self::ZWE,
