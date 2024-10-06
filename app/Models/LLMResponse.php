@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -9,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string $name
@@ -79,5 +80,13 @@ class LLMResponse extends Model
     public function relatedEntity(): MorphTo
     {
         return $this->morphTo();
+    }
+
+    public function consoleSummary(Command $command): void
+    {
+        $command->info("LLM: {$this->llm}\n");
+        $command->info("Response:\n{$this->response}\n");
+        $command->info("Input tokens: {$this->input_tokens}\n");
+        $command->info("Output tokens: {$this->output_tokens}\n");
     }
 }

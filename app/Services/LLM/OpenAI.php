@@ -22,10 +22,10 @@ class OpenAI
     /**
      * @throws ConnectionException
      */
-    public function prompt(string $llm, string $prompt, Model $relatedEntity = null): object
+    public function prompt(string $llm, string $prompt, Model $relatedEntity = null): LLMResponse
     {
         $uuid = Str::uuid();
-
+        $promptTimestamp = now();
         $response = Http::withHeaders([
             "Authorization" => "Bearer $this->apiKey",
         ])->post($this->baseUrl, [
@@ -43,7 +43,7 @@ class OpenAI
         $LLMResponse = new LLMResponse();
         $LLMResponse->id = $uuid;
         $LLMResponse->prompt = $prompt;
-        $LLMResponse->prompt_timestamp = now();
+        $LLMResponse->prompt_timestamp = $promptTimestamp;
         $LLMResponse->llm = $llm;
         $LLMResponse->response = $responseBody->choices[0]->message->content;
         $LLMResponse->response_timestamp = now();

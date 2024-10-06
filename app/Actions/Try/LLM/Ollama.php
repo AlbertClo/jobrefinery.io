@@ -7,7 +7,7 @@ use Illuminate\Console\Command;
 use Illuminate\Http\Client\ConnectionException;
 use Lorisleiva\Actions\Concerns\AsAction;
 
-class OpenAI
+class Ollama
 {
     use AsAction;
 
@@ -16,11 +16,11 @@ class OpenAI
      */
     public function handle(string $prompt, bool $terse): object
     {
-        $openAI = new \App\Services\LLM\OpenAI();
-        return $openAI->prompt(LLMData::GPT_4O_MINI, $prompt . ($terse ? '. Be terse.' : ''));
+        $ollama = new \App\Services\LLM\Ollama();
+        return $ollama->prompt(LLMData::LLAMA3_2_3B_INSTRUCT_Q80, $prompt . ($terse ? '. Be terse.' : ''));
     }
 
-    public string $commandSignature = 'try:llm:openai {prompt : e.g. What is the capital of France?} {--terse : Be terse}';
+    public string $commandSignature = 'try:llm:ollama {prompt : e.g. What is the capital of France?} {--terse : Be terse}';
     public string $commandDescription = 'Asks Anthropic to generate a response';
     public string $commandHelp = 'This command asks Anthropic to generate a response';
     public bool $commandHidden = false;

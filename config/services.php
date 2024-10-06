@@ -48,4 +48,7 @@ return [
         'webhook_url' => env('REPLICATE_WEBHOOK_BASE_URL') . '/api/webhooks/replicate/prompts/',
     ],
 
+    'ollama' => [
+        'base_url' => env('REPLICATE_API_KEY', 'http://ollama:11434'),
+    ],
 ];

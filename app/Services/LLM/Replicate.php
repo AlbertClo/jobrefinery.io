@@ -48,7 +48,7 @@ class Replicate
         return $LLMResponse;
     }
 
-    public function prompt(string $llm, string $prompt, Model $relatedEntity = null): object
+    public function prompt(string $llm, string $prompt, Model $relatedEntity = null): LLMResponse
     {
         $LLMResponse = $this->promptAsync($llm, $prompt, $relatedEntity);
 

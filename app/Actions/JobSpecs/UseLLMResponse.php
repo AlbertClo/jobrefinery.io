@@ -24,8 +24,6 @@ class UseLLMResponse
     {
         $responseAnswer = $this->llmJsonResponseToArray($llmResponse);
 
-        // dump($responseAnswer);
-
         $jobSpec = JobSpec::find($llmResponse->related_entity_id);
         if ($jobSpec === null) {
             throw new Exception("Error: Could not find jobSpec with id {$llmResponse->related_entity_id}");

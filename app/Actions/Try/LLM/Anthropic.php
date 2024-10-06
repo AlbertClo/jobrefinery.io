@@ -2,6 +2,7 @@
 
 namespace App\Actions\Try\LLM;
 
+use App\Models\StaticData\LLMData;
 use Illuminate\Console\Command;
 use Illuminate\Http\Client\ConnectionException;
 use Lorisleiva\Actions\Concerns\AsAction;
@@ -16,7 +17,7 @@ class Anthropic
     public function handle(string $prompt, bool $terse): object
     {
         $anthropic = new \App\Services\LLM\Anthropic();
-        return $anthropic->promptHaiku($prompt . ($terse ? '. Be terse.' : ''));
+        return $anthropic->prompt(LLMData::CLAUDE_3_HAIKU ,$prompt . ($terse ? '. Be terse.' : ''));
     }
 
     public string $commandSignature = 'try:llm:anthropic {prompt : e.g. What is the capital of France?} {--terse : Be terse}';
@@ -29,10 +30,8 @@ class Anthropic
      */
     public function asCommand(Command $command): void
     {
-        $response = $this->handle($command->argument('prompt'), $command->option('terse', false));
+        $llmResponse = $this->handle($command->argument('prompt'), $command->option('terse', false));
 
-        $command->info($response->answer);
-        $command->info('Input tokens: ' .$response->token_cost->input_tokens);
-        $command->info('Output tokens: ' .$response->token_cost->output_tokens);
+        $llmResponse->consoleSummary($command);
     }
 }

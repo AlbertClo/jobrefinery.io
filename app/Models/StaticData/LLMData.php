@@ -14,6 +14,10 @@ class LLMData implements StaticDataContract
     public const string GPT_4O = "gpt-4o";
     public const string META_LLAMA_3_8B_INSTRUCT = "meta/meta-llama-3-8b-instruct";
     public const string MISTRAL_7B_INSTRUCT_V_0_2 = "mistralai/mistral-7b-instruct-v0.2";
+    public const string LLAMA3_1_70B = "llama3.1:70b";
+    public const string LLAMA3_2_1B = "llama3.2:1b";
+    public const string LLAMA3_2_3B = "llama3.2:3b";
+    public const string LLAMA3_2_3B_INSTRUCT_Q80 = "llama3.2:3b-instruct-q8_0";
 
     public static function getModelClass(): string
     {
@@ -86,6 +90,38 @@ class LLMData implements StaticDataContract
                 "description" => null,
                 "input_token_cost_per_million" => 0.05,
                 "output_token_cost_per_million" => 0.25,
+            ],
+            [
+                "slug" => self::LLAMA3_1_70B,
+                "name" => 'Llama 3.1 70B',
+                "provider" => 'Ollama',
+                "description" => null,
+                "input_token_cost_per_million" => 0,
+                "output_token_cost_per_million" => 0,
+            ],
+            [
+                "slug" => self::LLAMA3_2_1B,
+                "name" => 'Llama 3.2 1B',
+                "provider" => 'Ollama',
+                "description" => null,
+                "input_token_cost_per_million" => 0,
+                "output_token_cost_per_million" => 0,
+            ],
+            [
+                "slug" => self::LLAMA3_2_3B,
+                "name" => 'Llama 3.2 3B',
+                "provider" => 'Ollama',
+                "description" => null,
+                "input_token_cost_per_million" => 0,
+                "output_token_cost_per_million" => 0,
+            ],
+            [
+                "slug" => self::LLAMA3_2_3B_INSTRUCT_Q80,
+                "name" => 'Llama 3.2 3B Instruct Q80',
+                "provider" => 'Ollama',
+                "description" => null,
+                "input_token_cost_per_million" => 0,
+                "output_token_cost_per_million" => 0,
             ],
         ];
     }

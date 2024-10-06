@@ -109,6 +109,25 @@ services:
             - "${PUSHER_METRICS_PORT:-9601}:9601"
         networks:
             - sail
+    ollama:
+        build: ./docker/ollama
+        ports:
+            - "11434:11434"
+        healthcheck:
+            test: ollama --version || exit 1
+        volumes:
+            - sail-ollama:/root/.ollama
+        networks:
+            - sail
+        entrypoint: ["/usr/bin/bash", "/pull-models.sh"]
+        deploy:
+            resources:
+                reservations:
+                    devices:
+                        - driver: nvidia
+                          count: 1
+                          capabilities: [gpu]
+
 networks:
     sail:
         driver: bridge
@@ -118,4 +137,6 @@ volumes:
     sail-typesense:
         driver: local
     sail-pgsql:
+        driver: local
+    sail-ollama:
         driver: local

@@ -5,12 +5,10 @@ namespace App\Services\LLM;
 use App\Actions\JobSpecs\UseLLMResponse;
 use App\Models\LLM;
 use App\Models\LLMResponse;
-use App\Models\StaticData\LLMData;
 use Http;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Str;
-use stdClass;
 
 class Anthropic
 {
@@ -25,10 +23,10 @@ class Anthropic
     /**
      * @throws ConnectionException
      */
-    public function prompt(string $llm, string $prompt, Model $relatedEntity = null): object
+    public function prompt(string $llm, string $prompt, Model $relatedEntity = null): LLMResponse
     {
         $uuid = Str::uuid();
-
+        $promptTimestamp = now();
         $response = Http::withHeaders([
             "x-api-key" => $this->apiKey,
             "anthropic-version" => "2023-06-01",
@@ -48,7 +46,7 @@ class Anthropic
         $LLMResponse = new LLMResponse();
         $LLMResponse->id = $uuid;
         $LLMResponse->prompt = $prompt;
-        $LLMResponse->prompt_timestamp = now();
+        $LLMResponse->prompt_timestamp = $promptTimestamp;
         $LLMResponse->llm = $llm;
         $LLMResponse->response = $responseBody->content[0]->text;
         $LLMResponse->response_timestamp = now();
