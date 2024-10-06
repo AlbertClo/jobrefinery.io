@@ -2,6 +2,7 @@
 
 namespace App\Actions\JobSites\HackerNews;
 
+use App\Actions\JobSpecs\PromptLLM;
 use App\Models\CachedPage;
 use App\Models\JobSpec;
 use App\Models\StaticData\JobSiteData;
@@ -52,10 +53,9 @@ class Extract
         // Remove null entries and reindex array
         $jobPosts = array_values(array_filter($jobPosts));
 
-        $chunkSize = 1;
-        $jobPosts = array_chunk($jobPosts, $chunkSize);
-        foreach ($jobPosts as $chunk) {
-            JobSpec::upsert($chunk, ['direct_link']);
+        foreach ($jobPosts as $jobPost) {
+            $jobSpec = JobSpec::firstOrCreate($jobPost);
+            PromptLLM::dispatch($jobSpec)->onQueue('prompt-llm');
         }
     }
 

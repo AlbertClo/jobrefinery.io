@@ -69,8 +69,9 @@ class PromptLLM
             {$jobSpec->original_description_text}
         ";
 
-        $replicate = new \App\Services\LLM\Replicate();
-        $replicate->promptAsync(LLMData::META_LLAMA_3_8B_INSTRUCT, $prompt, $jobSpec);
+        $ollama = new \App\Services\LLM\Ollama();
+        $LLMResponse = $ollama->prompt(LLMData::LLAMA3_2_3B_INSTRUCT_Q80, $prompt, $jobSpec);
+        UseLLMResponse::dispatch($LLMResponse);
 
 //        $openai = new \App\Services\LLM\OpenAI();
 //        $LLMResponse = $openai->prompt(LLMData::GPT_4O_MINI, $prompt, $jobSpec);
@@ -80,9 +81,12 @@ class PromptLLM
 //        $LLMResponse = $anthropic->prompt(LLMData::CLAUDE_3_HAIKU, $prompt, $jobSpec);
 //        UseLLMResponse::dispatch($LLMResponse);
 
-//                $anthropic = new \App\Services\LLM\Anthropic();
+//        $anthropic = new \App\Services\LLM\Anthropic();
 //        $LLMResponse = $anthropic->prompt(LLMData::CLAUDE_3_SONNET, $prompt, $jobSpec);
 //        UseLLMResponse::dispatch($LLMResponse);
+
+//        $replicate = new \App\Services\LLM\Replicate();
+//        $replicate->promptAsync(LLMData::META_LLAMA_3_8B_INSTRUCT, $prompt, $jobSpec);
     }
 
     public function asJob(JobSpec $jobSpec): void

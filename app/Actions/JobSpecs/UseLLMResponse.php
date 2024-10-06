@@ -131,28 +131,26 @@ class UseLLMResponse
      */
     function llmJsonResponseToArray(LLMResponse $llmResponse): array
     {
-        // Remove triple quotes if present
-        $string = preg_replace('/^"""|"""$/m', '', $llmResponse->response);
+        $response = $llmResponse->response;
+        $start = strpos($response, '{');
+        $end = strrpos($response, '}');
 
-        // Remove markdown code block syntax if present
-        $string = preg_replace('/^```json\s*\n|\n```$/m', '', $string);
+        if ($start === false || $end === false) {
+            throw new Exception("Error: Unable to find JSON in response");
+        }
 
-        // Remove any leading/trailing whitespace and newlines
-        $string = trim($string);
-
-        // Parse the JSON string
-        $data = json_decode($string, true);
-
-        if ($data === null && json_last_error() !== JSON_ERROR_NONE) {
+        $json = substr($response, $start, $end - $start + 1);
+        $responseArray = json_decode($json, true);
+        if ($responseArray === null && json_last_error() !== JSON_ERROR_NONE) {
             throw new Exception("Error: Unable to parse JSON string" . json_last_error_msg());
         }
 
-        // If it's replicate we need to try to remove unnecessary spaces
+        // If it's Replicate we need to try to remove unnecessary spaces inside the response as well.
         if (strtolower($llmResponse->relatedLLM->provider) === 'replicate') {
-            $data = $this->cleanArray($data);
+            $response = $this->cleanArray($responseArray);
         }
 
-        return $data;
+        return $responseArray;
     }
 
     // Function to recursively clean keys and values
