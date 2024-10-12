@@ -1,115 +1,113 @@
-@import url("https://fonts.googleapis.com/css2?family=Cardo:wght@400;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Cardo:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-    :root {
-        --radius: 0.3rem;
+	:root {
+		--radius: 0.3rem;
 
-        --sans-font: Lato, ui-sans-serif, system-ui, sans-serif,
-            "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
-            "Noto Color Emoji";
-        --serif-font: Cardo, ui-serif, Georgia, Cambria, "Times New Roman",
-            Times, serif;
-        --mono-font: JetBrains Mono, ui-monospace, SFMono-Regular, Menlo, Monaco,
-            Consolas, "Liberation Mono", "Courier New", monospace;
-    }
+		--sans-font: Lato, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+			'Segoe UI Symbol', 'Noto Color Emoji';
+		--serif-font: Cardo, ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+		--mono-font: JetBrains Mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+			'Courier New', monospace;
+	}
 
-    .theme-midnight {
-        --midnight: hsl(238, 100%, 6%);
-        --dark: hsl(238, 32%, 16%);
-        --dusk: hsl(238, 24%, 23%);
-        --off-white: hsl(40, 100%, 92%);
-        --very-light-pink: hsl(39, 100%, 97%);
-        --silver: hsl(260, 3%, 80%);
-        --pale-grey: hsl(240, 7%, 94%);
-        --white: hsl(0, 0%, 100%);
-        --neon-yellow: hsl(68, 100%, 50%);
-        --violet-red: hsl(328, 98%, 38%);
-        --orangey-red: hsl(0, 85%, 48%);
+	.theme-midnight {
+		--midnight: hsl(238, 100%, 6%);
+		--dark: hsl(238, 32%, 16%);
+		--dusk: hsl(238, 24%, 23%);
+		--off-white: hsl(40, 100%, 92%);
+		--very-light-pink: hsl(39, 100%, 97%);
+		--silver: hsl(260, 3%, 80%);
+		--pale-grey: hsl(240, 7%, 94%);
+		--white: hsl(0, 0%, 100%);
+		--neon-yellow: hsl(68, 100%, 50%);
+		--violet-red: hsl(328, 98%, 38%);
+		--orangey-red: hsl(0, 85%, 48%);
 
-        --background: var(--midnight);
-        --foreground: var(--off-white);
+		--background: var(--midnight);
+		--foreground: var(--off-white);
 
-        --card: var(--midnight);
-        --card-foreground: var(--silver);
+		--card: var(--midnight);
+		--card-foreground: var(--silver);
 
-        --popover: var(--midnight);
-        --popover-foreground: var(--pale-grey);
+		--popover: var(--midnight);
+		--popover-foreground: var(--pale-grey);
 
-        --primary: var(--neon-yellow);
-        --primary-foreground: var(--dark);
+		--primary: var(--neon-yellow);
+		--primary-foreground: var(--dark);
 
-        --secondary: var(--dark);
-        --secondary-foreground: var(--neon-yellow);
+		--secondary: var(--dark);
+		--secondary-foreground: var(--neon-yellow);
 
-        --muted: var(--dark);
-        --muted-foreground: var(--dusk);
+		--muted: var(--dark);
+		--muted-foreground: var(--dusk);
 
-        --accent: var(--dark);
-        --accent-foreground: var(--violet-red);
+		--accent: var(--dark);
+		--accent-foreground: var(--violet-red);
 
-        --destructive: var(--orangey-red);
-        --destructive-foreground: var(--dark);
+		--destructive: var(--orangey-red);
+		--destructive-foreground: var(--dark);
 
-        --border: var(--dusk);
-        --input: var(--dusk);
-        --ring: var(--neon-yellow);
-    }
+		--border: var(--dusk);
+		--input: var(--dusk);
+		--ring: var(--neon-yellow);
+	}
 
-    .theme-rustic-earth {
-        --white: hsl(0 0% 100%);
-        --dark-brown: hsl(25, 33%, 23%);
-        --very-dark-brown: hsl(32, 23%, 13%);
-        --clay: hsl(13, 44%, 46%);
-        --orange: hsl(24.6 95% 53.1%);
-        --pale-grey: hsl(240, 7%, 94%);
-        --black-soil: hsl(24 9.8% 10%);
-        --warm-grey: hsl(25 5.3% 44.7%);
-        --coral: hsl(0 84.2% 60.2%);
-        --olive-green: hsl(87, 33%, 45%);
-        --mushroom: hsl(21, 27%, 72%);
+	.theme-rustic-earth {
+		--white: hsl(0 0% 100%);
+		--dark-brown: hsl(25, 33%, 23%);
+		--very-dark-brown: hsl(32, 23%, 13%);
+		--clay: hsl(13, 44%, 46%);
+		--orange: hsl(24.6 95% 53.1%);
+		--pale-grey: hsl(240, 7%, 94%);
+		--black-soil: hsl(24 9.8% 10%);
+		--warm-grey: hsl(25 5.3% 44.7%);
+		--coral: hsl(0 84.2% 60.2%);
+		--olive-green: hsl(87, 33%, 45%);
+		--mushroom: hsl(21, 27%, 72%);
 
-        --background: var(--white);
-        --foreground: var(--dark-brown);
+		--background: var(--white);
+		--foreground: var(--dark-brown);
 
-        --card: var(--white);
-        --card-foreground: var(--very-dark-brown);
+		--card: var(--white);
+		--card-foreground: var(--very-dark-brown);
 
-        --popover: var(--white);
-        --popover-foreground: var(--clay);
+		--popover: var(--white);
+		--popover-foreground: var(--clay);
 
-        --primary: var(--olive-green);
-        --primary-foreground: var(--pale-grey);
+		--primary: var(--olive-green);
+		--primary-foreground: var(--pale-grey);
 
-        --secondary: var(--mushroom);
-        --secondary-foreground: var(--black-soil);
+		--secondary: var(--mushroom);
+		--secondary-foreground: var(--black-soil);
 
-        --muted: var(--pale-grey);
-        --muted-foreground: var(--warm-grey);
+		--muted: var(--pale-grey);
+		--muted-foreground: var(--warm-grey);
 
-        --accent: var(--pale-grey);
-        --accent-foreground: var(--orange);
+		--accent: var(--pale-grey);
+		--accent-foreground: var(--orange);
 
-        --destructive: var(--coral);
-        --destructive-foreground: var(--pale-grey);
+		--destructive: var(--coral);
+		--destructive-foreground: var(--pale-grey);
 
-        --border: var(--pale-grey);
-        --input: var(--pale-grey);
-        --ring: var(--olive-green);
-    }
+		--border: var(--pale-grey);
+		--input: var(--pale-grey);
+		--ring: var(--olive-green);
+	}
 }
 
 @layer base {
-    * {
-        @apply border-border;
-    }
+	* {
+		@apply border-border;
+	}
 
-    body {
-        @apply bg-background text-foreground;
-    }
+	body {
+		@apply bg-background text-foreground;
+	}
 }
