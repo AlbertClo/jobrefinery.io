@@ -17,10 +17,12 @@ class UserSeeder extends TestDataSeeder
             [
                 "id" => '4b225ba5-1167-4221-8604-55457754b53f',
                 "email" => 'albert@jobrefinery.io',
-                "name" => 'Albert Cloe',
+                "name" => 'Albert Clo',
                 "password" => Hash::make('test1234'),
                 'enrichFunction' => function (User $user) {
-                    $user->roles()->attach(RoleData::ADMIN_ID);
+                    if (!$user->hasRole(RoleData::ADMIN_ID)) {
+                        $user->roles()->attach(RoleData::ADMIN_ID);
+                    }
                 }
             ],
             [
