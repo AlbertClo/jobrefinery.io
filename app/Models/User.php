@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\StaticData\RoleData;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,7 +12,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string $name
@@ -45,7 +46,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, HasUuids;
 
@@ -96,5 +97,15 @@ class User extends Authenticatable implements MustVerifyEmail
     public function emailedJobs(): BelongsToMany
     {
         return $this->belongsToMany(JobSpec::class, 'job_emailed_to_user')->withTimestamps();
+    }
+
+    public function hasRole(string $roleId): bool
+    {
+        return $this->roles->contains('id', $roleId);
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->hasRole(RoleData::ADMIN_ID);
     }
 }
