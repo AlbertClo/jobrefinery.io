@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string $cached_page_id
@@ -105,7 +105,8 @@ class JobSpec extends Model
         'is_remote',
         'is_hybrid',
         'days_in_office_per_week',
-        'original_description',
+        'original_description_html',
+        'original_description_text',
         'llm_summary',
         'salary_from',
         'salary_to',

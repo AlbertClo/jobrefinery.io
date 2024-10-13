@@ -331,7 +331,7 @@ const sidebarOpen = ref(false);
 				</div>
 			</div>
 
-			<main class="p-4 lg:p-8">
+			<main class="flex flex-col gap-4 p-4 lg:gap-8 lg:p-8">
 				<slot />
 			</main>
 		</div>

@@ -54,7 +54,12 @@ class Extract
         $jobPosts = array_values(array_filter($jobPosts));
 
         foreach ($jobPosts as $jobPost) {
-            $jobSpec = JobSpec::firstOrCreate($jobPost);
+            $jobSpec = JobSpec::where('direct_link', $jobPost['direct_link'])->first();
+            if ($jobSpec === null) {
+                $jobSpec = JobSpec::create($jobPost);
+            } else {
+                $jobSpec->update($jobPost);
+            }
             PromptLLM::dispatch($jobSpec)->onQueue('prompt-llm');
         }
     }
