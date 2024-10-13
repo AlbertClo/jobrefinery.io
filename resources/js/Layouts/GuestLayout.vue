@@ -1,11 +1,9 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 import { Dialog, DialogPanel } from '@headlessui/vue';
 import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline';
-import { useCycleList } from '@vueuse/core';
 import { Button } from '@/components/shadcn/button';
 import { Link } from '@inertiajs/vue3';
-import { Icon } from '@iconify/vue';
 import ThemeCyclerButton from '@/components/job-refinery/theme-switchers/theme-cycler-button/ThemeCyclerButton.vue';
 
 const navigation = [
@@ -14,17 +12,6 @@ const navigation = [
 ];
 
 const mobileMenuOpen = ref(false);
-
-// const themes = ['theme-midnight', 'theme-arizona'];
-// const {state: selectedTheme, next: selectNextTheme} = useCycleList(themes, {initialValue: themes[0]})
-// document.documentElement.classList.add(themes[0]);
-// watch(selectedTheme, async (newTheme, oldTheme) => {
-//     // remove old theme
-//     document.documentElement.classList.remove(oldTheme);
-//
-//     // add new theme
-//     document.documentElement.classList.add(newTheme);
-// })
 </script>
 
 <template>
@@ -57,7 +44,10 @@ const mobileMenuOpen = ref(false);
 				</div>
 				<div class="hidden lg:flex lg:flex-1 lg:justify-end">
 					<ThemeCyclerButton variant="outline" class="mr-4" />
-					<a href="#" class="flex items-center justify-center text-sm font-semibold text-popover-foreground">
+					<a
+						:href="route('login')"
+						class="flex items-center justify-center text-sm font-semibold text-popover-foreground"
+					>
 						Sign in <span aria-hidden="true">&rarr;</span>
 					</a>
 				</div>
