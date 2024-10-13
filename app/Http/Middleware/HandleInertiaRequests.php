@@ -33,7 +33,7 @@ class HandleInertiaRequests extends Middleware
         return [
             ...parent::share($request),
             'auth' => [
-                'user' => $request->user(),
+                'user' => $request->user(), // todo: limit the data we send to the client
             ],
             'ziggy' => fn () => [
                 ...(new Ziggy)->toArray(),

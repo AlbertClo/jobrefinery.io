@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
 import {
 	Dialog,
@@ -20,19 +20,32 @@ import {
 	FolderIcon,
 	HomeIcon,
 	UsersIcon,
+	ChartBarIcon,
+	Square3Stack3DIcon,
+	Square2StackIcon,
 	XMarkIcon,
 } from '@heroicons/vue/24/outline';
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/20/solid';
 import { Link } from '@inertiajs/vue3';
 import Logo from '@/components/job-refinery/logos/logo/Logo.vue';
 
+function isCurrentPage(href: string): boolean {
+	console.log('window');
+	console.log(window);
+	const currentUrl = window?.location?.href;
+	const linkUrl = new URL(href, window?.location?.origin);
+	return currentUrl === linkUrl.href;
+}
+
 const navigation = [
-	{ name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
-	{ name: 'Team', href: '#', icon: UsersIcon, current: false },
-	{ name: 'Projects', href: '#', icon: FolderIcon, current: false },
-	{ name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-	{ name: 'Documents', href: '#', icon: DocumentDuplicateIcon, current: false },
-	{ name: 'Reports', href: '#', icon: ChartPieIcon, current: false },
+	{ name: 'Dashboard', href: route('admin.dashboard'), icon: HomeIcon, current: true },
+	{ name: 'Jobs List', href: route('admin.jobs.list'), icon: Square3Stack3DIcon, current: true },
+	{ name: 'Stats', href: route('admin.stats'), icon: ChartBarIcon },
+	// { name: 'Team', href: '#', icon: UsersIcon, current: false },
+	// { name: 'Projects', href: '#', icon: FolderIcon, current: false },
+	// { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
+	// { name: 'Documents', href: '#', icon: DocumentDuplicateIcon, current: false },
+	// { name: 'Reports', href: '#', icon: ChartPieIcon, current: false },
 ];
 const teams = [
 	{ id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },
@@ -124,30 +137,30 @@ const sidebarOpen = ref(false);
 												</li>
 											</ul>
 										</li>
-										<li>
-											<div class="popover-foreground text-sm font-semibold leading-6">
-												Your teams
-											</div>
-											<ul role="list" class="-mx-2 mt-2 space-y-1">
-												<li v-for="team in teams" :key="team.name">
-													<a
-														:href="team.href"
-														:class="[
-															team.current
-																? 'bg-foreground text-background'
-																: 'text-muted-foreground hover:bg-foreground hover:text-background',
-															'group flex gap-x-3 rounded-md p-2 text-base font-semibold leading-6',
-														]"
-													>
-														<span
-															class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-foreground text-[0.625rem] font-medium text-muted-foreground group-hover:text-background"
-															>{{ team.initial }}</span
-														>
-														<span class="truncate">{{ team.name }}</span>
-													</a>
-												</li>
-											</ul>
-										</li>
+										<!--										<li>-->
+										<!--											<div class="popover-foreground text-sm font-semibold leading-6">-->
+										<!--												Your teams-->
+										<!--											</div>-->
+										<!--											<ul role="list" class="-mx-2 mt-2 space-y-1">-->
+										<!--												<li v-for="team in teams" :key="team.name">-->
+										<!--													<a-->
+										<!--														:href="team.href"-->
+										<!--														:class="[-->
+										<!--															team.current-->
+										<!--																? 'bg-foreground text-background'-->
+										<!--																: 'text-muted-foreground hover:bg-foreground hover:text-background',-->
+										<!--															'group flex gap-x-3 rounded-md p-2 text-base font-semibold leading-6',-->
+										<!--														]"-->
+										<!--													>-->
+										<!--														<span-->
+										<!--															class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-foreground text-[0.625rem] font-medium text-muted-foreground group-hover:text-background"-->
+										<!--															>{{ team.initial }}</span-->
+										<!--														>-->
+										<!--														<span class="truncate">{{ team.name }}</span>-->
+										<!--													</a>-->
+										<!--												</li>-->
+										<!--											</ul>-->
+										<!--										</li>-->
 										<li class="mt-auto">
 											<a
 												href="#"
@@ -184,10 +197,10 @@ const sidebarOpen = ref(false);
 						<li>
 							<ul role="list" class="-mx-2 space-y-1">
 								<li v-for="item in navigation" :key="item.name">
-									<a
+									<Link
 										:href="item.href"
 										:class="[
-											item.current
+											isCurrentPage(item.href)
 												? 'bg-foreground text-background'
 												: 'text-card-foreground hover:bg-muted-foreground hover:text-foreground',
 											'group flex gap-x-3 rounded-md p-2 text-base font-semibold leading-6',
@@ -195,36 +208,36 @@ const sidebarOpen = ref(false);
 									>
 										<component :is="item.icon" class="h-6 w-6 shrink-0" aria-hidden="true" />
 										{{ item.name }}
-									</a>
+									</Link>
 								</li>
 							</ul>
 						</li>
-						<li>
-							<div class="text-sm font-semibold leading-6 text-card-foreground">Your teams</div>
-							<ul role="list" class="-mx-2 mt-2 space-y-1">
-								<li v-for="team in teams" :key="team.name">
-									<a
-										:href="team.href"
-										:class="[
-											team.current
-												? 'bg-foreground text-background'
-												: 'text-card-foreground hover:bg-muted-foreground hover:text-foreground',
-											'group flex gap-x-3 rounded-md p-2 text-base font-semibold leading-6',
-										]"
-									>
-										<span
-											class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-foreground text-[0.625rem] font-medium text-muted-foreground group-hover:text-background"
-											>{{ team.initial }}</span
-										>
-										<span class="truncate">{{ team.name }}</span>
-									</a>
-								</li>
-							</ul>
-						</li>
+						<!--						<li>-->
+						<!--							<div class="text-sm font-semibold leading-6 text-card-foreground">Your teams</div>-->
+						<!--							<ul role="list" class="-mx-2 mt-2 space-y-1">-->
+						<!--								<li v-for="team in teams" :key="team.name">-->
+						<!--									<a-->
+						<!--										:href="team.href"-->
+						<!--										:class="[-->
+						<!--											team.current-->
+						<!--												? 'bg-foreground text-background'-->
+						<!--												: 'text-card-foreground hover:bg-muted-foreground hover:text-foreground',-->
+						<!--											'group flex gap-x-3 rounded-md p-2 text-base font-semibold leading-6',-->
+						<!--										]"-->
+						<!--									>-->
+						<!--										<span-->
+						<!--											class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-foreground text-[0.625rem] font-medium text-muted-foreground group-hover:text-background"-->
+						<!--											>{{ team.initial }}</span-->
+						<!--										>-->
+						<!--										<span class="truncate">{{ team.name }}</span>-->
+						<!--									</a>-->
+						<!--								</li>-->
+						<!--							</ul>-->
+						<!--						</li>-->
 						<li class="mt-auto">
 							<a
 								href="#"
-								class="group -mx-2 flex gap-x-3 rounded-md p-2 text-base font-semibold leading-6 text-muted-foreground hover:bg-foreground hover:text-background"
+								class="group -mx-2 flex gap-x-3 rounded-md p-2 text-base font-semibold leading-6 text-card-foreground hover:bg-foreground hover:text-background"
 							>
 								<Cog6ToothIcon class="h-6 w-6 shrink-0" aria-hidden="true" />
 								Settings
