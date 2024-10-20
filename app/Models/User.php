@@ -7,12 +7,13 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 /**
- *
+ * 
  *
  * @property string $id
  * @property string $name
@@ -44,6 +45,8 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereSelectedTheme($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Answer> $answers
+ * @property-read int|null $answers_count
  * @mixin \Eloquent
  */
 class User extends Authenticatable
@@ -107,5 +110,10 @@ class User extends Authenticatable
     public function isAdmin(): bool
     {
         return $this->hasRole(RoleData::ADMIN_ID);
+    }
+
+    public function answers(): MorphMany
+    {
+        return $this->morphMany(Answer::class, 'author');
     }
 }
