@@ -2,9 +2,9 @@
 
 namespace App\Actions\JobSites\HackerNews;
 
-use App\Actions\JobSpecs\PromptLLM;
+use App\Actions\Jobs\PromptLLM;
 use App\Models\CachedPage;
-use App\Models\JobSpec;
+use App\Models\Job;
 use App\Models\StaticData\JobSiteData;
 use Illuminate\Console\Command;
 use Lorisleiva\Actions\Concerns\AsAction;
@@ -54,13 +54,13 @@ class Extract
         $jobPosts = array_values(array_filter($jobPosts));
 
         foreach ($jobPosts as $jobPost) {
-            $jobSpec = JobSpec::where('direct_link', $jobPost['direct_link'])->first();
-            if ($jobSpec === null) {
-                $jobSpec = JobSpec::create($jobPost);
+            $job = Job::where('direct_link', $jobPost['direct_link'])->first();
+            if ($job === null) {
+                $job = Job::create($jobPost);
             } else {
-                $jobSpec->update($jobPost);
+                $job->update($jobPost);
             }
-            PromptLLM::dispatch($jobSpec)->onQueue('prompt-llm');
+            PromptLLM::dispatch($job)->onQueue('prompt-llm');
         }
     }
 

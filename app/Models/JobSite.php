@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string|null $company_id
@@ -61,6 +61,6 @@ class JobSite extends Model
 
     public function jobs(): HasMany
     {
-        return $this->hasMany(JobSpec::class);
+        return $this->hasMany(Job::class);
     }
 }

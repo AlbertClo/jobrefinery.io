@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('job_specs', function (Blueprint $table) {
+        Schema::create('jobs', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('cached_page_id')->index()->constrained('cached_pages', 'id');
             $table->foreignUuid('job_site_id')->index()->constrained('job_sites', 'id');
@@ -49,6 +49,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('job_specs');
+        Schema::dropIfExists('jobs');
     }
 };

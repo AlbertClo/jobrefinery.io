@@ -13,7 +13,7 @@ class StatsController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $daysInOfficeBreakdown = DB::query()->from('job_specs')
+        $daysInOfficeBreakdown = DB::query()->from('jobs')
             ->select(DB::raw('count(id) as count'), 'days_in_office_per_week')
             ->groupBy('days_in_office_per_week')
             ->orderByDesc('days_in_office_per_week')

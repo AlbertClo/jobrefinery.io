@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Actions\JobSpecs;
+namespace App\Actions\Jobs;
 
 use App\Models\City;
 use App\Models\Company;
-use App\Models\JobSpec;
+use App\Models\Job;
 use App\Models\LLMResponse;
 use App\Models\Skill;
 use Exception;
@@ -24,9 +24,9 @@ class UseLLMResponse
     {
         $responseAnswer = $this->llmJsonResponseToArray($llmResponse);
 
-        $jobSpec = JobSpec::find($llmResponse->related_entity_id);
-        if ($jobSpec === null) {
-            throw new Exception("Error: Could not find jobSpec with id {$llmResponse->related_entity_id}");
+        $job = Job::find($llmResponse->related_entity_id);
+        if ($job === null) {
+            throw new Exception("Error: Could not find job with id {$llmResponse->related_entity_id}");
         }
 
         if ($responseAnswer['city'] !== null) {
@@ -39,7 +39,7 @@ class UseLLMResponse
                 $city->country_code = $responseAnswer['work_permit_country_code'];
                 $city->save();
             }
-            $jobSpec->city_id = $city->id;
+            $job->city_id = $city->id;
         }
 
         if ($responseAnswer['company'] !== null) {
@@ -50,7 +50,7 @@ class UseLLMResponse
                 $company->name = $responseAnswer['company'];
                 $company->save();
             }
-            $jobSpec->company_id = $company->id;
+            $job->company_id = $company->id;
         }
 
         if ($responseAnswer['salary_period'] !== 'annual') {
@@ -66,36 +66,36 @@ class UseLLMResponse
             'AUD' => 0.69,
         ];
 
-        $jobSpec->heading = $responseAnswer['heading'];
-        $jobSpec->requires_work_permit = (bool)$responseAnswer['requires_work_permit'];
-        $jobSpec->work_permit_country_code = $responseAnswer['work_permit_country_code'];
-        $jobSpec->is_remote = (bool)$responseAnswer['is_remote'];
-        $jobSpec->is_hybrid = (bool)$responseAnswer['is_hybrid'];
-        $jobSpec->days_in_office_per_week = $responseAnswer['days_in_office_per_week'];
-        $jobSpec->salary_from = $responseAnswer['salary_from'] ?? null;
-        $jobSpec->salary_to = $responseAnswer['salary_to'] ?? null;
-        $jobSpec->salary_currency = $responseAnswer['salary_currency'];
-        $jobSpec->timezone_from = $responseAnswer['timezone_from'];
-        $jobSpec->timezone_to = $responseAnswer['timezone_to'];
+        $job->heading = $responseAnswer['heading'];
+        $job->requires_work_permit = (bool)$responseAnswer['requires_work_permit'];
+        $job->work_permit_country_code = $responseAnswer['work_permit_country_code'];
+        $job->is_remote = (bool)$responseAnswer['is_remote'];
+        $job->is_hybrid = (bool)$responseAnswer['is_hybrid'];
+        $job->days_in_office_per_week = $responseAnswer['days_in_office_per_week'];
+        $job->salary_from = $responseAnswer['salary_from'] ?? null;
+        $job->salary_to = $responseAnswer['salary_to'] ?? null;
+        $job->salary_currency = $responseAnswer['salary_currency'];
+        $job->timezone_from = $responseAnswer['timezone_from'];
+        $job->timezone_to = $responseAnswer['timezone_to'];
 
-        if (in_array($jobSpec->salary_currency, array_keys($exchangeRatesFromUSD))) {
-            if ($jobSpec->salary_from !== null) {
-                $jobSpec->salary_in_usd_from = $jobSpec->salary_from * $exchangeRatesFromUSD[$jobSpec->salary_currency];
+        if (in_array($job->salary_currency, array_keys($exchangeRatesFromUSD))) {
+            if ($job->salary_from !== null) {
+                $job->salary_in_usd_from = $job->salary_from * $exchangeRatesFromUSD[$job->salary_currency];
             }
-            if ($jobSpec->salary_to !== null) {
-                $jobSpec->salary_in_usd_to = $jobSpec->salary_to * $exchangeRatesFromUSD[$jobSpec->salary_currency];
+            if ($job->salary_to !== null) {
+                $job->salary_in_usd_to = $job->salary_to * $exchangeRatesFromUSD[$job->salary_currency];
             }
         }
 
-        $jobSpec->skills()->detach(); // detach existing skills, if any
+        $job->skills()->detach(); // detach existing skills, if any
         if (is_array($responseAnswer['skills'])) {
             foreach ($responseAnswer['skills'] as $skillName) {
                 $skill = Skill::where('name', $skillName)->firstOrCreate(['name' => $skillName]);
-                $jobSpec->skills()->attach($skill, ['skill_importance' => 'preferred']);
+                $job->skills()->attach($skill, ['skill_importance' => 'preferred']);
             }
         }
 
-        $jobSpec->save();
+        $job->save();
     }
 
     /**
@@ -106,7 +106,7 @@ class UseLLMResponse
         $this->handle($llmResponse);
     }
 
-    public string $commandSignature = 'job-specs:use-llm-response {jobSpecId?}';
+    public string $commandSignature = 'job:use-llm-response {jobId?}';
     public string $commandDescription = 'Fill in the job data that we need to get from an LLM';
     public string $commandHelp = 'Fill in the job data that we need to get from an LLM';
     public bool $commandHidden = false;

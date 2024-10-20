@@ -2,7 +2,7 @@
 
 namespace App\Actions\Webhooks\Replicate;
 
-use App\Actions\JobSpecs\UseLLMResponse;
+use App\Actions\Jobs\UseLLMResponse;
 use App\Models\LLM;
 use App\Models\LLMResponse;
 use Illuminate\Http\Request;

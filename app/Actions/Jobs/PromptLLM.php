@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Actions\JobSpecs;
+namespace App\Actions\Jobs;
 
-use App\Models\JobSpec;
+use App\Models\Job;
 use App\Models\StaticData\JobSiteData;
 use App\Models\StaticData\LLMData;
 use Illuminate\Console\Command;
@@ -12,10 +12,10 @@ class PromptLLM
 {
     use AsAction;
 
-    public function handle(JobSpec $jobSpec): void
+    public function handle(Job $job): void
     {
         $extraPromptInfo = '';
-        if ($jobSpec->job_site_id === JobSiteData::HACKER_NEWS_ID) {
+        if ($job->job_site_id === JobSiteData::HACKER_NEWS_ID) {
             $extraPromptInfo = "This job description is from a Hacker News \"Ask HN: Who is hiring?\" Post.";
         }
 
@@ -66,51 +66,51 @@ class PromptLLM
             {$extraPromptInfo}
 
             Here is the job description:
-            {$jobSpec->original_description_text}
+            {$job->original_description_text}
         ";
 
         $ollama = new \App\Services\LLM\Ollama();
-        $LLMResponse = $ollama->prompt(LLMData::LLAMA3_2_3B_INSTRUCT_Q80, $prompt, $jobSpec);
+        $LLMResponse = $ollama->prompt(LLMData::LLAMA3_2_3B_INSTRUCT_Q80, $prompt, $job);
         UseLLMResponse::dispatch($LLMResponse);
 
 //        $openai = new \App\Services\LLM\OpenAI();
-//        $LLMResponse = $openai->prompt(LLMData::GPT_4O_MINI, $prompt, $jobSpec);
+//        $LLMResponse = $openai->prompt(LLMData::GPT_4O_MINI, $prompt, $job);
 //        UseLLMResponse::dispatch($LLMResponse);
 
 //        $anthropic = new \App\Services\LLM\Anthropic();
-//        $LLMResponse = $anthropic->prompt(LLMData::CLAUDE_3_HAIKU, $prompt, $jobSpec);
+//        $LLMResponse = $anthropic->prompt(LLMData::CLAUDE_3_HAIKU, $prompt, $job);
 //        UseLLMResponse::dispatch($LLMResponse);
 
 //        $anthropic = new \App\Services\LLM\Anthropic();
-//        $LLMResponse = $anthropic->prompt(LLMData::CLAUDE_3_SONNET, $prompt, $jobSpec);
+//        $LLMResponse = $anthropic->prompt(LLMData::CLAUDE_3_SONNET, $prompt, $job);
 //        UseLLMResponse::dispatch($LLMResponse);
 
 //        $replicate = new \App\Services\LLM\Replicate();
-//        $replicate->promptAsync(LLMData::META_LLAMA_3_8B_INSTRUCT, $prompt, $jobSpec);
+//        $replicate->promptAsync(LLMData::META_LLAMA_3_8B_INSTRUCT, $prompt, $job);
     }
 
-    public function asJob(JobSpec $jobSpec): void
+    public function asJob(Job $job): void
     {
-        $this->handle($jobSpec);
+        $this->handle($job);
     }
 
-    public string $commandSignature = 'job-specs:prompt-llm {jobSpecId}';
+    public string $commandSignature = 'jobs:prompt-llm {jobId}';
     public string $commandDescription = 'Fill in the job data that we need to get from an LLM';
     public string $commandHelp = 'Fill in the job data that we need to get from an LLM';
     public bool $commandHidden = false;
 
     public function asCommand(Command $command): int
     {
-        $jobSpecId = $command->argument('jobSpecId');
-        if ($jobSpecId === null) {
-            $command->error('No jobSpec id provided');
+        $jobId = $command->argument('jobId');
+        if ($jobId === null) {
+            $command->error('No job id provided');
 
             return $command::FAILURE;
         }
 
-        $jobSpec = JobSpec::findOrFail($jobSpecId);
+        $job = Job::where('id', $jobId)->firstOrFail();
 
-        $this->handle($jobSpec);
+        $this->handle($job);
 
         return $command::SUCCESS;
     }

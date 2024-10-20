@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string $job_site_id
@@ -78,6 +78,6 @@ class CachedPage extends Model
 
     public function job(): HasMany
     {
-        return $this->hasMany(JobSpec::class, 'cached_page_id');
+        return $this->hasMany(Job::class, 'cached_page_id');
     }
 }

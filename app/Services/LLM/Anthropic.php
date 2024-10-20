@@ -2,7 +2,7 @@
 
 namespace App\Services\LLM;
 
-use App\Actions\JobSpecs\UseLLMResponse;
+use App\Actions\Jobs\UseLLMResponse;
 use App\Models\LLM;
 use App\Models\LLMResponse;
 use Http;

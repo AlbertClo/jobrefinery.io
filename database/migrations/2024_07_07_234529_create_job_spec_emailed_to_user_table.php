@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('job_spec_emailed_to_user', function (Blueprint $table) {
-            $table->foreignUuid('job_spec_id')->index()->onDelete('cascade');
+        Schema::create('job_emailed_to_user', function (Blueprint $table) {
+            $table->foreignUuid('job_id')->index()->onDelete('cascade');
             $table->foreignUuid('user_id')->index()->onDelete('cascade');
             $table->timestamp('created_at')->useCurrent();
 
-            $table->foreign('job_spec_id')->references('id')->on('job_specs');
+            $table->foreign('job_id')->references('id')->on('jobs');
             $table->foreign('user_id')->references('id')->on('users');
 
-            $table->index(['user_id', 'job_spec_id'], 'job_emailed_to_user_job_spec_user');
+            $table->index(['user_id', 'job_id'], 'job_emailed_to_user_job_user');
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('job_spec_emailed_to_user');
+        Schema::dropIfExists('job_emailed_to_user');
     }
 };

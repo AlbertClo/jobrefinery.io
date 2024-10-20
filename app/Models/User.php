@@ -96,7 +96,7 @@ class User extends Authenticatable
 
     public function emailedJobs(): BelongsToMany
     {
-        return $this->belongsToMany(JobSpec::class, 'job_emailed_to_user')->withTimestamps();
+        return $this->belongsToMany(Job::class, 'job_emailed_to_user')->withTimestamps();
     }
 
     public function hasRole(string $roleId): bool

@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 /**
- * 
  *
- * @property string $job_spec_id
+ *
+ * @property string $job_id
  * @property string $skill_id
  * @property string $skill_importance
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\JobSpec $jobSpec
+ * @property-read \App\Models\Job $job
  * @property-read \App\Models\Skill $skill
  * @method static \Illuminate\Database\Eloquent\Builder|JobListsSkill newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|JobListsSkill newQuery()
@@ -23,13 +23,12 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
  * @method static \Illuminate\Database\Eloquent\Builder|JobListsSkill whereSkillId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|JobListsSkill whereSkillImportance($value)
  * @method static \Illuminate\Database\Eloquent\Builder|JobListsSkill whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|JobSpecListsSkill whereJobSpecId($value)
- * @property-read \App\Models\JobSpec|null $job
+ * @method static \Illuminate\Database\Eloquent\Builder|JobListsSkill whereJobSpecId($value)
  * @mixin \Eloquent
  */
-class JobSpecListsSkill extends Pivot
+class JobListsSkill extends Pivot
 {
-    protected $table = 'job_spec_lists_skills';
+    protected $table = 'job_lists_skills';
 
     protected $fillable = [
         'job_id',
@@ -39,7 +38,7 @@ class JobSpecListsSkill extends Pivot
 
     public function job(): BelongsTo
     {
-        return $this->belongsTo(JobSpec::class);
+        return $this->belongsTo(Job::class);
     }
 
     public function skill(): BelongsTo

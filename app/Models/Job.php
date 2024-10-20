@@ -85,12 +85,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read int|null $llm_responses_count
  * @method static \Illuminate\Database\Eloquent\Builder|Job whereMadeVisibleAt($value)
  * @property string|null $heading
- * @method static \Illuminate\Database\Eloquent\Builder|JobSpec whereHeading($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereHeading($value)
  * @property string|null $company_id
- * @method static \Illuminate\Database\Eloquent\Builder|JobSpec whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereCompanyId($value)
  * @mixin \Eloquent
  */
-class JobSpec extends Model
+class Job extends Model
 {
     use HasFactory, HasUuids, SoftDeletes;
 
@@ -144,7 +144,7 @@ class JobSpec extends Model
 
     public function skills(): BelongsToMany
     {
-        return $this->belongsToMany(Skill::class, 'job_spec_lists_skills')
+        return $this->belongsToMany(Skill::class, 'job_lists_skills')
             ->withPivot('skill_importance')
             ->withTimestamps();
     }
