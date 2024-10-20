@@ -66,6 +66,7 @@ Run Vite to compile and watch our fontend assets
 -   [TypeScript](https://www.typescriptlang.org/) - Typed JavaScript.
 -   [Docker](https://www.docker.com/) - Containers for local development and production deployments.
 -   [Laravel Sail](https://laravel.com/docs/11.x/sail) - To manage Docker containers for local development.
+-   [Ollama](https://ollama.dev/) - Open source LLMs.
 
 ## IDE Helper
 https://github.com/barryvdh/laravel-ide-helper?tab=readme-ov-file#usage
