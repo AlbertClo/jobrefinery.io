@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string $job_site_id
@@ -22,7 +22,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property \Illuminate\Support\Carbon $created_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, CachedPage> $children
  * @property-read int|null $children_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Job> $job
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\RefinedJob> $job
  * @property-read int|null $job_count
  * @property-read \App\Models\JobSite $jobSite
  * @property-read CachedPage|null $parent
@@ -76,8 +76,8 @@ class CachedPage extends Model
         return $this->hasMany(CachedPage::class, 'parent_id');
     }
 
-    public function job(): HasMany
+    public function rawJobs(): HasMany
     {
-        return $this->hasMany(Job::class, 'cached_page_id');
+        return $this->hasMany(RawJob::class, 'cached_page_id');
     }
 }

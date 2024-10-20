@@ -11,24 +11,25 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('jobs', function (Blueprint $table) {
+        Schema::create('refined_jobs', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('cached_page_id')->index()->constrained('cached_pages', 'id');
             $table->foreignUuid('job_site_id')->index()->constrained('job_sites', 'id');
+            $table->foreignUuid('cached_page_id')->index()->constrained('cached_pages', 'id');
+            $table->foreignUuid('raw_job_id')->index()->constrained('raw_jobs', 'id');
+            $table->string('heading')->nullable();
+            $table->string('country_code')->nullable()->index();
+            $table->boolean('requires_work_permit')->nullable();
             $table->foreignUuid('city_id')->nullable()->index()->constrained('cities', 'id');
             $table->foreignUuid('company_id')->nullable()->index()->constrained('companies', 'id');
-            $table->string('original_url')->nullable();
-            $table->string('direct_link')->nullable()->unique();
             $table->timestamp('post_date')->nullable();
-            $table->string('heading')->nullable();
-            $table->boolean('requires_work_permit')->nullable();
-            $table->string('work_permit_country_code')->nullable()->index();
             $table->boolean('is_remote')->nullable();
             $table->boolean('is_hybrid')->nullable();
+            $table->boolean('is_onsite')->nullable();
             $table->integer('days_in_office_per_week')->nullable();
             $table->text('original_description_html')->nullable();
             $table->text('original_description_text')->nullable();
-            $table->text('llm_summary')->nullable();
+            $table->text('llm_summary_markdown')->nullable();
+            $table->text('human_summary_markdown')->nullable();
             $table->decimal('salary_from', 10, 2)->nullable();
             $table->decimal('salary_to', 10, 2)->nullable();
             $table->string('salary_currency')->nullable()->constrained('currencies', 'code');
@@ -36,11 +37,9 @@ return new class extends Migration
             $table->decimal('salary_in_usd_to', 10, 2)->nullable();
             $table->string('timezone_from')->nullable();
             $table->string('timezone_to')->nullable();
-            $table->timestamp('made_visible_at')->nullable();
+            $table->timestamp('published_at')->nullable();
             $table->softDeletes();
             $table->timestamps();
-
-            $table->foreign('work_permit_country_code')->references('code')->on('countries');
         });
     }
 
@@ -49,6 +48,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('jobs');
+        Schema::dropIfExists('refined_jobs');
     }
 };

@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string $cached_page_id
@@ -52,43 +52,43 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Skill> $skills
  * @property-read int|null $skills_count
  * @property-read \App\Models\Country|null $workPermitCountry
- * @method static \Illuminate\Database\Eloquent\Builder|Job newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Job newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Job onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder|Job query()
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereCachedPageId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereCityId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereCompanyId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereDaysInOfficePerWeek($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereDirectLink($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereHeading($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereIsHybrid($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereIsRemote($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereJobSiteId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereLlmSummary($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereMadeVisibleAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereOriginalDescriptionHtml($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereOriginalDescriptionText($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereOriginalUrl($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job wherePostDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereRequiresWorkPermit($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereSalaryCurrency($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereSalaryFrom($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereSalaryInUsdFrom($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereSalaryInUsdTo($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereSalaryTo($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereTimezoneFrom($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereTimezoneTo($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereWorkPermitCountryCode($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job withTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder|Job withoutTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|RefinedJob newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|RefinedJob newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|RefinedJob onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|RefinedJob query()
+ * @method static \Illuminate\Database\Eloquent\Builder|RefinedJob whereCachedPageId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RefinedJob whereCityId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RefinedJob whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RefinedJob whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RefinedJob whereDaysInOfficePerWeek($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RefinedJob whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RefinedJob whereDirectLink($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RefinedJob whereHeading($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RefinedJob whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RefinedJob whereIsHybrid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RefinedJob whereIsRemote($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RefinedJob whereJobSiteId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RefinedJob whereLlmSummary($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RefinedJob whereMadeVisibleAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RefinedJob whereOriginalDescriptionHtml($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RefinedJob whereOriginalDescriptionText($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RefinedJob whereOriginalUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RefinedJob wherePostDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RefinedJob whereRequiresWorkPermit($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RefinedJob whereSalaryCurrency($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RefinedJob whereSalaryFrom($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RefinedJob whereSalaryInUsdFrom($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RefinedJob whereSalaryInUsdTo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RefinedJob whereSalaryTo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RefinedJob whereTimezoneFrom($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RefinedJob whereTimezoneTo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RefinedJob whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RefinedJob whereWorkPermitCountryCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RefinedJob withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|RefinedJob withoutTrashed()
  * @mixin \Eloquent
  */
-class Job extends Model
+class RefinedJob extends Model
 {
     use HasFactory, HasUuids, SoftDeletes;
 

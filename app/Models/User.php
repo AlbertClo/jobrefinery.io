@@ -13,7 +13,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string $name
@@ -24,7 +24,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Job> $emailedJobs
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\RefinedJob> $emailedJobs
  * @property-read int|null $emailed_jobs_count
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
@@ -99,7 +99,7 @@ class User extends Authenticatable
 
     public function emailedJobs(): BelongsToMany
     {
-        return $this->belongsToMany(Job::class, 'job_emailed_to_user')->withTimestamps();
+        return $this->belongsToMany(RefinedJob::class, 'job_emailed_to_user')->withTimestamps();
     }
 
     public function hasRole(string $roleId): bool

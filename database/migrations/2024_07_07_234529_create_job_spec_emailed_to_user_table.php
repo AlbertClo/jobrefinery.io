@@ -12,14 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('job_emailed_to_user', function (Blueprint $table) {
-            $table->foreignUuid('job_id')->index()->onDelete('cascade');
+            $table->foreignUuid('refined_job_id')->index()->onDelete('cascade');
             $table->foreignUuid('user_id')->index()->onDelete('cascade');
             $table->timestamp('created_at')->useCurrent();
 
-            $table->foreign('job_id')->references('id')->on('jobs');
-            $table->foreign('user_id')->references('id')->on('users');
-
-            $table->index(['user_id', 'job_id'], 'job_emailed_to_user_job_user');
+            $table->index(['user_id', 'refined_job_id'], 'job_emailed_to_user_job_user');
         });
     }
 

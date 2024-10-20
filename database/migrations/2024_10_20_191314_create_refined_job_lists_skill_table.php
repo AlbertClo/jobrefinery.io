@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('job_lists_skills', function (Blueprint $table) {
-            $table->foreignUuid('job_id')->index()->constrained('jobs')->onDelete('cascade');
+        Schema::create('refined_job_lists_skill', function (Blueprint $table) {
+            $table->foreignUuid('refined_job_id')->index()->constrained('refined_jobs')->onDelete('cascade');
             $table->foreignUuid('skill_id')->index()->constrained('skills')->onDelete('cascade');
             $table->enum('skill_importance', ['required', 'preferred', 'nice to have'])->nullable();
             $table->timestamps();
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('job_lists_skills');
+        Schema::dropIfExists('refined_job_lists_skill');
     }
 };

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('answers', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('question_id')->index()->constrained('questions', 'id')->onDelete('cascade');
-            $table->foreignUuid('job_id')->index()->constrained('jobs', 'id')->onDelete('cascade');
+            $table->foreignUuid('raw_job_id')->index()->constrained('raw_jobs', 'id')->onDelete('cascade');
             $table->string('author_id')->index();
             $table->string('author_type')->nullable();
             $table->text('answer');

@@ -2,7 +2,8 @@
 
 namespace App\Actions\Jobs;
 
-use App\Models\Job;
+use App\Models\RawJob;
+use App\Models\RefinedJob;
 use App\Models\StaticData\JobSiteData;
 use App\Models\StaticData\LLMData;
 use Illuminate\Console\Command;
@@ -12,10 +13,10 @@ class PromptLLM
 {
     use AsAction;
 
-    public function handle(Job $job): void
+    public function handle(RawJob $rawJob): void
     {
         $extraPromptInfo = '';
-        if ($job->job_site_id === JobSiteData::HACKER_NEWS_ID) {
+        if ($rawJob->job_site_id === JobSiteData::HACKER_NEWS_ID) {
             $extraPromptInfo = "This job description is from a Hacker News \"Ask HN: Who is hiring?\" Post.";
         }
 
@@ -66,12 +67,12 @@ class PromptLLM
             {$extraPromptInfo}
 
             Here is the job description:
-            {$job->original_description_text}
+            {$rawJob->original_description_text}
         ";
 
         $ollama = new \App\Services\LLM\Ollama();
-        $LLMResponse = $ollama->prompt(LLMData::LLAMA3_2_3B_INSTRUCT_Q80, $prompt, $job);
-        UseLLMResponse::dispatch($LLMResponse);
+        $LLMResponse = $ollama->prompt(LLMData::LLAMA3_2_3B_INSTRUCT_Q80, $prompt, $rawJob);
+        AskAllQuestions::dispatch($LLMResponse);
 
 //        $openai = new \App\Services\LLM\OpenAI();
 //        $LLMResponse = $openai->prompt(LLMData::GPT_4O_MINI, $prompt, $job);
@@ -89,7 +90,7 @@ class PromptLLM
 //        $replicate->promptAsync(LLMData::META_LLAMA_3_8B_INSTRUCT, $prompt, $job);
     }
 
-    public function asJob(Job $job): void
+    public function asJob(RefinedJob $job): void
     {
         $this->handle($job);
     }
@@ -108,7 +109,7 @@ class PromptLLM
             return $command::FAILURE;
         }
 
-        $job = Job::where('id', $jobId)->firstOrFail();
+        $job = RefinedJob::where('id', $jobId)->firstOrFail();
 
         $this->handle($job);
 

@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string|null $company_id
@@ -23,7 +23,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\CachedPage> $cachedPages
  * @property-read int|null $cached_pages_count
  * @property-read \App\Models\Company|null $company
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Job> $jobs
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\RefinedJob> $jobs
  * @property-read int|null $jobs_count
  * @method static \Illuminate\Database\Eloquent\Builder|JobSite newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|JobSite newQuery()
@@ -59,8 +59,13 @@ class JobSite extends Model
         return $this->hasMany(CachedPage::class);
     }
 
-    public function jobs(): HasMany
+    public function rawJobs(): HasMany
     {
-        return $this->hasMany(Job::class);
+        return $this->hasMany(RawJob::class);
+    }
+
+    public function refinedJobs(): HasMany
+    {
+        return $this->hasMany(RefinedJob::class);
     }
 }

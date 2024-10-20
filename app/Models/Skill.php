@@ -8,14 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string $name
  * @property string $type
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Job> $jobs
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\RefinedJob> $jobs
  * @property-read int|null $jobs_count
  * @method static \Illuminate\Database\Eloquent\Builder|Skill newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Skill newQuery()
@@ -35,7 +35,7 @@ class Skill extends Model
 
     public function jobs(): BelongsToMany
     {
-        return $this->belongsToMany(Job::class, 'job_lists_skills')
+        return $this->belongsToMany(RefinedJob::class, 'job_lists_skills')
             ->withPivot('skill_importance')
             ->withTimestamps();
     }

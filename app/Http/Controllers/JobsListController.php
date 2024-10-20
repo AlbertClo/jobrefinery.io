@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Job;
+use App\Models\RawJob;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class JobsListController extends Controller
@@ -13,13 +14,20 @@ class JobsListController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $jobs = Job::whereNotNull('heading')->orderBy('post_date', 'desc')->get();
+        $rawJobs = DB::query()
+            ->from('raw_jobs')
+            ->join('answers', 'answers.job_id', '=', 'raw_jobs.id')
+            ->join('questions', 'questions.id', '=', 'answers.question_id')
+            ->select('raw_jobs.id', 'raw_jobs.original_description_html')
+            ->get();
 
-        $count = Job::whereNotNull('heading')->count();
+        RawJob::orderBy('post_date', 'desc')->get();
+
+        $count = RawJob::count();
 
         return Inertia::render('Admin/JobsList', [
             'count' => $count,
-            'jobs' => $jobs
+            'rawJobs' => $rawJobs
         ]);
     }
 }

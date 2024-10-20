@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 /**
- * 
+ *
  *
  * @property string $job_id
  * @property string $skill_id
  * @property string $skill_importance
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Job $job
+ * @property-read \App\Models\RefinedJob $job
  * @property-read \App\Models\Skill $skill
  * @method static \Illuminate\Database\Eloquent\Builder|JobListsSkill newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|JobListsSkill newQuery()
@@ -38,7 +38,7 @@ class JobListsSkill extends Pivot
 
     public function job(): BelongsTo
     {
-        return $this->belongsTo(Job::class);
+        return $this->belongsTo(RefinedJob::class);
     }
 
     public function skill(): BelongsTo

@@ -4,7 +4,7 @@ namespace App\Actions\Jobs;
 
 use App\Models\City;
 use App\Models\Company;
-use App\Models\Job;
+use App\Models\RefinedJob;
 use App\Models\LLMResponse;
 use App\Models\Skill;
 use Exception;
@@ -24,7 +24,7 @@ class UseLLMResponse
     {
         $responseAnswer = $this->llmJsonResponseToArray($llmResponse);
 
-        $job = Job::find($llmResponse->related_entity_id);
+        $job = RefinedJob::find($llmResponse->related_entity_id);
         if ($job === null) {
             throw new Exception("Error: Could not find job with id {$llmResponse->related_entity_id}");
         }

@@ -3,7 +3,7 @@
 namespace App\Actions\Questions;
 
 use App\Models\Answer;
-use App\Models\Job;
+use App\Models\RawJob;
 use App\Models\LLM;
 use App\Models\LLMResponse;
 use App\Models\Question;
@@ -21,13 +21,13 @@ class Ask
      * @throws ConnectionException
      * @throws Exception
      */
-    public function handle(LLM $llm, Job $job, Question $question): void
+    public function handle(LLM $llm, RawJob $rawJob, Question $question): void
     {
         $q = "I'm going to give you a job description. And I'm going to ask you a question about the job description.
             I want you to provide your answer as a JSON object.
 
             The job description is:
-            \"{$job->original_description_text}\"
+            \"{$rawJob->original_description_text}\"
 
             The question is \"What is the salary range?\"
 
@@ -39,27 +39,30 @@ class Ask
 
 
         $ollama = new Ollama();
-        $LLMResponse = $ollama->prompt($llm->slug, $q, $job);
+        $LLMResponse = $ollama->prompt($llm->slug, $q, $rawJob);
 
         $answer = new Answer();
         $answer->question_id = $question->id;
-        $answer->job_id = $job->id;
+        $answer->job_id = $rawJob->id;
         $answer->author_id = $llm->slug;
         $answer->author_type = $llm->getMorphClass();
         $answer->answer = $this->extractAnswerFromLLMResponse($LLMResponse);;
         $answer->save();
     }
 
-    public function asJob(LLM $llm, Job $job, Question $question): void
+    public function asJob(LLM $llm, RawJob $job, Question $question): void
     {
         $this->handle($llm, $job, $question);
     }
 
-    public string $commandSignature = 'questions:ask {llmSlug} {jobId} {questionId}';
+    public string $commandSignature = 'questions:ask {llmSlug} {rawJobId} {questionId}';
     public string $commandDescription = 'Ask a question to an LLM';
     public string $commandHelp = 'Ask a question to an LLM';
     public bool $commandHidden = false;
 
+    /**
+     * @throws ConnectionException
+     */
     public function asCommand(Command $command): int
     {
         $llmSlug = $command->argument('llmSlug');
@@ -68,9 +71,9 @@ class Ask
             return $command::FAILURE;
         }
 
-        $jobId = $command->argument('jobId');
-        if ($jobId === null) {
-            $command->error('No job id provided');
+        $rawJobId = $command->argument('rawJobId');
+        if ($rawJobId === null) {
+            $command->error('No raw job id provided');
             return $command::FAILURE;
         }
 
@@ -83,10 +86,10 @@ class Ask
 
 
         $llm = LLM::where('slug', $llmSlug)->firstOrFail();
-        $job = Job::where('id', $jobId)->firstOrFail();
+        $rawJob = RawJob::where('id', $rawJobId)->firstOrFail();
         $question = Question::where('id', $questionId)->firstOrFail();
 
-        $this->handle($llm, $job, $question);
+        $this->handle($llm, $rawJob, $question);
 
         return $command::SUCCESS;
     }
