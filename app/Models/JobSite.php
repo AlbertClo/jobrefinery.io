@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- *
+ * 
  *
  * @property string $id
  * @property string|null $company_id
@@ -41,6 +41,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|JobSite whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|JobSite withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|JobSite withoutTrashed()
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\RawJob> $rawJobs
+ * @property-read int|null $raw_jobs_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\RefinedJob> $refinedJobs
+ * @property-read int|null $refined_jobs_count
  * @mixin \Eloquent
  */
 class JobSite extends Model

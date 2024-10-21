@@ -62,6 +62,15 @@
         ],
         "analyse": [
             "./vendor/bin/phpstan analyse --level=5 --memory-limit=2G"
+        ],
+        "queues:clear": [
+            "@php artisan queue:clear --queue=default",
+            "@php artisan queue:clear --queue=prompt-llm",
+            "@php artisan queue:flush"
+        ],
+        "queues:listen": [
+            "Composer\\Config::disableProcessTimeout",
+            "npx concurrently -k -c \"#93c5fd,#c4b5fd\" \"php artisan queue:listen --queue=default\" \"php artisan queue:listen --queue=prompt-llm\"  --names=default,prompt-llm"
         ]
     },
     "extra": {

@@ -6,6 +6,7 @@ type RawJob = {
 	id: string;
 	original_description_html: string;
 	post_date: Date;
+	answers: string;
 	created_at: string;
 	updated_at: string;
 };
@@ -35,6 +36,16 @@ const props = defineProps<{ rawJobs: RawJob[]; count: number }>();
 							{{ rawJob.id }}
 						</div>
 						<div class="justify- text-base text-foreground" v-html="rawJob.original_description_html"></div>
+						<div class="grid grid-cols-2 gap-4 text-foreground text-yellow-100">
+							<template v-for="answer in JSON.parse(rawJob.answers)">
+								<div class="text-base text-popover-foreground">
+									{{ answer.question }}
+								</div>
+								<div class="text-base text-accent-foreground">
+									{{ answer.answer }}
+								</div>
+							</template>
+						</div>
 					</div>
 				</div>
 			</div>

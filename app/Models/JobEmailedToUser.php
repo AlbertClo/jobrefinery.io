@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 /**
- *
+ * 
  *
  * @property string $job_id
  * @property string $user_id
@@ -19,6 +19,8 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
  * @method static \Illuminate\Database\Eloquent\Builder|JobEmailedToUser whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|JobEmailedToUser whereJobId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|JobEmailedToUser whereUserId($value)
+ * @property string $refined_job_id
+ * @method static \Illuminate\Database\Eloquent\Builder|JobEmailedToUser whereRefinedJobId($value)
  * @mixin \Eloquent
  */
 class JobEmailedToUser extends Pivot

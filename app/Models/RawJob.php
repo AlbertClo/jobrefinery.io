@@ -9,6 +9,43 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * 
+ *
+ * @property string $id
+ * @property string $cached_page_id
+ * @property string $job_site_id
+ * @property string|null $original_url
+ * @property string|null $direct_link
+ * @property string|null $post_date
+ * @property string|null $original_description_html
+ * @property string|null $original_description_text
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\CachedPage $cachedPage
+ * @property-read \App\Models\JobSite $jobSite
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\LLMResponse> $llmResponses
+ * @property-read int|null $llm_responses_count
+ * @method static \Illuminate\Database\Eloquent\Builder|RawJob newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|RawJob newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|RawJob onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|RawJob query()
+ * @method static \Illuminate\Database\Eloquent\Builder|RawJob whereCachedPageId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RawJob whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RawJob whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RawJob whereDirectLink($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RawJob whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RawJob whereJobSiteId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RawJob whereOriginalDescriptionHtml($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RawJob whereOriginalDescriptionText($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RawJob whereOriginalUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RawJob wherePostDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RawJob whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RawJob withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|RawJob withoutTrashed()
+ * @mixin \Eloquent
+ */
 class RawJob extends Model
 {
     use HasFactory, HasUuids, SoftDeletes;
@@ -19,21 +56,8 @@ class RawJob extends Model
         'original_url',
         'direct_link',
         'post_date',
-        'requires_work_permit',
-        'work_permit_country_code',
-        'is_remote',
-        'is_hybrid',
-        'days_in_office_per_week',
         'original_description_html',
         'original_description_text',
-        'llm_summary',
-        'salary_from',
-        'salary_to',
-        'salary_currency',
-        'salary_in_usd_from',
-        'salary_in_usd_to',
-        'timezone_from',
-        'timezone_to'
     ];
 
     public function cachedPage(): BelongsTo

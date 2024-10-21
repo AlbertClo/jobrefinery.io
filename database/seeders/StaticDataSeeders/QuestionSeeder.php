@@ -2,9 +2,9 @@
 
 namespace Database\Seeders\StaticDataSeeders;
 
-use App\Models\StaticData\LLMData;
+use App\Models\StaticData\QuestionData;
 
 class QuestionSeeder extends StaticDataSeeder
 {
-    protected static $staticDataClass = LLMData::class;
+    protected static $staticDataClass = QuestionData::class;
 }

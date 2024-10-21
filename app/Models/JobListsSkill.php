@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 /**
- *
+ * 
  *
  * @property string $job_id
  * @property string $skill_id

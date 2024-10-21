@@ -13,7 +13,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 /**
- *
+ * 
  *
  * @property string $id
  * @property string $name

@@ -23,27 +23,14 @@ class Ask
      */
     public function handle(LLM $llm, RawJob $rawJob, Question $question): void
     {
-        $q = "I'm going to give you a job description. And I'm going to ask you a question about the job description.
-            I want you to provide your answer as a JSON object.
-
-            The job description is:
-            \"{$rawJob->original_description_text}\"
-
-            The question is \"What is the salary range?\"
-
-            You answer should follow this format:
-            {
-                \"answer\": \"$90k to $100k\",
-            }
-        ";
-
+        $q = str_replace("\{\$jobDescription\}", $rawJob->original_description_text,  $question->question);
 
         $ollama = new Ollama();
         $LLMResponse = $ollama->prompt($llm->slug, $q, $rawJob);
 
         $answer = new Answer();
         $answer->question_id = $question->id;
-        $answer->job_id = $rawJob->id;
+        $answer->raw_job_id = $rawJob->id;
         $answer->author_id = $llm->slug;
         $answer->author_type = $llm->getMorphClass();
         $answer->answer = $this->extractAnswerFromLLMResponse($LLMResponse);;

@@ -27,6 +27,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder|Question whereQuestion($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Question whereSummary($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Question whereUpdatedAt($value)
+ * @property string $related_field The related column in the refined_jobs table
+ * @method static \Illuminate\Database\Eloquent\Builder|Question whereRelatedField($value)
  * @mixin \Eloquent
  */
 class Question extends Model

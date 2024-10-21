@@ -14,11 +14,19 @@ class JobsListController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $rawJobs = DB::query()
-            ->from('raw_jobs')
-            ->join('answers', 'answers.job_id', '=', 'raw_jobs.id')
+        $rawJobs = DB::table('raw_jobs')
+            ->join('answers', 'answers.raw_job_id', '=', 'raw_jobs.id')
             ->join('questions', 'questions.id', '=', 'answers.question_id')
             ->select('raw_jobs.id', 'raw_jobs.original_description_html')
+            ->selectRaw(
+                "json_agg(
+                    json_build_object(
+                        'question', questions.summary,
+                        'answer', answers.answer
+                    )
+                ) as answers"
+            )
+            ->groupBy('raw_jobs.id', 'raw_jobs.original_description_html')
             ->get();
 
         RawJob::orderBy('post_date', 'desc')->get();

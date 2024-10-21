@@ -61,7 +61,7 @@ class Extract
             } else {
                 $job->update($jobPost);
             }
-            AskAllQuestions::dispatch($job)->onQueue('prompt-llm');
+            AskAllQuestions::dispatch($job);
         }
     }
 

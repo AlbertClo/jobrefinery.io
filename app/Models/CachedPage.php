@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- *
+ * 
  *
  * @property string $id
  * @property string $job_site_id
@@ -38,6 +38,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder|CachedPage whereUrlFull($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CachedPage whereUrlOrigin($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CachedPage whereUrlPathname($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\RawJob> $rawJobs
+ * @property-read int|null $raw_jobs_count
  * @mixin \Eloquent
  */
 class CachedPage extends Model
