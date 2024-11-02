@@ -12,6 +12,7 @@
         "bugsnag/bugsnag-laravel": "^2.0",
         "inertiajs/inertia-laravel": "^1.0",
         "laravel/framework": "^11.9",
+        "laravel/pail": "^1.2",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
         "laravel/vapor-cli": "^1.65",
@@ -70,7 +71,11 @@
         ],
         "queues:listen": [
             "Composer\\Config::disableProcessTimeout",
-            "npx concurrently -k -c \"#93c5fd,#c4b5fd\" \"php artisan queue:listen --queue=default\" \"php artisan queue:listen --queue=prompt-llm\"  --names=default,prompt-llm"
+            "npx concurrently -k -c \"#fff,#fff,#fff\" \"php artisan pail -vv\" \"php artisan queue:listen --queue=default\" \"php artisan queue:listen --queue=prompt-llm\"  --names=pail,queue:default,queue:prompt-llm"
+        ],
+        "dev": [
+            "Composer\\Config::disableProcessTimeout",
+            "npx concurrently -k -c \"#93c5fd,#c4b5fd,#d4d4d8,#fdba74\" \"php artisan queue:listen --tries=1\" \"php artisan queue:listen --queue=prompt-llm\" \"php artisan pail\" \"npm run dev\" --names=queue:default,queue:prompt-llm,logs,vite"
         ]
     },
     "extra": {
