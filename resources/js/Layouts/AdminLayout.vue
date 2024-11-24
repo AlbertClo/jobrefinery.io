@@ -13,21 +13,17 @@ import {
 import {
 	Bars3Icon,
 	BellIcon,
-	CalendarIcon,
-	ChartPieIcon,
 	Cog6ToothIcon,
-	DocumentDuplicateIcon,
-	FolderIcon,
 	HomeIcon,
-	UsersIcon,
 	ChartBarIcon,
 	Square3Stack3DIcon,
-	Square2StackIcon,
 	XMarkIcon,
 } from '@heroicons/vue/24/outline';
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/20/solid';
 import { Link } from '@inertiajs/vue3';
 import Logo from '@/components/job-refinery/logos/logo/Logo.vue';
+import ThemeCyclerButton from '../components/job-refinery/theme-switchers/theme-cycler-button/ThemeCyclerButton.vue';
+import { cn } from '@/lib/utils';
 
 function isCurrentPage(href: string): boolean {
 	console.log('window');
@@ -199,12 +195,14 @@ const sidebarOpen = ref(false);
 								<li v-for="item in navigation" :key="item.name">
 									<Link
 										:href="item.href"
-										:class="[
-											isCurrentPage(item.href)
-												? 'bg-foreground text-background'
-												: 'text-card-foreground hover:bg-muted-foreground hover:text-foreground',
-											'group flex gap-x-3 rounded-md p-2 text-base font-semibold leading-6',
-										]"
+										:class="
+											cn(
+												isCurrentPage(item.href)
+													? 'bg-foreground text-primary-foreground'
+													: 'text-card-foreground hover:bg-muted-foreground hover:text-background',
+												'group flex gap-x-3 rounded-md p-2 text-base font-semibold leading-6'
+											)
+										"
 									>
 										<component :is="item.icon" class="h-6 w-6 shrink-0" aria-hidden="true" />
 										{{ item.name }}
@@ -258,7 +256,7 @@ const sidebarOpen = ref(false);
 				</button>
 
 				<!-- Separator -->
-				<div class="bg-card-foreground/10 h-6 w-px lg:hidden" aria-hidden="true" />
+				<div class="h-6 w-px bg-card-foreground/10 lg:hidden" aria-hidden="true" />
 
 				<div class="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
 					<form class="relative flex flex-1" action="#" method="GET">
@@ -276,13 +274,14 @@ const sidebarOpen = ref(false);
 						/>
 					</form>
 					<div class="flex items-center gap-x-4 lg:gap-x-6">
+						<ThemeCyclerButton variant="outline" class="mr-4" />
 						<button type="button" class="-m-2.5 p-2.5 text-card-foreground hover:text-gray-500">
 							<span class="sr-only">View notifications</span>
 							<BellIcon class="h-6 w-6" aria-hidden="true" />
 						</button>
 
 						<!-- Separator -->
-						<div class="lg:bg-card-foreground/10 hidden lg:block lg:h-6 lg:w-px" aria-hidden="true" />
+						<div class="hidden lg:block lg:h-6 lg:w-px lg:bg-card-foreground/10" aria-hidden="true" />
 
 						<!-- Profile dropdown -->
 						<Menu as="div" class="relative">

@@ -11,6 +11,14 @@ type RawJob = {
 	updated_at: string;
 };
 
+const formatAnswer = (answer: string): string[] => {
+	try {
+		return JSON.parse(answer);
+	} catch (e) {
+		return [answer];
+	}
+};
+
 const props = defineProps<{ rawJobs: RawJob[]; count: number }>();
 </script>
 
@@ -20,7 +28,7 @@ const props = defineProps<{ rawJobs: RawJob[]; count: number }>();
 	<AdminLayout>
 		<template #default>
 			<h2 class="text-xl font-semibold leading-tight text-popover-foreground">Job List</h2>
-			<div class="flex w-full flex-row justify-center">
+			<div class="flex w-full flex-row justify-center text-lg">
 				<div class="flex w-256 flex-col gap-4 p-4">
 					<div class="flex flex-col gap-4 rounded-lg bg-muted p-8 py-4">
 						<div class="text-lg leading-tight text-popover-foreground">
@@ -35,16 +43,33 @@ const props = defineProps<{ rawJobs: RawJob[]; count: number }>();
 						<div class="text-lg font-semibold leading-tight text-popover-foreground">
 							{{ rawJob.id }}
 						</div>
-						<div class="justify- text-base text-foreground" v-html="rawJob.original_description_html"></div>
-						<div class="grid grid-cols-2 gap-4 text-foreground text-yellow-100">
-							<template v-for="answer in JSON.parse(rawJob.answers)">
-								<div class="text-base text-popover-foreground">
-									{{ answer.question }}
+						<div class="text-foreground" v-html="rawJob.original_description_html"></div>
+						<div class="flex flex-col gap-4 rounded-lg bg-popover p-6">
+							<div v-for="question in JSON.parse(rawJob.answers).questions" class="">
+								<span class="text-xl font-bold text-popover-foreground">
+									{{ Object.keys(question)[0] }}
+								</span>
+								<div class="mt-8 grid grid-cols-2 gap-20 text-lg text-popover-foreground">
+									<div
+										v-for="answer in question[Object.keys(question)[0]]"
+										class="flex flex-col gap-4 rounded-lg bg-background"
+									>
+										<div>
+											<span class="text-sm text-foreground/50">Author:</span><br />
+											<span class="text-nowrap text-primary">{{ answer.author }}</span>
+										</div>
+
+										<div>
+											<span class="text-sm text-foreground/50">Answer:</span><br />
+											<ul class="ml-4 list-disc">
+												<li v-for="a in formatAnswer(answer.answer)" class="text-nowrap">
+													{{ a }}
+												</li>
+											</ul>
+										</div>
+									</div>
 								</div>
-								<div class="text-base text-accent-foreground">
-									{{ answer.answer }}
-								</div>
-							</template>
+							</div>
 						</div>
 					</div>
 				</div>
