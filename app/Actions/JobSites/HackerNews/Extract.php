@@ -39,6 +39,7 @@ class Extract
                 // Get the post timestamp
                 $ageElement = $node->filter('span.age');
                 $timestamp = $ageElement->count() > 0 ? $ageElement->attr('title') : null;
+                $timestamp = explode(' ', $timestamp)[0];
 
                 return [
                     'cached_page_id' => $cachedPage->id,
