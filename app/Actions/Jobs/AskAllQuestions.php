@@ -17,8 +17,12 @@ class AskAllQuestions
 
     public function handle(RawJob $rawJob): void
     {
-        $question = Question::where('id', QuestionData::MULTIPLE_JOB_ROLES)->first();
+        $question = Question::where('id', QuestionData::LIST_ROLES)->first();
+
         $llm = LLM::where('slug', LLMData::LLAMA3_2_3B_INSTRUCT_Q80)->first();
+        Ask::dispatch($llm, $rawJob, $question)->onQueue('prompt-llm');
+
+        $llm = LLM::where('slug', LLMData::LLAMA3_1_70B)->first();
         Ask::dispatch($llm, $rawJob, $question)->onQueue('prompt-llm');
     }
 

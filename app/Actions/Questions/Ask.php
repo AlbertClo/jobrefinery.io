@@ -23,17 +23,22 @@ class Ask
      */
     public function handle(LLM $llm, RawJob $rawJob, Question $question): void
     {
-        $q = str_replace("\{\$jobDescription\}", $rawJob->original_description_text,  $question->question);
+        $q = str_replace("\{\$jobDescription\}", $rawJob->original_description_text, $question->question);
 
         $ollama = new Ollama();
         $LLMResponse = $ollama->prompt($llm->slug, $q, $rawJob);
+
+        $a = $this->extractAnswerFromLLMResponse($LLMResponse);
+        if (is_array($a)) {
+            $a = json_encode($a);
+        }
 
         $answer = new Answer();
         $answer->question_id = $question->id;
         $answer->raw_job_id = $rawJob->id;
         $answer->author_id = $llm->slug;
         $answer->author_type = $llm->getMorphClass();
-        $answer->answer = $this->extractAnswerFromLLMResponse($LLMResponse);;
+        $answer->answer = $a;
         $answer->save();
     }
 
@@ -71,7 +76,6 @@ class Ask
             return $command::FAILURE;
         }
 
-
         $llm = LLM::where('slug', $llmSlug)->firstOrFail();
         $rawJob = RawJob::where('id', $rawJobId)->firstOrFail();
         $question = Question::where('id', $questionId)->firstOrFail();
@@ -84,7 +88,7 @@ class Ask
     /**
      * @throws Exception
      */
-    public function extractAnswerFromLLMResponse(LLMResponse $llmResponse): string
+    public function extractAnswerFromLLMResponse(LLMResponse $llmResponse): string|array
     {
         $response = $llmResponse->response;
         $start = strpos($response, '{');
