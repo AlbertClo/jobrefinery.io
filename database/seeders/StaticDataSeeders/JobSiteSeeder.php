@@ -2,9 +2,9 @@
 
 namespace Database\Seeders\StaticDataSeeders;
 
-use App\Models\StaticData\JobSiteData;
+use App\Enums\JobSiteEnum;
 
-class JobSiteSeeder extends StaticDataSeeder
+class JobSiteSeeder extends EnumSeeder
 {
-    protected static $staticDataClass = JobSiteData::class;
+    protected string $enum = JobSiteEnum::class;
 }

@@ -2,9 +2,9 @@
 
 namespace Database\Seeders\StaticDataSeeders;
 
-use App\Models\StaticData\QuestionData;
+use App\Enums\QuestionEnum;
 
-class QuestionSeeder extends StaticDataSeeder
+class QuestionSeeder extends EnumSeeder
 {
-    protected static $staticDataClass = QuestionData::class;
+    protected string $enum = QuestionEnum::class;
 }
