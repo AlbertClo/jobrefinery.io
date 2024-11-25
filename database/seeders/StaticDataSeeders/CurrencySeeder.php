@@ -2,9 +2,9 @@
 
 namespace Database\Seeders\StaticDataSeeders;
 
-use App\Models\StaticData\CurrencyData;
+use App\Enums\CurrencyEnum;
 
-class CurrencySeeder extends StaticDataSeeder
+class CurrencySeeder extends EnumSeeder
 {
-    protected static $staticDataClass = CurrencyData::class;
+    protected string $enum = CurrencyEnum::class;
 }

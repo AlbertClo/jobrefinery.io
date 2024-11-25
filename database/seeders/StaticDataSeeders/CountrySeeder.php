@@ -2,9 +2,9 @@
 
 namespace Database\Seeders\StaticDataSeeders;
 
-use App\Models\StaticData\CountryData;
+use App\Enums\CountryEnum;
 
-class CountrySeeder extends StaticDataSeeder
+class CountrySeeder extends EnumSeeder
 {
-    protected static $staticDataClass = CountryData::class;
+    protected string $enum = CountryEnum::class;
 }
