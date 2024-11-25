@@ -2,9 +2,9 @@
 
 namespace Database\Seeders\StaticDataSeeders;
 
-use App\Models\StaticData\RoleData;
+use App\Enums\RoleEnum;
 
-class RoleSeeder extends StaticDataSeeder
+class RoleSeeder extends EnumSeeder
 {
-    protected static $staticDataClass = RoleData::class;
+    protected string $enum = RoleEnum::class;
 }

@@ -2,9 +2,9 @@
 
 namespace Database\Seeders\StaticDataSeeders;
 
-use App\Models\StaticData\LLMData;
+use App\Enums\LLMEnum;
 
-class LLMSeeder extends StaticDataSeeder
+class LLMSeeder extends EnumSeeder
 {
-    protected static $staticDataClass = LLMData::class;
+    protected string $enum = LLMEnum::class;
 }
