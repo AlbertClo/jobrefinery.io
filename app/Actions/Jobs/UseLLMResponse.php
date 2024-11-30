@@ -145,38 +145,6 @@ class UseLLMResponse
             throw new Exception("Error: Unable to parse JSON string" . json_last_error_msg());
         }
 
-        // If it's Replicate we need to try to remove unnecessary spaces inside the response as well.
-        if (strtolower($llmResponse->relatedLLM->provider) === 'replicate') {
-            $response = $this->cleanArray($responseArray);
-        }
-
         return $responseArray;
-    }
-
-    // Function to recursively clean keys and values
-    private function cleanArray($array): array
-    {
-        $result = [];
-        foreach ($array as $key => $value) {
-            // Remove spaces and asterisks from keys
-            $cleanKey = str_replace([' ', '*'], '', $key);
-
-            if (is_array($value)) {
-                // Recursively clean nested arrays
-                $result[$cleanKey] = $this->cleanArray($value);
-            } elseif (is_string($value)) {
-                // Don't remove spaces from these values, only trim
-                if (in_array(strtolower($cleanKey), ['heading', 'city', 'company'])) {
-                    $result[$cleanKey] = trim($value);
-                } else {
-                    // Remove spaces from string values for other keys
-                    $result[$cleanKey] = str_replace(' ', '', $value);
-                }
-            } else {
-                // Keep non-string values as is
-                $result[$cleanKey] = $value;
-            }
-        }
-        return $result;
     }
 }

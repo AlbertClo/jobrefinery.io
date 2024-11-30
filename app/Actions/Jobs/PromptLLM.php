@@ -85,9 +85,6 @@ class PromptLLM
 //        $anthropic = new \App\Services\LLM\Anthropic();
 //        $LLMResponse = $anthropic->prompt(LLMData::CLAUDE_3_SONNET, $prompt, $job);
 //        UseLLMResponse::dispatch($LLMResponse);
-
-//        $replicate = new \App\Services\LLM\Replicate();
-//        $replicate->promptAsync(LLMData::META_LLAMA_3_8B_INSTRUCT, $prompt, $job);
     }
 
     public function asJob(RefinedJob $job): void
