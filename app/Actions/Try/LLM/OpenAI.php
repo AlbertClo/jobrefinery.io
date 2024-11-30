@@ -2,7 +2,7 @@
 
 namespace App\Actions\Try\LLM;
 
-use App\Models\StaticData\LLMData;
+use App\Models\SeedableEnums\LLMEnum;
 use Illuminate\Console\Command;
 use Illuminate\Http\Client\ConnectionException;
 use Lorisleiva\Actions\Concerns\AsAction;
@@ -17,7 +17,7 @@ class OpenAI
     public function handle(string $prompt, bool $terse): object
     {
         $openAI = new \App\Services\LLM\OpenAI();
-        return $openAI->prompt(LLMData::GPT_4O_MINI, $prompt . ($terse ? '. Be terse.' : ''));
+        return $openAI->prompt(LLMEnum::GPT_4O_MINI->value, $prompt . ($terse ? '. Be terse.' : ''));
     }
 
     public string $commandSignature = 'try:llm:openai {prompt : e.g. What is the capital of France?} {--terse : Be terse}';

@@ -62,7 +62,7 @@ Run Vite to compile and watch our fontend assets
 -   [Vite](https://vitejs.dev/) - Frontend build tool.
 -   [Radix UI](https://www.radix-ui.com/) - Unstyled component Library.
 -   [Tailwind](https://tailwindcss.com/) - CSS Styling framework.
--   [Shadcn](https://ui.shadcn.com/) - Styled Radix UI components with Taildwind.
+-   [Shadcn](https://ui.shadcn.com/) - Styled Radix UI components with Tailwind.
 -   [TypeScript](https://www.typescriptlang.org/) - Typed JavaScript.
 -   [Docker](https://www.docker.com/) - Containers for local development and production deployments.
 -   [Laravel Sail](https://laravel.com/docs/11.x/sail) - To manage Docker containers for local development.
@@ -78,6 +78,11 @@ Run the following commands to generate the IDE helper files
 ./vendor/bin/sail artisan ide-helper:models - PHPDocs for models
 ./vendor/bin/sail artisan ide-helper:meta - PhpStorm Meta file
 ```
+Or all together
+```
+./vendor/bin/sail artisan ide-helper:generate && ./vendor/bin/sail artisan ide-helper:models && ./vendor/bin/sail artisan ide-helper:meta
+```
+
 To update a specific model
 ```
 ./vendor/bin/sail artisan ide-helper:models "App\Models\User"

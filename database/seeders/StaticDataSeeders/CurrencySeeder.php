@@ -2,7 +2,7 @@
 
 namespace Database\Seeders\StaticDataSeeders;
 
-use App\Enums\CurrencyEnum;
+use App\Models\SeedableEnums\CurrencyEnum;
 
 class CurrencySeeder extends EnumSeeder
 {

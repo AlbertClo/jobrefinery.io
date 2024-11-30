@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Enums;
+namespace App\Models\SeedableEnums;
 
-use App\Enums\Contracts\SeedableEnum;
-use App\Enums\Traits\SeedableEnumTrait;
+use App\Models\SeedableEnums\Contracts\SeedableEnum;
+use App\Models\SeedableEnums\Traits\SeedableEnumTrait;
 
 enum CountryEnum: string implements SeedableEnum
 {

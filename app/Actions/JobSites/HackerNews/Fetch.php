@@ -3,6 +3,7 @@
 namespace App\Actions\JobSites\HackerNews;
 
 use App\Models\CachedPage;
+use App\Models\SeedableEnums\JobSiteEnum;
 use App\Models\StaticData\JobSiteData;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
@@ -20,7 +21,7 @@ class Fetch
         parse_str($parsedUrl['query'], $queryParams);
 
         $cachedPage = CachedPage::firstOrCreate([
-            'job_site_id' => JobSiteData::HACKER_NEWS_ID,
+            'job_site_id' => JobSiteEnum::HACKER_NEWS->id(),
             'url_full' => $url
         ], [
             'url_origin' => $parsedUrl['scheme'] . '://' . $parsedUrl['host'],

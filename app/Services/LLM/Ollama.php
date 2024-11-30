@@ -3,7 +3,7 @@
 namespace App\Services\LLM;
 
 use App\Models\LLMResponse;
-use App\Models\StaticData\LLMData;
+use App\Models\SeedableEnums\LLMEnum;
 use Http;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Client\ConnectionException;
@@ -26,7 +26,7 @@ class Ollama
         $uuid = Str::uuid();
         $promptTimestamp = now();
         $response = Http::post('http://ollama:11434/api/generate', [
-            'model' => LLMData::LLAMA3_2_3B,
+            'model' => LLMEnum::LLAMA3_2_3B->value,
             'prompt' => $prompt,
             'stream' => false
         ]);

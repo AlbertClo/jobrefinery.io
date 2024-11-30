@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Enums\Contracts;
+namespace App\Models\SeedableEnums\Contracts;
 
 interface SeedableEnum
 {

@@ -2,7 +2,7 @@
 
 namespace Database\Seeders\StaticDataSeeders;
 
-use App\Enums\JobSiteEnum;
+use App\Models\SeedableEnums\JobSiteEnum;
 
 class JobSiteSeeder extends EnumSeeder
 {

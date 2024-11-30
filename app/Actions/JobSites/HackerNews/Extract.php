@@ -3,10 +3,9 @@
 namespace App\Actions\JobSites\HackerNews;
 
 use App\Actions\Jobs\AskAllQuestions;
-use App\Actions\Jobs\PromptLLM;
 use App\Models\CachedPage;
 use App\Models\RawJob;
-use App\Models\StaticData\JobSiteData;
+use App\Models\SeedableEnums\JobSiteEnum;
 use Illuminate\Console\Command;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Symfony\Component\DomCrawler\Crawler;
@@ -43,7 +42,7 @@ class Extract
 
                 return [
                     'cached_page_id' => $cachedPage->id,
-                    'job_site_id' => JobSiteData::HACKER_NEWS_ID,
+                    'job_site_id' => JobSiteEnum::HACKER_NEWS->id(),
                     'original_url' => $cachedPage->url_full,
                     'direct_link' => $directLink,
                     'post_date' => $timestamp,
@@ -80,7 +79,7 @@ class Extract
     {
         $cachedPageId = $command->argument('cachedPageId');
         if ($cachedPageId === null) {
-            $cachedPage = CachedPage::where('job_site_id', JobSiteData::HACKER_NEWS_ID)
+            $cachedPage = CachedPage::where('job_site_id', JobSiteEnum::HACKER_NEWS->id())
                 ->orderBy('created_at', 'desc')
                 ->first();
         } else {

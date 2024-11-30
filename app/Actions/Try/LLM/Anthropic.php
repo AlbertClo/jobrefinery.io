@@ -2,7 +2,7 @@
 
 namespace App\Actions\Try\LLM;
 
-use App\Models\StaticData\LLMData;
+use App\Models\SeedableEnums\LLMEnum;
 use Illuminate\Console\Command;
 use Illuminate\Http\Client\ConnectionException;
 use Lorisleiva\Actions\Concerns\AsAction;
@@ -17,7 +17,7 @@ class Anthropic
     public function handle(string $prompt, bool $terse): object
     {
         $anthropic = new \App\Services\LLM\Anthropic();
-        return $anthropic->prompt(LLMData::CLAUDE_3_HAIKU ,$prompt . ($terse ? '. Be terse.' : ''));
+        return $anthropic->prompt(LLMEnum::CLAUDE_3_HAIKU->value ,$prompt . ($terse ? '. Be terse.' : ''));
     }
 
     public string $commandSignature = 'try:llm:anthropic {prompt : e.g. What is the capital of France?} {--terse : Be terse}';

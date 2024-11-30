@@ -2,7 +2,7 @@
 
 namespace Database\Seeders\StaticDataSeeders;
 
-use App\Enums\CountryEnum;
+use App\Models\SeedableEnums\CountryEnum;
 
 class CountrySeeder extends EnumSeeder
 {

@@ -2,7 +2,7 @@
 
 namespace Database\Seeders\TestDataSeeders;
 
-use App\Models\StaticData\RoleData;
+use App\Models\SeedableEnums\RoleEnum;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Hash;
@@ -20,8 +20,8 @@ class UserSeeder extends TestDataSeeder
                 "name" => 'Albert Clo',
                 "password" => Hash::make('test1234'),
                 'enrichFunction' => function (User $user) {
-                    if (!$user->hasRole(RoleData::ADMIN_ID)) {
-                        $user->roles()->attach(RoleData::ADMIN_ID);
+                    if (!$user->hasRole(RoleEnum::ADMIN->id())) {
+                        $user->roles()->attach(RoleEnum::ADMIN->id());
                     }
                 }
             ],

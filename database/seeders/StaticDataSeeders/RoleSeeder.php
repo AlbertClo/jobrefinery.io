@@ -2,7 +2,7 @@
 
 namespace Database\Seeders\StaticDataSeeders;
 
-use App\Enums\RoleEnum;
+use App\Models\SeedableEnums\RoleEnum;
 
 class RoleSeeder extends EnumSeeder
 {

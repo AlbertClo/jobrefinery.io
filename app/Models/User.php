@@ -2,8 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\StaticData\RoleData;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\SeedableEnums\RoleEnum;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -13,7 +12,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string $name
@@ -109,7 +108,7 @@ class User extends Authenticatable
 
     public function isAdmin(): bool
     {
-        return $this->hasRole(RoleData::ADMIN_ID);
+        return $this->hasRole(RoleEnum::ADMIN->id());
     }
 
     public function answers(): MorphMany

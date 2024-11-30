@@ -2,7 +2,7 @@
 
 namespace Database\Seeders\StaticDataSeeders;
 
-use App\Enums\LLMEnum;
+use App\Models\SeedableEnums\LLMEnum;
 
 class LLMSeeder extends EnumSeeder
 {

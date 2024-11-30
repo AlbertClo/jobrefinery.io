@@ -1,25 +1,30 @@
 <?php
 
-namespace App\Models\StaticData;
+namespace App\Models\SeedableEnums;
 
-use App\Models\StaticData\Contracts\StaticDataContract;
+use App\Models\SeedableEnums\Contracts\SeedableEnum;
+use App\Models\SeedableEnums\Traits\SeedableEnumTrait;
+use App\Models\Question;
 
-class QuestionData implements StaticDataContract
+enum QuestionEnum: string implements SeedableEnum
 {
-    public const string MULTIPLE_JOB_ROLES = "5513c687-74a4-4b2b-a337-f69c446bfda5";
-    public const string LIST_ROLES = "bf77026b-a054-4399-8001-f82124169bef";
+    use SeedableEnumTrait;
+
+    case MULTIPLE_JOB_ROLES = "5513c687-74a4-4b2b-a337-f69c446bfda5";
+    case LIST_ROLES = "bf77026b-a054-4399-8001-f82124169bef";
 
     public static function getModelClass(): string
     {
-        return \App\Models\Question::class;
+        return Question::class;
     }
 
-    public static function getData(): array
+    public function getData(): array
     {
-        return [
-            [
+        return match ($this) {
+            self::MULTIPLE_JOB_ROLES => [
                 "id" => self::MULTIPLE_JOB_ROLES,
-                "summary" => "Does this job description contain one job role or multiple job roles?", // todo rename this to question, and rename question to 'context'
+                "summary" => "Does this job description contain one job role or multiple job roles?",
+                // todo rename this to question, and rename question to 'context'
                 "related_field" => "heading",
                 "question" => "
                     I'm going to give you a job description.
@@ -41,9 +46,10 @@ class QuestionData implements StaticDataContract
                     }
                 ",
             ],
-            [
+            self::LIST_ROLES => [
                 "id" => self::LIST_ROLES,
-                "summary" => "What role or roles is this job description hiring for?", // todo rename this to question, and rename question to 'context'
+                "summary" => "What role or roles is this job description hiring for?",
+                // todo rename this to question, and rename question to 'context'
                 "related_field" => "heading",
                 "question" => "
                     I'm going to give you a job description.
@@ -81,6 +87,6 @@ class QuestionData implements StaticDataContract
                     }
                 ",
             ],
-        ];
+        };
     }
 }

@@ -1,1089 +1,1091 @@
 <?php
 
-namespace App\Models\StaticData;
+namespace App\Models\SeedableEnums;
 
-use App\Models\StaticData\Contracts\StaticDataContract;
+use App\Models\SeedableEnums\Contracts\SeedableEnum;
+use App\Models\SeedableEnums\Traits\SeedableEnumTrait;
 
-class CurrencyData implements StaticDataContract
+enum CurrencyEnum: string implements SeedableEnum
 {
-    public const AED = 'AED';
-    public const AFN = 'AFN';
-    public const ALL = 'ALL';
-    public const AMD = 'AMD';
-    public const ANG = 'ANG';
-    public const AOA = 'AOA';
-    public const ARS = 'ARS';
-    public const AUD = 'AUD';
-    public const AWG = 'AWG';
-    public const AZN = 'AZN';
-    public const BAM = 'BAM';
-    public const BBD = 'BBD';
-    public const BDT = 'BDT';
-    public const BGN = 'BGN';
-    public const BHD = 'BHD';
-    public const BIF = 'BIF';
-    public const BMD = 'BMD';
-    public const BND = 'BND';
-    public const BOB = 'BOB';
-    public const BOV = 'BOV';
-    public const BRL = 'BRL';
-    public const BSD = 'BSD';
-    public const BTN = 'BTN';
-    public const BWP = 'BWP';
-    public const BYN = 'BYN';
-    public const BZD = 'BZD';
-    public const CAD = 'CAD';
-    public const CDF = 'CDF';
-    public const CHE = 'CHE';
-    public const CHF = 'CHF';
-    public const CHW = 'CHW';
-    public const CLF = 'CLF';
-    public const CLP = 'CLP';
-    public const CNY = 'CNY';
-    public const COP = 'COP';
-    public const COU = 'COU';
-    public const CRC = 'CRC';
-    public const CUP = 'CUP';
-    public const CVE = 'CVE';
-    public const CZK = 'CZK';
-    public const DJF = 'DJF';
-    public const DKK = 'DKK';
-    public const DOP = 'DOP';
-    public const DZD = 'DZD';
-    public const EGP = 'EGP';
-    public const ERN = 'ERN';
-    public const ETB = 'ETB';
-    public const EUR = 'EUR';
-    public const FJD = 'FJD';
-    public const FKP = 'FKP';
-    public const GBP = 'GBP';
-    public const GEL = 'GEL';
-    public const GHS = 'GHS';
-    public const GIP = 'GIP';
-    public const GMD = 'GMD';
-    public const GNF = 'GNF';
-    public const GTQ = 'GTQ';
-    public const GYD = 'GYD';
-    public const HKD = 'HKD';
-    public const HNL = 'HNL';
-    public const HTG = 'HTG';
-    public const HUF = 'HUF';
-    public const IDR = 'IDR';
-    public const ILS = 'ILS';
-    public const INR = 'INR';
-    public const IQD = 'IQD';
-    public const IRR = 'IRR';
-    public const ISK = 'ISK';
-    public const JMD = 'JMD';
-    public const JOD = 'JOD';
-    public const JPY = 'JPY';
-    public const KES = 'KES';
-    public const KGS = 'KGS';
-    public const KHR = 'KHR';
-    public const KMF = 'KMF';
-    public const KPW = 'KPW';
-    public const KRW = 'KRW';
-    public const KWD = 'KWD';
-    public const KYD = 'KYD';
-    public const KZT = 'KZT';
-    public const LAK = 'LAK';
-    public const LBP = 'LBP';
-    public const LKR = 'LKR';
-    public const LRD = 'LRD';
-    public const LSL = 'LSL';
-    public const LYD = 'LYD';
-    public const MAD = 'MAD';
-    public const MDL = 'MDL';
-    public const MGA = 'MGA';
-    public const MKD = 'MKD';
-    public const MMK = 'MMK';
-    public const MNT = 'MNT';
-    public const MOP = 'MOP';
-    public const MRU = 'MRU';
-    public const MUR = 'MUR';
-    public const MVR = 'MVR';
-    public const MWK = 'MWK';
-    public const MXN = 'MXN';
-    public const MXV = 'MXV';
-    public const MYR = 'MYR';
-    public const MZN = 'MZN';
-    public const NAD = 'NAD';
-    public const NGN = 'NGN';
-    public const NIO = 'NIO';
-    public const NOK = 'NOK';
-    public const NPR = 'NPR';
-    public const NZD = 'NZD';
-    public const OMR = 'OMR';
-    public const PAB = 'PAB';
-    public const PEN = 'PEN';
-    public const PGK = 'PGK';
-    public const PHP = 'PHP';
-    public const PKR = 'PKR';
-    public const PLN = 'PLN';
-    public const PYG = 'PYG';
-    public const QAR = 'QAR';
-    public const RON = 'RON';
-    public const RSD = 'RSD';
-    public const RUB = 'RUB';
-    public const RWF = 'RWF';
-    public const SAR = 'SAR';
-    public const SBD = 'SBD';
-    public const SCR = 'SCR';
-    public const SDG = 'SDG';
-    public const SEK = 'SEK';
-    public const SGD = 'SGD';
-    public const SHP = 'SHP';
-    public const SLE = 'SLE';
-    public const SOS = 'SOS';
-    public const SRD = 'SRD';
-    public const SSP = 'SSP';
-    public const STN = 'STN';
-    public const SVC = 'SVC';
-    public const SYP = 'SYP';
-    public const SZL = 'SZL';
-    public const THB = 'THB';
-    public const TJS = 'TJS';
-    public const TMT = 'TMT';
-    public const TND = 'TND';
-    public const TOP = 'TOP';
-    public const TRY = 'TRY';
-    public const TTD = 'TTD';
-    public const TWD = 'TWD';
-    public const TZS = 'TZS';
-    public const UAH = 'UAH';
-    public const UGX = 'UGX';
-    public const USD = 'USD';
-    public const USN = 'USN';
-    public const UYI = 'UYI';
-    public const UYU = 'UYU';
-    public const UYW = 'UYW';
-    public const UZS = 'UZS';
-    public const VED = 'VED';
-    public const VES = 'VES';
-    public const VND = 'VND';
-    public const VUV = 'VUV';
-    public const WST = 'WST';
-    public const XAF = 'XAF';
-    public const XAG = 'XAG';
-    public const XAU = 'XAU';
-    public const XBA = 'XBA';
-    public const XBB = 'XBB';
-    public const XBC = 'XBC';
-    public const XBD = 'XBD';
-    public const XCD = 'XCD';
-    public const XDR = 'XDR';
-    public const XOF = 'XOF';
-    public const XPD = 'XPD';
-    public const XPF = 'XPF';
-    public const XPT = 'XPT';
-    public const XSU = 'XSU';
-    public const XTS = 'XTS';
-    public const XUA = 'XUA';
-    public const YER = 'YER';
-    public const ZAR = 'ZAR';
-    public const ZMW = 'ZMW';
-    public const ZWG = 'ZWG';
-    public const ZWL = 'ZWL';
+    use SeedableEnumTrait;
+
+    case AED = 'AED';
+    case AFN = 'AFN';
+    case ALL = 'ALL';
+    case AMD = 'AMD';
+    case ANG = 'ANG';
+    case AOA = 'AOA';
+    case ARS = 'ARS';
+    case AUD = 'AUD';
+    case AWG = 'AWG';
+    case AZN = 'AZN';
+    case BAM = 'BAM';
+    case BBD = 'BBD';
+    case BDT = 'BDT';
+    case BGN = 'BGN';
+    case BHD = 'BHD';
+    case BIF = 'BIF';
+    case BMD = 'BMD';
+    case BND = 'BND';
+    case BOB = 'BOB';
+    case BOV = 'BOV';
+    case BRL = 'BRL';
+    case BSD = 'BSD';
+    case BTN = 'BTN';
+    case BWP = 'BWP';
+    case BYN = 'BYN';
+    case BZD = 'BZD';
+    case CAD = 'CAD';
+    case CDF = 'CDF';
+    case CHE = 'CHE';
+    case CHF = 'CHF';
+    case CHW = 'CHW';
+    case CLF = 'CLF';
+    case CLP = 'CLP';
+    case CNY = 'CNY';
+    case COP = 'COP';
+    case COU = 'COU';
+    case CRC = 'CRC';
+    case CUP = 'CUP';
+    case CVE = 'CVE';
+    case CZK = 'CZK';
+    case DJF = 'DJF';
+    case DKK = 'DKK';
+    case DOP = 'DOP';
+    case DZD = 'DZD';
+    case EGP = 'EGP';
+    case ERN = 'ERN';
+    case ETB = 'ETB';
+    case EUR = 'EUR';
+    case FJD = 'FJD';
+    case FKP = 'FKP';
+    case GBP = 'GBP';
+    case GEL = 'GEL';
+    case GHS = 'GHS';
+    case GIP = 'GIP';
+    case GMD = 'GMD';
+    case GNF = 'GNF';
+    case GTQ = 'GTQ';
+    case GYD = 'GYD';
+    case HKD = 'HKD';
+    case HNL = 'HNL';
+    case HTG = 'HTG';
+    case HUF = 'HUF';
+    case IDR = 'IDR';
+    case ILS = 'ILS';
+    case INR = 'INR';
+    case IQD = 'IQD';
+    case IRR = 'IRR';
+    case ISK = 'ISK';
+    case JMD = 'JMD';
+    case JOD = 'JOD';
+    case JPY = 'JPY';
+    case KES = 'KES';
+    case KGS = 'KGS';
+    case KHR = 'KHR';
+    case KMF = 'KMF';
+    case KPW = 'KPW';
+    case KRW = 'KRW';
+    case KWD = 'KWD';
+    case KYD = 'KYD';
+    case KZT = 'KZT';
+    case LAK = 'LAK';
+    case LBP = 'LBP';
+    case LKR = 'LKR';
+    case LRD = 'LRD';
+    case LSL = 'LSL';
+    case LYD = 'LYD';
+    case MAD = 'MAD';
+    case MDL = 'MDL';
+    case MGA = 'MGA';
+    case MKD = 'MKD';
+    case MMK = 'MMK';
+    case MNT = 'MNT';
+    case MOP = 'MOP';
+    case MRU = 'MRU';
+    case MUR = 'MUR';
+    case MVR = 'MVR';
+    case MWK = 'MWK';
+    case MXN = 'MXN';
+    case MXV = 'MXV';
+    case MYR = 'MYR';
+    case MZN = 'MZN';
+    case NAD = 'NAD';
+    case NGN = 'NGN';
+    case NIO = 'NIO';
+    case NOK = 'NOK';
+    case NPR = 'NPR';
+    case NZD = 'NZD';
+    case OMR = 'OMR';
+    case PAB = 'PAB';
+    case PEN = 'PEN';
+    case PGK = 'PGK';
+    case PHP = 'PHP';
+    case PKR = 'PKR';
+    case PLN = 'PLN';
+    case PYG = 'PYG';
+    case QAR = 'QAR';
+    case RON = 'RON';
+    case RSD = 'RSD';
+    case RUB = 'RUB';
+    case RWF = 'RWF';
+    case SAR = 'SAR';
+    case SBD = 'SBD';
+    case SCR = 'SCR';
+    case SDG = 'SDG';
+    case SEK = 'SEK';
+    case SGD = 'SGD';
+    case SHP = 'SHP';
+    case SLE = 'SLE';
+    case SOS = 'SOS';
+    case SRD = 'SRD';
+    case SSP = 'SSP';
+    case STN = 'STN';
+    case SVC = 'SVC';
+    case SYP = 'SYP';
+    case SZL = 'SZL';
+    case THB = 'THB';
+    case TJS = 'TJS';
+    case TMT = 'TMT';
+    case TND = 'TND';
+    case TOP = 'TOP';
+    case TRY = 'TRY';
+    case TTD = 'TTD';
+    case TWD = 'TWD';
+    case TZS = 'TZS';
+    case UAH = 'UAH';
+    case UGX = 'UGX';
+    case USD = 'USD';
+    case USN = 'USN';
+    case UYI = 'UYI';
+    case UYU = 'UYU';
+    case UYW = 'UYW';
+    case UZS = 'UZS';
+    case VED = 'VED';
+    case VES = 'VES';
+    case VND = 'VND';
+    case VUV = 'VUV';
+    case WST = 'WST';
+    case XAF = 'XAF';
+    case XAG = 'XAG';
+    case XAU = 'XAU';
+    case XBA = 'XBA';
+    case XBB = 'XBB';
+    case XBC = 'XBC';
+    case XBD = 'XBD';
+    case XCD = 'XCD';
+    case XDR = 'XDR';
+    case XOF = 'XOF';
+    case XPD = 'XPD';
+    case XPF = 'XPF';
+    case XPT = 'XPT';
+    case XSU = 'XSU';
+    case XTS = 'XTS';
+    case XUA = 'XUA';
+    case YER = 'YER';
+    case ZAR = 'ZAR';
+    case ZMW = 'ZMW';
+    case ZWG = 'ZWG';
+    case ZWL = 'ZWL';
 
     public static function getModelClass(): string
     {
         return \App\Models\Currency::class;
     }
 
-    public static function getData(): array
+    public function getData(): array
     {
-        return [
-            [
-                'code' => self::AED,
+        return match ($this) {
+            self::AED, => [
+                'code' => $this->value,
                 'name' => 'United Arab Emirates Dirham',
                 'symbol' => 'د.إ',
             ],
-            [
-                'code' => self::AFN,
+            self::AFN, => [
+                'code' => $this->value,
                 'name' => 'Afghan Afghani',
                 'symbol' => '؋',
             ],
-            [
-                'code' => self::ALL,
+            self::ALL, => [
+                'code' => $this->value,
                 'name' => 'Albanian Lek',
                 'symbol' => 'L',
             ],
-            [
-                'code' => self::AMD,
+            self::AMD, => [
+                'code' => $this->value,
                 'name' => 'Armenian Dram',
                 'symbol' => '֏',
             ],
-            [
-                'code' => self::ANG,
+            self::ANG, => [
+                'code' => $this->value,
                 'name' => 'Netherlands Antillean Guilder',
                 'symbol' => 'ƒ',
             ],
-            [
-                'code' => self::AOA,
+            self::AOA, => [
+                'code' => $this->value,
                 'name' => 'Angolan Kwanza',
                 'symbol' => 'Kz',
             ],
-            [
-                'code' => self::ARS,
+            self::ARS, => [
+                'code' => $this->value,
                 'name' => 'Argentine Peso',
                 'symbol' => '$',
             ],
-            [
-                'code' => self::AUD,
+            self::AUD, => [
+                'code' => $this->value,
                 'name' => 'Australian Dollar',
                 'symbol' => '$',
             ],
-            [
-                'code' => self::AWG,
+            self::AWG, => [
+                'code' => $this->value,
                 'name' => 'Aruban Florin',
                 'symbol' => 'ƒ',
             ],
-            [
-                'code' => self::AZN,
+            self::AZN, => [
+                'code' => $this->value,
                 'name' => 'Azerbaijani Manat',
                 'symbol' => '₼',
             ],
-            [
-                'code' => self::BAM,
+            self::BAM, => [
+                'code' => $this->value,
                 'name' => 'Bosnia-Herzegovina Convertible Mark',
                 'symbol' => 'KM',
             ],
-            [
-                'code' => self::BBD,
+            self::BBD, => [
+                'code' => $this->value,
                 'name' => 'Barbadian Dollar',
                 'symbol' => '$',
             ],
-            [
-                'code' => self::BDT,
+            self::BDT, => [
+                'code' => $this->value,
                 'name' => 'Bangladeshi Taka',
                 'symbol' => '৳',
             ],
-            [
-                'code' => self::BGN,
+            self::BGN, => [
+                'code' => $this->value,
                 'name' => 'Bulgarian Lev',
                 'symbol' => 'лв',
             ],
-            [
-                'code' => self::BHD,
+            self::BHD, => [
+                'code' => $this->value,
                 'name' => 'Bahraini Dinar',
                 'symbol' => '.د.ب',
             ],
-            [
-                'code' => self::BIF,
+            self::BIF, => [
+                'code' => $this->value,
                 'name' => 'Burundian Franc',
                 'symbol' => 'FBu',
             ],
-            [
-                'code' => self::BMD,
+            self::BMD, => [
+                'code' => $this->value,
                 'name' => 'Bermudan Dollar',
                 'symbol' => '$',
             ],
-            [
-                'code' => self::BND,
+            self::BND, => [
+                'code' => $this->value,
                 'name' => 'Brunei Dollar',
                 'symbol' => '$',
             ],
-            [
-                'code' => self::BOB,
+            self::BOB, => [
+                'code' => $this->value,
                 'name' => 'Bolivian Boliviano',
                 'symbol' => 'Bs.',
             ],
-            [
-                'code' => self::BOV,
+            self::BOV, => [
+                'code' => $this->value,
                 'name' => 'Bolivian Mvdol',
                 'symbol' => 'BOV',
             ],
-            [
-                'code' => self::BRL,
+            self::BRL, => [
+                'code' => $this->value,
                 'name' => 'Brazilian Real',
                 'symbol' => 'R$',
             ],
-            [
-                'code' => self::BSD,
+            self::BSD, => [
+                'code' => $this->value,
                 'name' => 'Bahamian Dollar',
                 'symbol' => '$',
             ],
-            [
-                'code' => self::BTN,
+            self::BTN, => [
+                'code' => $this->value,
                 'name' => 'Bhutanese Ngultrum',
                 'symbol' => 'Nu.',
             ],
-            [
-                'code' => self::BWP,
+            self::BWP, => [
+                'code' => $this->value,
                 'name' => 'Botswanan Pula',
                 'symbol' => 'P',
             ],
-            [
-                'code' => self::BYN,
+            self::BYN, => [
+                'code' => $this->value,
                 'name' => 'Belarusian Ruble',
                 'symbol' => 'Br',
             ],
-            [
-                'code' => self::BZD,
+            self::BZD, => [
+                'code' => $this->value,
                 'name' => 'Belize Dollar',
                 'symbol' => 'BZ$',
             ],
-            [
-                'code' => self::CAD,
+            self::CAD, => [
+                'code' => $this->value,
                 'name' => 'Canadian Dollar',
                 'symbol' => '$',
             ],
-            [
-                'code' => self::CDF,
+            self::CDF, => [
+                'code' => $this->value,
                 'name' => 'Congolese Franc',
                 'symbol' => 'FC',
             ],
-            [
-                'code' => self::CHE,
+            self::CHE, => [
+                'code' => $this->value,
                 'name' => 'WIR Euro',
                 'symbol' => 'CHE',
             ],
-            [
-                'code' => self::CHF,
+            self::CHF, => [
+                'code' => $this->value,
                 'name' => 'Swiss Franc',
                 'symbol' => 'CHF',
             ],
-            [
-                'code' => self::CHW,
+            self::CHW, => [
+                'code' => $this->value,
                 'name' => 'WIR Franc',
                 'symbol' => 'CHW',
             ],
-            [
-                'code' => self::CLF,
+            self::CLF, => [
+                'code' => $this->value,
                 'name' => 'Chilean Unit of Account (UF)',
                 'symbol' => 'CLF',
             ],
-            [
-                'code' => self::CLP,
+            self::CLP, => [
+                'code' => $this->value,
                 'name' => 'Chilean Peso',
                 'symbol' => '$',
             ],
-            [
-                'code' => self::CNY,
+            self::CNY, => [
+                'code' => $this->value,
                 'name' => 'Chinese Yuan',
                 'symbol' => '¥',
             ],
-            [
-                'code' => self::COP,
+            self::COP, => [
+                'code' => $this->value,
                 'name' => 'Colombian Peso',
                 'symbol' => '$',
             ],
-            [
-                'code' => self::COU,
+            self::COU, => [
+                'code' => $this->value,
                 'name' => 'Colombian Real Value Unit',
                 'symbol' => 'COU',
             ],
-            [
-                'code' => self::CRC,
+            self::CRC, => [
+                'code' => $this->value,
                 'name' => 'Costa Rican Colón',
                 'symbol' => '₡',
             ],
-            [
-                'code' => self::CUP,
+            self::CUP, => [
+                'code' => $this->value,
                 'name' => 'Cuban Peso',
                 'symbol' => '₱',
             ],
-            [
-                'code' => self::CVE,
+            self::CVE, => [
+                'code' => $this->value,
                 'name' => 'Cape Verdean Escudo',
                 'symbol' => '$',
             ],
-            [
-                'code' => self::CZK,
+            self::CZK, => [
+                'code' => $this->value,
                 'name' => 'Czech Republic Koruna',
                 'symbol' => 'Kč',
             ],
-            [
-                'code' => self::DJF,
+            self::DJF, => [
+                'code' => $this->value,
                 'name' => 'Djiboutian Franc',
                 'symbol' => 'Fdj',
             ],
-            [
-                'code' => self::DKK,
+            self::DKK, => [
+                'code' => $this->value,
                 'name' => 'Danish Krone',
                 'symbol' => 'kr',
             ],
-            [
-                'code' => self::DOP,
+            self::DOP, => [
+                'code' => $this->value,
                 'name' => 'Dominican Peso',
                 'symbol' => 'RD$',
             ],
-            [
-                'code' => self::DZD,
+            self::DZD, => [
+                'code' => $this->value,
                 'name' => 'Algerian Dinar',
                 'symbol' => 'د.ج',
             ],
-            [
-                'code' => self::EGP,
+            self::EGP, => [
+                'code' => $this->value,
                 'name' => 'Egyptian Pound',
                 'symbol' => '£',
             ],
-            [
-                'code' => self::ERN,
+            self::ERN, => [
+                'code' => $this->value,
                 'name' => 'Eritrean Nakfa',
                 'symbol' => 'Nfk',
             ],
-            [
-                'code' => self::ETB,
+            self::ETB, => [
+                'code' => $this->value,
                 'name' => 'Ethiopian Birr',
                 'symbol' => 'Br',
             ],
-            [
-                'code' => self::EUR,
+            self::EUR, => [
+                'code' => $this->value,
                 'name' => 'Euro',
                 'symbol' => '€',
             ],
-            [
-                'code' => self::FJD,
+            self::FJD, => [
+                'code' => $this->value,
                 'name' => 'Fijian Dollar',
                 'symbol' => '$',
             ],
-            [
-                'code' => self::FKP,
+            self::FKP, => [
+                'code' => $this->value,
                 'name' => 'Falkland Islands Pound',
                 'symbol' => '£',
             ],
-            [
-                'code' => self::GBP,
+            self::GBP, => [
+                'code' => $this->value,
                 'name' => 'British Pound Sterling',
                 'symbol' => '£',
             ],
-            [
-                'code' => self::GEL,
+            self::GEL, => [
+                'code' => $this->value,
                 'name' => 'Georgian Lari',
                 'symbol' => '₾',
             ],
-            [
-                'code' => self::GHS,
+            self::GHS, => [
+                'code' => $this->value,
                 'name' => 'Ghanaian Cedi',
                 'symbol' => '₵',
             ],
-            [
-                'code' => self::GIP,
+            self::GIP, => [
+                'code' => $this->value,
                 'name' => 'Gibraltar Pound',
                 'symbol' => '£',
             ],
-            [
-                'code' => self::GMD,
+            self::GMD, => [
+                'code' => $this->value,
                 'name' => 'Gambian Dalasi',
                 'symbol' => 'D',
             ],
-            [
-                'code' => self::GNF,
+            self::GNF, => [
+                'code' => $this->value,
                 'name' => 'Guinean Franc',
                 'symbol' => 'FG',
             ],
-            [
-                'code' => self::GTQ,
+            self::GTQ, => [
+                'code' => $this->value,
                 'name' => 'Guatemalan Quetzal',
                 'symbol' => 'Q',
             ],
-            [
-                'code' => self::GYD,
-                'name' => 'Guyanaese Dollar',
+            self::GYD, => [
+                'code' => $this->value,
+                'name' => 'Guyanese Dollar',
                 'symbol' => '$',
             ],
-            [
-                'code' => self::HKD,
+            self::HKD, => [
+                'code' => $this->value,
                 'name' => 'Hong Kong Dollar',
                 'symbol' => '$',
             ],
-            [
-                'code' => self::HNL,
+            self::HNL, => [
+                'code' => $this->value,
                 'name' => 'Honduran Lempira',
                 'symbol' => 'L',
             ],
-            [
-                'code' => self::HTG,
+            self::HTG, => [
+                'code' => $this->value,
                 'name' => 'Haitian Gourde',
                 'symbol' => 'G',
             ],
-            [
-                'code' => self::HUF,
+            self::HUF, => [
+                'code' => $this->value,
                 'name' => 'Hungarian Forint',
                 'symbol' => 'Ft',
             ],
-            [
-                'code' => self::IDR,
+            self::IDR, => [
+                'code' => $this->value,
                 'name' => 'Indonesian Rupiah',
                 'symbol' => 'Rp',
             ],
-            [
-                'code' => self::ILS,
+            self::ILS, => [
+                'code' => $this->value,
                 'name' => 'Israeli New Sheqel',
                 'symbol' => '₪',
             ],
-            [
-                'code' => self::INR,
+            self::INR, => [
+                'code' => $this->value,
                 'name' => 'Indian Rupee',
                 'symbol' => '₹',
             ],
-            [
-                'code' => self::IQD,
+            self::IQD, => [
+                'code' => $this->value,
                 'name' => 'Iraqi Dinar',
                 'symbol' => 'ع.د',
             ],
-            [
-                'code' => self::IRR,
+            self::IRR, => [
+                'code' => $this->value,
                 'name' => 'Iranian Rial',
                 'symbol' => '﷼',
             ],
-            [
-                'code' => self::ISK,
+            self::ISK, => [
+                'code' => $this->value,
                 'name' => 'Icelandic Króna',
                 'symbol' => 'kr',
             ],
-            [
-                'code' => self::JMD,
+            self::JMD, => [
+                'code' => $this->value,
                 'name' => 'Jamaican Dollar',
                 'symbol' => 'J$',
             ],
-            [
-                'code' => self::JOD,
+            self::JOD, => [
+                'code' => $this->value,
                 'name' => 'Jordanian Dinar',
                 'symbol' => 'د.ا',
             ],
-            [
-                'code' => self::JPY,
+            self::JPY, => [
+                'code' => $this->value,
                 'name' => 'Japanese Yen',
                 'symbol' => '¥',
             ],
-            [
-                'code' => self::KES,
+            self::KES, => [
+                'code' => $this->value,
                 'name' => 'Kenyan Shilling',
                 'symbol' => 'KSh',
             ],
-            [
-                'code' => self::KGS,
+            self::KGS, => [
+                'code' => $this->value,
                 'name' => 'Kyrgystani Som',
                 'symbol' => 'лв',
             ],
-            [
-                'code' => self::KHR,
+            self::KHR, => [
+                'code' => $this->value,
                 'name' => 'Cambodian Riel',
                 'symbol' => '៛',
             ],
-            [
-                'code' => self::KMF,
+            self::KMF, => [
+                'code' => $this->value,
                 'name' => 'Comorian Franc',
                 'symbol' => 'CF',
             ],
-            [
-                'code' => self::KPW,
+            self::KPW, => [
+                'code' => $this->value,
                 'name' => 'North Korean Won',
                 'symbol' => '₩',
             ],
-            [
-                'code' => self::KRW,
+            self::KRW, => [
+                'code' => $this->value,
                 'name' => 'South Korean Won',
                 'symbol' => '₩',
             ],
-            [
-                'code' => self::KWD,
+            self::KWD, => [
+                'code' => $this->value,
                 'name' => 'Kuwaiti Dinar',
                 'symbol' => 'د.ك',
             ],
-            [
-                'code' => self::KYD,
+            self::KYD, => [
+                'code' => $this->value,
                 'name' => 'Cayman Islands Dollar',
                 'symbol' => '$',
             ],
-            [
-                'code' => self::KZT,
+            self::KZT, => [
+                'code' => $this->value,
                 'name' => 'Kazakhstani Tenge',
                 'symbol' => '₸',
             ],
-            [
-                'code' => self::LAK,
+            self::LAK, => [
+                'code' => $this->value,
                 'name' => 'Laotian Kip',
                 'symbol' => '₭',
             ],
-            [
-                'code' => self::LBP,
+            self::LBP, => [
+                'code' => $this->value,
                 'name' => 'Lebanese Pound',
                 'symbol' => 'ل.ل',
             ],
-            [
-                'code' => self::LKR,
+            self::LKR, => [
+                'code' => $this->value,
                 'name' => 'Sri Lankan Rupee',
                 'symbol' => '₨',
             ],
-            [
-                'code' => self::LRD,
+            self::LRD, => [
+                'code' => $this->value,
                 'name' => 'Liberian Dollar',
                 'symbol' => '$',
             ],
-            [
-                'code' => self::LSL,
+            self::LSL, => [
+                'code' => $this->value,
                 'name' => 'Lesotho Loti',
                 'symbol' => 'L',
             ],
-            [
-                'code' => self::LYD,
+            self::LYD, => [
+                'code' => $this->value,
                 'name' => 'Libyan Dinar',
                 'symbol' => 'ل.د',
             ],
-            [
-                'code' => self::MAD,
+            self::MAD, => [
+                'code' => $this->value,
                 'name' => 'Moroccan Dirham',
                 'symbol' => 'د.م.',
             ],
-            [
-                'code' => self::MDL,
+            self::MDL, => [
+                'code' => $this->value,
                 'name' => 'Moldovan Leu',
                 'symbol' => 'L',
             ],
-            [
-                'code' => self::MGA,
+            self::MGA, => [
+                'code' => $this->value,
                 'name' => 'Malagasy Ariary',
                 'symbol' => 'Ar',
             ],
-            [
-                'code' => self::MKD,
+            self::MKD, => [
+                'code' => $this->value,
                 'name' => 'Macedonian Denar',
                 'symbol' => 'ден',
             ],
-            [
-                'code' => self::MMK,
+            self::MMK, => [
+                'code' => $this->value,
                 'name' => 'Myanma Kyat',
                 'symbol' => 'K',
             ],
-            [
-                'code' => self::MNT,
+            self::MNT, => [
+                'code' => $this->value,
                 'name' => 'Mongolian Tugrik',
                 'symbol' => '₮',
             ],
-            [
-                'code' => self::MOP,
+            self::MOP, => [
+                'code' => $this->value,
                 'name' => 'Macanese Pataca',
                 'symbol' => 'P',
             ],
-            [
-                'code' => self::MRU,
+            self::MRU, => [
+                'code' => $this->value,
                 'name' => 'Mauritanian Ouguiya',
                 'symbol' => 'UM',
             ],
-            [
-                'code' => self::MUR,
+            self::MUR, => [
+                'code' => $this->value,
                 'name' => 'Mauritian Rupee',
                 'symbol' => '₨',
             ],
-            [
-                'code' => self::MVR,
+            self::MVR, => [
+                'code' => $this->value,
                 'name' => 'Maldivian Rufiyaa',
                 'symbol' => '.ރ',
             ],
-            [
-                'code' => self::MWK,
+            self::MWK, => [
+                'code' => $this->value,
                 'name' => 'Malawian Kwacha',
                 'symbol' => 'MK',
             ],
-            [
-                'code' => self::MXN,
+            self::MXN, => [
+                'code' => $this->value,
                 'name' => 'Mexican Peso',
                 'symbol' => '$',
             ],
-            [
-                'code' => self::MXV,
+            self::MXV, => [
+                'code' => $this->value,
                 'name' => 'Mexican Investment Unit',
                 'symbol' => 'MXV',
             ],
-            [
-                'code' => self::MYR,
+            self::MYR, => [
+                'code' => $this->value,
                 'name' => 'Malaysian Ringgit',
                 'symbol' => 'RM',
             ],
-            [
-                'code' => self::MZN,
+            self::MZN, => [
+                'code' => $this->value,
                 'name' => 'Mozambican Metical',
                 'symbol' => 'MT',
             ],
-            [
-                'code' => self::NAD,
+            self::NAD, => [
+                'code' => $this->value,
                 'name' => 'Namibian Dollar',
                 'symbol' => '$',
             ],
-            [
-                'code' => self::NGN,
+            self::NGN, => [
+                'code' => $this->value,
                 'name' => 'Nigerian Naira',
                 'symbol' => '₦',
             ],
-            [
-                'code' => self::NIO,
+            self::NIO, => [
+                'code' => $this->value,
                 'name' => 'Nicaraguan Córdoba',
                 'symbol' => 'C$',
             ],
-            [
-                'code' => self::NOK,
+            self::NOK, => [
+                'code' => $this->value,
                 'name' => 'Norwegian Krone',
                 'symbol' => 'kr',
             ],
-            [
-                'code' => self::NPR,
+            self::NPR, => [
+                'code' => $this->value,
                 'name' => 'Nepalese Rupee',
                 'symbol' => '₨',
             ],
-            [
-                'code' => self::NZD,
+            self::NZD, => [
+                'code' => $this->value,
                 'name' => 'New Zealand Dollar',
                 'symbol' => '$',
             ],
-            [
-                'code' => self::OMR,
+            self::OMR, => [
+                'code' => $this->value,
                 'name' => 'Omani Rial',
                 'symbol' => '﷼',
             ],
-            [
-                'code' => self::PAB,
+            self::PAB, => [
+                'code' => $this->value,
                 'name' => 'Panamanian Balboa',
                 'symbol' => 'B/.',
             ],
-            [
-                'code' => self::PEN,
+            self::PEN, => [
+                'code' => $this->value,
                 'name' => 'Peruvian Nuevo Sol',
                 'symbol' => 'S/.',
             ],
-            [
-                'code' => self::PGK,
+            self::PGK, => [
+                'code' => $this->value,
                 'name' => 'Papua New Guinean Kina',
                 'symbol' => 'K',
             ],
-            [
-                'code' => self::PHP,
+            self::PHP, => [
+                'code' => $this->value,
                 'name' => 'Philippine Peso',
                 'symbol' => '₱',
             ],
-            [
-                'code' => self::PKR,
+            self::PKR, => [
+                'code' => $this->value,
                 'name' => 'Pakistani Rupee',
                 'symbol' => '₨',
             ],
-            [
-                'code' => self::PLN,
+            self::PLN, => [
+                'code' => $this->value,
                 'name' => 'Polish Zloty',
                 'symbol' => 'zł',
             ],
-            [
-                'code' => self::PYG,
+            self::PYG, => [
+                'code' => $this->value,
                 'name' => 'Paraguayan Guarani',
                 'symbol' => '₲',
             ],
-            [
-                'code' => self::QAR,
+            self::QAR, => [
+                'code' => $this->value,
                 'name' => 'Qatari Rial',
                 'symbol' => '﷼',
             ],
-            [
-                'code' => self::RON,
+            self::RON, => [
+                'code' => $this->value,
                 'name' => 'Romanian Leu',
                 'symbol' => 'lei',
             ],
-            [
-                'code' => self::RSD,
+            self::RSD, => [
+                'code' => $this->value,
                 'name' => 'Serbian Dinar',
                 'symbol' => 'Дин.',
             ],
-            [
-                'code' => self::RUB,
+            self::RUB, => [
+                'code' => $this->value,
                 'name' => 'Russian Ruble',
                 'symbol' => '₽',
             ],
-            [
-                'code' => self::RWF,
+            self::RWF, => [
+                'code' => $this->value,
                 'name' => 'Rwandan Franc',
                 'symbol' => 'FRw',
             ],
-            [
-                'code' => self::SAR,
+            self::SAR, => [
+                'code' => $this->value,
                 'name' => 'Saudi Riyal',
                 'symbol' => '﷼',
             ],
-            [
-                'code' => self::SBD,
+            self::SBD, => [
+                'code' => $this->value,
                 'name' => 'Solomon Islands Dollar',
                 'symbol' => '$',
             ],
-            [
-                'code' => self::SCR,
+            self::SCR, => [
+                'code' => $this->value,
                 'name' => 'Seychellois Rupee',
                 'symbol' => '₨',
             ],
-            [
-                'code' => self::SDG,
+            self::SDG, => [
+                'code' => $this->value,
                 'name' => 'Sudanese Pound',
                 'symbol' => 'ج.س.',
             ],
-            [
-                'code' => self::SEK,
+            self::SEK, => [
+                'code' => $this->value,
                 'name' => 'Swedish Krona',
                 'symbol' => 'kr',
             ],
-            [
-                'code' => self::SGD,
+            self::SGD, => [
+                'code' => $this->value,
                 'name' => 'Singapore Dollar',
                 'symbol' => '$',
             ],
-            [
-                'code' => self::SHP,
+            self::SHP, => [
+                'code' => $this->value,
                 'name' => 'Saint Helena Pound',
                 'symbol' => '£',
             ],
-            [
-                'code' => self::SLE,
+            self::SLE, => [
+                'code' => $this->value,
                 'name' => 'Sierra Leonean Leone',
                 'symbol' => 'Le',
             ],
-            [
-                'code' => self::SOS,
+            self::SOS, => [
+                'code' => $this->value,
                 'name' => 'Somali Shilling',
                 'symbol' => 'S',
             ],
-            [
-                'code' => self::SRD,
+            self::SRD, => [
+                'code' => $this->value,
                 'name' => 'Surinamese Dollar',
                 'symbol' => '$',
             ],
-            [
-                'code' => self::SSP,
+            self::SSP, => [
+                'code' => $this->value,
                 'name' => 'South Sudanese Pound',
                 'symbol' => '£',
             ],
-            [
-                'code' => self::STN,
+            self::STN, => [
+                'code' => $this->value,
                 'name' => 'São Tomé and Príncipe Dobra',
                 'symbol' => 'Db',
             ],
-            [
-                'code' => self::SVC,
+            self::SVC, => [
+                'code' => $this->value,
                 'name' => 'Salvadoran Colón',
                 'symbol' => '$',
             ],
-            [
-                'code' => self::SYP,
+            self::SYP, => [
+                'code' => $this->value,
                 'name' => 'Syrian Pound',
                 'symbol' => '£',
             ],
-            [
-                'code' => self::SZL,
+            self::SZL, => [
+                'code' => $this->value,
                 'name' => 'Swazi Lilangeni',
                 'symbol' => 'L',
             ],
-            [
-                'code' => self::THB,
+            self::THB, => [
+                'code' => $this->value,
                 'name' => 'Thai Baht',
                 'symbol' => '฿',
             ],
-            [
-                'code' => self::TJS,
+            self::TJS, => [
+                'code' => $this->value,
                 'name' => 'Tajikistani Somoni',
                 'symbol' => 'SM',
             ],
-            [
-                'code' => self::TMT,
+            self::TMT, => [
+                'code' => $this->value,
                 'name' => 'Turkmenistani Manat',
                 'symbol' => 'T',
             ],
-            [
-                'code' => self::TND,
+            self::TND, => [
+                'code' => $this->value,
                 'name' => 'Tunisian Dinar',
                 'symbol' => 'د.ت',
             ],
-            [
-                'code' => self::TOP,
+            self::TOP, => [
+                'code' => $this->value,
                 'name' => 'Tongan Paʻanga',
                 'symbol' => 'T$',
             ],
-            [
-                'code' => self::TRY,
+            self::TRY, => [
+                'code' => $this->value,
                 'name' => 'Turkish Lira',
                 'symbol' => '₺',
             ],
-            [
-                'code' => self::TTD,
+            self::TTD, => [
+                'code' => $this->value,
                 'name' => 'Trinidad and Tobago Dollar',
                 'symbol' => 'TT$',
             ],
-            [
-                'code' => self::TWD,
+            self::TWD, => [
+                'code' => $this->value,
                 'name' => 'New Taiwan Dollar',
                 'symbol' => 'NT$',
             ],
-            [
-                'code' => self::TZS,
+            self::TZS, => [
+                'code' => $this->value,
                 'name' => 'Tanzanian Shilling',
                 'symbol' => 'TSh',
             ],
-            [
-                'code' => self::UAH,
+            self::UAH, => [
+                'code' => $this->value,
                 'name' => 'Ukrainian Hryvnia',
                 'symbol' => '₴',
             ],
-            [
-                'code' => self::UGX,
+            self::UGX, => [
+                'code' => $this->value,
                 'name' => 'Ugandan Shilling',
                 'symbol' => 'USh',
             ],
-            [
-                'code' => self::USD,
+            self::USD, => [
+                'code' => $this->value,
                 'name' => 'United States Dollar',
                 'symbol' => '$',
             ],
-            [
-                'code' => self::USN,
+            self::USN, => [
+                'code' => $this->value,
                 'name' => 'United States Dollar (Next day)',
                 'symbol' => 'USN',
             ],
-            [
-                'code' => self::UYI,
+            self::UYI, => [
+                'code' => $this->value,
                 'name' => 'Uruguay Peso en Unidades Indexadas (URUIURUI)',
                 'symbol' => 'UYI',
             ],
-            [
-                'code' => self::UYU,
+            self::UYU, => [
+                'code' => $this->value,
                 'name' => 'Uruguayan Peso',
                 'symbol' => '$U',
             ],
-            [
-                'code' => self::UYW,
+            self::UYW, => [
+                'code' => $this->value,
                 'name' => 'Unidad Previsional',
                 'symbol' => 'UP',
             ],
-            [
-                'code' => self::UZS,
+            self::UZS, => [
+                'code' => $this->value,
                 'name' => 'Uzbekistan Som',
                 'symbol' => 'лв',
             ],
-            [
-                'code' => self::VED,
+            self::VED, => [
+                'code' => $this->value,
                 'name' => 'Venezuelan Digital Bolívar',
                 'symbol' => 'VED',
             ],
-            [
-                'code' => self::VES,
-                'name' => 'Venezuelan Sovereign Bolívar',
+            self::VES, => [
+                'code' => $this->value,
+                'name' => 'Venezuelan Sober',
                 'symbol' => 'Bs.',
             ],
-            [
-                'code' => self::VND,
+            self::VND, => [
+                'code' => $this->value,
                 'name' => 'Vietnamese Dong',
                 'symbol' => '₫',
             ],
-            [
-                'code' => self::VUV,
+            self::VUV, => [
+                'code' => $this->value,
                 'name' => 'Vanuatu Vatu',
                 'symbol' => 'VT',
             ],
-            [
-                'code' => self::WST,
+            self::WST, => [
+                'code' => $this->value,
                 'name' => 'Samoan Tala',
                 'symbol' => 'WS$',
             ],
-            [
-                'code' => self::XAF,
+            self::XAF, => [
+                'code' => $this->value,
                 'name' => 'CFA Franc BEAC',
                 'symbol' => 'FCFA',
             ],
-            [
-                'code' => self::XAG,
+            self::XAG, => [
+                'code' => $this->value,
                 'name' => 'Silver (troy ounce)',
                 'symbol' => 'XAG',
             ],
-            [
-                'code' => self::XAU,
+            self::XAU, => [
+                'code' => $this->value,
                 'name' => 'Gold (troy ounce)',
                 'symbol' => 'XAU',
             ],
-            [
-                'code' => self::XBA,
+            self::XBA, => [
+                'code' => $this->value,
                 'name' => 'European Composite Unit (EURCO)',
                 'symbol' => 'XBA',
             ],
-            [
-                'code' => self::XBB,
+            self::XBB, => [
+                'code' => $this->value,
                 'name' => 'European Monetary Unit (E.M.U.-6)',
                 'symbol' => 'XBB',
             ],
-            [
-                'code' => self::XBC,
+            self::XBC, => [
+                'code' => $this->value,
                 'name' => 'European Unit of Account 9 (E.U.A.-9)',
                 'symbol' => 'XBC',
             ],
-            [
-                'code' => self::XBD,
+            self::XBD, => [
+                'code' => $this->value,
                 'name' => 'European Unit of Account 17 (E.U.A.-17)',
                 'symbol' => 'XBD',
             ],
-            [
-                'code' => self::XCD,
+            self::XCD, => [
+                'code' => $this->value,
                 'name' => 'East Caribbean Dollar',
                 'symbol' => '$',
             ],
-            [
-                'code' => self::XDR,
+            self::XDR, => [
+                'code' => $this->value,
                 'name' => 'Special Drawing Rights',
                 'symbol' => 'XDR',
             ],
-            [
-                'code' => self::XOF,
+            self::XOF, => [
+                'code' => $this->value,
                 'name' => 'CFA Franc BCEAO',
                 'symbol' => 'CFA',
             ],
-            [
-                'code' => self::XPD,
+            self::XPD, => [
+                'code' => $this->value,
                 'name' => 'Palladium (troy ounce)',
                 'symbol' => 'XPD',
             ],
-            [
-                'code' => self::XPF,
+            self::XPF, => [
+                'code' => $this->value,
                 'name' => 'CFP Franc',
                 'symbol' => '₣',
             ],
-            [
-                'code' => self::XPT,
+            self::XPT, => [
+                'code' => $this->value,
                 'name' => 'Platinum (troy ounce)',
                 'symbol' => 'XPT',
             ],
-            [
-                'code' => self::XSU,
+            self::XSU, => [
+                'code' => $this->value,
                 'name' => 'SUCRE',
                 'symbol' => 'XSU',
             ],
-            [
-                'code' => self::XTS,
+            self::XTS, => [
+                'code' => $this->value,
                 'name' => 'Test Currency Code',
                 'symbol' => 'XTS',
             ],
-            [
-                'code' => self::XUA,
+            self::XUA, => [
+                'code' => $this->value,
                 'name' => 'ADB Unit of Account',
                 'symbol' => 'XUA',
             ],
-            [
-                'code' => self::YER,
+            self::YER, => [
+                'code' => $this->value,
                 'name' => 'Yemeni Rial',
                 'symbol' => '﷼',
             ],
-            [
-                'code' => self::ZAR,
+            self::ZAR, => [
+                'code' => $this->value,
                 'name' => 'South African Rand',
                 'symbol' => 'R',
             ],
-            [
-                'code' => self::ZMW,
+            self::ZMW, => [
+                'code' => $this->value,
                 'name' => 'Zambian Kwacha',
                 'symbol' => 'ZK',
             ],
-            [
-                'code' => self::ZWG,
-                'name' => 'Zimbabwe Gold',
+            self::ZWG, => [
+                'code' => $this->value,
+                'name' => 'Zimbabwe Dollar',
                 'symbol' => 'ZWG',
             ],
-            [
-                'code' => self::ZWL,
+            self::ZWL, => [
+                'code' => $this->value,
                 'name' => 'Zimbabwean Dollar',
                 'symbol' => 'Z$',
             ],
-
-        ];
+        };
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Enums\Traits;
+namespace App\Models\SeedableEnums\Traits;
 
 trait SeedableEnumTrait
 {
@@ -10,5 +10,10 @@ trait SeedableEnumTrait
             fn(self $case) => $case->getData(),
             self::cases()
         );
+    }
+
+    public function id(): string
+    {
+        return $this->getData()['id'];
     }
 }

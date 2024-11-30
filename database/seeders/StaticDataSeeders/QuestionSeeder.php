@@ -2,7 +2,7 @@
 
 namespace Database\Seeders\StaticDataSeeders;
 
-use App\Enums\QuestionEnum;
+use App\Models\SeedableEnums\QuestionEnum;
 
 class QuestionSeeder extends EnumSeeder
 {

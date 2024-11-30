@@ -4,8 +4,8 @@ namespace App\Actions\Jobs;
 
 use App\Models\RawJob;
 use App\Models\RefinedJob;
-use App\Models\StaticData\JobSiteData;
-use App\Models\StaticData\LLMData;
+use App\Models\SeedableEnums\JobSiteEnum;
+use App\Models\SeedableEnums\LLMEnum;
 use Illuminate\Console\Command;
 use Lorisleiva\Actions\Concerns\AsAction;
 
@@ -16,7 +16,7 @@ class PromptLLM
     public function handle(RawJob $rawJob): void
     {
         $extraPromptInfo = '';
-        if ($rawJob->job_site_id === JobSiteData::HACKER_NEWS_ID) {
+        if ($rawJob->job_site_id === JobSiteEnum::HACKER_NEWS->id()) {
             $extraPromptInfo = "This job description is from a Hacker News \"Ask HN: Who is hiring?\" Post.";
         }
 
@@ -71,19 +71,19 @@ class PromptLLM
         ";
 
         $ollama = new \App\Services\LLM\Ollama();
-        $LLMResponse = $ollama->prompt(LLMData::LLAMA3_2_3B_INSTRUCT_Q80, $prompt, $rawJob);
+        $LLMResponse = $ollama->prompt(LLMEnum::LLAMA3_2_3B_INSTRUCT_Q80->value, $prompt, $rawJob);
         AskAllQuestions::dispatch($LLMResponse);
 
 //        $openai = new \App\Services\LLM\OpenAI();
-//        $LLMResponse = $openai->prompt(LLMData::GPT_4O_MINI, $prompt, $job);
+//        $LLMResponse = $openai->prompt(LLMEnum::GPT_4O_MINI, $prompt, $job);
 //        UseLLMResponse::dispatch($LLMResponse);
 
 //        $anthropic = new \App\Services\LLM\Anthropic();
-//        $LLMResponse = $anthropic->prompt(LLMData::CLAUDE_3_HAIKU, $prompt, $job);
+//        $LLMResponse = $anthropic->prompt(LLMEnum::CLAUDE_3_HAIKU, $prompt, $job);
 //        UseLLMResponse::dispatch($LLMResponse);
 
 //        $anthropic = new \App\Services\LLM\Anthropic();
-//        $LLMResponse = $anthropic->prompt(LLMData::CLAUDE_3_SONNET, $prompt, $job);
+//        $LLMResponse = $anthropic->prompt(LLMEnum::CLAUDE_3_SONNET, $prompt, $job);
 //        UseLLMResponse::dispatch($LLMResponse);
     }
 

@@ -2,7 +2,7 @@
 
 namespace Database\Seeders\StaticDataSeeders;
 
-use App\Enums\Contracts\SeedableEnum;
+use App\Models\SeedableEnums\Contracts\SeedableEnum;
 use Illuminate\Database\Seeder;
 
 abstract class EnumSeeder extends Seeder

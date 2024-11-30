@@ -6,8 +6,8 @@ use App\Actions\Questions\Ask;
 use App\Models\LLM;
 use App\Models\Question;
 use App\Models\RawJob;
-use App\Models\StaticData\LLMData;
-use App\Models\StaticData\QuestionData;
+use App\Models\SeedableEnums\LLMEnum;
+use App\Models\SeedableEnums\QuestionEnum;
 use Illuminate\Console\Command;
 use Lorisleiva\Actions\Concerns\AsAction;
 
@@ -17,12 +17,12 @@ class AskAllQuestions
 
     public function handle(RawJob $rawJob): void
     {
-        $question = Question::where('id', QuestionData::LIST_ROLES)->first();
+        $question = Question::where('id', QuestionEnum::LIST_ROLES->value)->first();
 
-        $llm = LLM::where('slug', LLMData::LLAMA3_2_3B_INSTRUCT_Q80)->first();
+        $llm = LLM::where('slug', LLMEnum::LLAMA3_2_3B_INSTRUCT_Q80->value)->first();
         Ask::dispatch($llm, $rawJob, $question)->onQueue('prompt-llm');
 
-        $llm = LLM::where('slug', LLMData::LLAMA3_1_70B)->first();
+        $llm = LLM::where('slug', LLMEnum::LLAMA3_1_70B->value)->first();
         Ask::dispatch($llm, $rawJob, $question)->onQueue('prompt-llm');
     }
 
