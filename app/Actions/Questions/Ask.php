@@ -28,14 +28,15 @@ class Ask
         $ollama = new Ollama();
         $LLMResponse = $ollama->prompt($llm->slug, $q, $rawJob);
 
-        $a = $this->extractAnswerFromLLMResponse($LLMResponse);
-        if (is_array($a)) {
+        $a = $this->extractAnswerObjectFromLLMResponse($LLMResponse);
+        if ($a !== null) {
             $a = json_encode($a);
         }
 
         $answer = new Answer();
         $answer->question_id = $question->id;
         $answer->raw_job_id = $rawJob->id;
+        $answer->llm_response_id = $LLMResponse->id;
         $answer->author_id = $llm->slug;
         $answer->author_type = $llm->getMorphClass();
         $answer->answer = $a;
@@ -88,24 +89,28 @@ class Ask
     /**
      * @throws Exception
      */
-    public function extractAnswerFromLLMResponse(LLMResponse $llmResponse): string|array
+    public function extractAnswerObjectFromLLMResponse(LLMResponse $llmResponse): array|null
     {
         $response = $llmResponse->response;
         $start = strpos($response, '{');
         $end = strrpos($response, '}');
 
         if ($start === false || $end === false) {
-            throw new Exception("Error: Unable to find JSON in response");
+            return null;
         }
 
         $json = substr($response, $start, $end - $start + 1);
         $responseArray = json_decode($json, true);
         if ($responseArray === null && json_last_error() !== JSON_ERROR_NONE) {
-            throw new Exception("Error: Unable to parse JSON string" . json_last_error_msg());
+            return null;
         }
 
         if (!$responseArray['answer']) {
-            throw new Exception("Error: Unable to find answer in response");
+            return null;
+        }
+
+        if (is_string($responseArray['answer'])) {
+            return [$responseArray['answer']];
         }
 
         return $responseArray['answer'];

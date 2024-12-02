@@ -15,9 +15,10 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('question_id')->index()->constrained('questions', 'id')->onDelete('cascade');
             $table->foreignUuid('raw_job_id')->index()->constrained('raw_jobs', 'id')->onDelete('cascade');
+             $table->foreignUuid('llm_response_id')->index()->constrained('llm_responses', 'id')->onDelete('cascade');
             $table->string('author_id')->index();
-            $table->string('author_type')->nullable();
-            $table->text('answer');
+            $table->string('author_type');
+            $table->json('answer')->nullable();
             $table->timestamps();
         });
     }
