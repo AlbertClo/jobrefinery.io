@@ -40,6 +40,7 @@ class OpenAI
         $llmModel = LLM::where('slug', $llm)->first();
         $cost = $llmModel->input_token_cost_per_million * $responseBody->usage->prompt_tokens / 1000000 +
             $llmModel->output_token_cost_per_million * $responseBody->usage->completion_tokens / 1000000;
+
         $LLMResponse = new LLMResponse();
         $LLMResponse->id = $uuid;
         $LLMResponse->prompt = $prompt;

@@ -2,7 +2,6 @@
 
 namespace App\Services\LLM;
 
-use App\Actions\Jobs\UseLLMResponse;
 use App\Models\LLM;
 use App\Models\LLMResponse;
 use Http;
@@ -43,6 +42,7 @@ class Anthropic
         $llmModel = LLM::where('slug', $llm)->first();
         $cost = $llmModel->input_token_cost_per_million * $responseBody->usage->input_tokens / 1000000 +
             $llmModel->output_token_cost_per_million * $responseBody->usage->output_tokens / 1000000;
+
         $LLMResponse = new LLMResponse();
         $LLMResponse->id = $uuid;
         $LLMResponse->prompt = $prompt;
@@ -56,8 +56,6 @@ class Anthropic
         $LLMResponse->save();
 
         $relatedEntity?->llmResponses()->save($LLMResponse);
-
-        UseLLMResponse::dispatch($LLMResponse);
 
         return $LLMResponse;
     }
