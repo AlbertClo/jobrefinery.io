@@ -26,8 +26,6 @@ import ThemeCyclerButton from '../components/job-refinery/theme-switchers/theme-
 import { cn } from '@/lib/utils';
 
 function isCurrentPage(href: string): boolean {
-	console.log('window');
-	console.log(window);
 	const currentUrl = window?.location?.href;
 	const linkUrl = new URL(href, window?.location?.origin);
 	return currentUrl === linkUrl.href;
