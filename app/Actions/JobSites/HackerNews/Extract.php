@@ -14,24 +14,6 @@ class Extract
 {
     use AsAction;
 
-    private function getFormattedText(Crawler $node): string
-    {
-        $html = $node->html();
-
-        // Replace block elements with newlines
-        $html = str_replace(['</p>', '</div>', '</br>', '<br>', '<br/>', '</h1>', '</h2>', '</h3>', '</h4>', '</h5>', '</h6>'], "\n\n", $html);
-        $html = str_replace(['< p>', '<div>', '<br>', '<br>', '<br/>', '<h1>', '<h2>', '<h3>', '<h4>', '<h5>', '<h6>'], "\n\n", $html);
-
-        // Strip all HTML tags
-        $text = strip_tags($html);
-
-        // Clean up excessive whitespace and newlines
-        $text = preg_replace('/\n\s+\n/', "\n\n", $text);
-        $text = preg_replace('/[\n]{3,}/', "\n\n", $text);
-
-        return trim($text);
-    }
-
     public function handle(CachedPage $cachedPage): void
     {
         $crawler = new Crawler($cachedPage->document);
@@ -113,5 +95,23 @@ class Extract
         $this->handle($cachedPage);
 
         return $command::SUCCESS;
+    }
+
+    private function getFormattedText(Crawler $node): string
+    {
+        $html = $node->html();
+
+        // Replace block elements with newlines
+        $html = str_replace(['</p>', '</div>', '</br>', '<br>', '<br/>', '</h1>', '</h2>', '</h3>', '</h4>', '</h5>', '</h6>'], "\n\n", $html);
+        $html = str_replace(['< p>', '<div>', '<br>', '<br>', '<br/>', '<h1>', '<h2>', '<h3>', '<h4>', '<h5>', '<h6>'], "\n\n", $html);
+
+        // Strip all HTML tags
+        $text = strip_tags($html);
+
+        // Clean up excessive whitespace and newlines
+        $text = preg_replace('/\n\s+\n/', "\n\n", $text);
+        $text = preg_replace('/[\n]{3,}/', "\n\n", $text);
+
+        return trim($text);
     }
 }
