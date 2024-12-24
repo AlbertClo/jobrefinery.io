@@ -111,20 +111,18 @@ services:
         networks:
             - sail
     ollama:
-        build: ./docker/ollama
+        image: ollama/ollama:rocm
         ports:
             - "11434:11434"
-        healthcheck:
-            test: ollama --version || exit 1
+        devices:
+            - /dev/kfd:/dev/kfd
+            - /dev/dri:/dev/dri
         volumes:
             - sail-ollama:/root/.ollama
-            - /dev/dri:/dev/dri
         networks:
             - sail
-        entrypoint: ["/usr/bin/bash", "/pull-models.sh"]
-        devices:
-            - /dev/dri:/dev/dri
         privileged: true
+
 
 networks:
     sail:
