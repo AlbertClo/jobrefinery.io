@@ -21,6 +21,8 @@ enum LLMEnum: string implements SeedableEnum
     case LLAMA3_2_1B = "llama3.2:1b";
     case LLAMA3_2_3B = "llama3.2:3b";
     case LLAMA3_2_3B_INSTRUCT_Q80 = "llama3.2:3b-instruct-q8_0";
+    case LLAMA3_3_70B = "llama3.3";
+    case MIXTRAL_8X7B = "mixtral:8x7b";
 
     public static function getModelClass(): string
     {
@@ -105,6 +107,22 @@ enum LLMEnum: string implements SeedableEnum
             self::LLAMA3_2_3B_INSTRUCT_Q80 => [
                 "slug" => $this->value,
                 "name" => 'Llama 3.2 3B Instruct Q80',
+                "provider" => LLMProviderEnum::OLLAMA,
+                "description" => null,
+                "input_token_cost_per_million" => 0,
+                "output_token_cost_per_million" => 0,
+            ],
+            self::MIXTRAL_8X7B => [
+                "slug" => $this->value,
+                "name" => 'Mixtral 8x7b',
+                "provider" => LLMProviderEnum::OLLAMA,
+                "description" => null,
+                "input_token_cost_per_million" => 0,
+                "output_token_cost_per_million" => 0,
+            ],
+            self::LLAMA3_3_70B => [
+                "slug" => $this->value,
+                "name" => 'Llama 3.3 70B',
                 "provider" => LLMProviderEnum::OLLAMA,
                 "description" => null,
                 "input_token_cost_per_million" => 0,
