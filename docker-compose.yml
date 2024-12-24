@@ -118,16 +118,13 @@ services:
             test: ollama --version || exit 1
         volumes:
             - sail-ollama:/root/.ollama
+            - /dev/dri:/dev/dri
         networks:
             - sail
         entrypoint: ["/usr/bin/bash", "/pull-models.sh"]
-        deploy:
-            resources:
-                reservations:
-                    devices:
-                        - driver: nvidia
-                          count: 1
-                          capabilities: [gpu]
+        devices:
+            - /dev/dri:/dev/dri
+        privileged: true
 
 networks:
     sail:
