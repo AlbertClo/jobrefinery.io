@@ -33,17 +33,33 @@ class JobsListController extends Controller
                             )
                         )
                     ]
-                ) as answers"
+                ) as questions_and_answers"
             )
             ->groupBy(
                 'raw_jobs.id',
                 'raw_jobs.original_description_html',
                 'questions.summary'
             )
+            ->limit(20)
             ->get();
 
-        RawJob::orderBy('post_date', 'desc')->get();
+//        $rawJobs->map(function ($rawJob) {
+//            foreach (json_decode($rawJob->questions_and_answers) as $qna) {
+//                foreach ($qna as $q) {
+//                    foreach ($q as $a) {
+//                        //dump($a);
+//                        foreach ($a as $authorAndAnswer) {
+//                            //dump($authorAndAnswer);
+//                            foreach ($authorAndAnswer->answer ?? [] as $role) {
+//                                dump($role);
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        });
 
+        RawJob::orderBy('post_date', 'desc')->get();
         $count = RawJob::count();
 
         return Inertia::render('Admin/JobsList', [

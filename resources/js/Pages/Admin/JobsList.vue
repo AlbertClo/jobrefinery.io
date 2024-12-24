@@ -6,17 +6,25 @@ type RawJob = {
 	id: string;
 	original_description_html: string;
 	post_date: Date;
-	answers: string;
+	questions_and_answers: string;
 	created_at: string;
 	updated_at: string;
 };
 
-const formatAnswer = (answer: string): string[] => {
-	try {
-		return JSON.parse(answer);
-	} catch (e) {
+const formatAnswer = (answer: string | object | null | undefined): string[] => {
+	if (answer === null || answer === undefined) {
+		return [];
+	}
+
+	if (typeof answer === 'string') {
 		return [answer];
 	}
+
+	if (typeof answer === 'object') {
+		return Object.values(answer);
+	}
+
+	return [];
 };
 
 const props = defineProps<{ rawJobs: RawJob[]; count: number }>();
@@ -45,7 +53,7 @@ const props = defineProps<{ rawJobs: RawJob[]; count: number }>();
 						</div>
 						<div class="text-foreground" v-html="rawJob.original_description_html"></div>
 						<div class="flex flex-col gap-4 rounded-lg bg-popover p-6">
-							<div v-for="question in JSON.parse(rawJob.answers).questions" class="">
+							<div v-for="question in JSON.parse(rawJob.questions_and_answers).questions" class="">
 								<span class="text-xl font-bold text-popover-foreground">
 									{{ Object.keys(question)[0] }}
 								</span>
