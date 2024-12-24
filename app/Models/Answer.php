@@ -10,12 +10,13 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string $question_id
  * @property string $raw_job_id
  * @property string $llm_response_id
+ * @property float|null $temperature
  * @property string $author_id
  * @property string $author_type
  * @property string $answer

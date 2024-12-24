@@ -21,12 +21,17 @@ class Ask
      * @throws ConnectionException
      * @throws Exception
      */
-    public function handle(LLM $llm, RawJob $rawJob, Question $question): void
+    public function handle(LLM $llm, RawJob $rawJob, Question $question, float $temperature = 0.7): void
     {
         $q = str_replace("\{\$jobDescription\}", $rawJob->original_description_text, $question->question);
 
         $ollama = new Ollama();
-        $LLMResponse = $ollama->prompt($llm->slug, $q, $rawJob);
+        $LLMResponse = $ollama->prompt(
+            llm: $llm->slug,
+            prompt: $q,
+            relatedEntity: $rawJob,
+            temperature: $temperature
+        );
 
         $a = $this->extractAnswerObjectFromLLMResponse($LLMResponse);
         if ($a !== null) {
@@ -37,15 +42,21 @@ class Ask
         $answer->question_id = $question->id;
         $answer->raw_job_id = $rawJob->id;
         $answer->llm_response_id = $LLMResponse->id;
+        $answer->temperature = $LLMResponse->temperature;
         $answer->author_id = $llm->slug;
         $answer->author_type = $llm->getMorphClass();
         $answer->answer = $a;
         $answer->save();
     }
 
-    public function asJob(LLM $llm, RawJob $job, Question $question): void
+    public function asJob(LLM $llm, RawJob $job, Question $question, float $temperature = 0.7): void
     {
-        $this->handle($llm, $job, $question);
+        $this->handle(
+            llm: $llm,
+            rawJob: $job,
+            question: $question,
+            temperature: $temperature
+        );
     }
 
     public string $commandSignature = 'questions:ask {llmSlug} {rawJobId} {questionId}';
@@ -81,7 +92,12 @@ class Ask
         $rawJob = RawJob::where('id', $rawJobId)->firstOrFail();
         $question = Question::where('id', $questionId)->firstOrFail();
 
-        $this->handle($llm, $rawJob, $question);
+        $this->handle(
+            llm: $llm,
+            rawJob: $rawJob,
+            question: $question,
+            temperature: 0.7
+        );
 
         return $command::SUCCESS;
     }

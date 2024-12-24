@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('llm_responses', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->text('prompt');
-            $table->timestamp('prompt_timestamp');
+            $table->timestamp('prompt_timestamp', 6);
             $table->text('response')->nullable();
-            $table->timestamp('response_timestamp')->nullable();
+            $table->float('temperature')->nullable();
+            $table->timestamp('response_timestamp', 6)->nullable();
             $table->string('llm')->nullable();
             $table->integer('input_tokens')->nullable();
             $table->integer('output_tokens')->nullable();

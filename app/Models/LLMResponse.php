@@ -10,12 +10,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string $prompt
  * @property string $prompt_timestamp
  * @property string|null $response
+ * @property float|null $temperature
  * @property string|null $response_timestamp
  * @property string|null $llm
  * @property int|null $input_tokens
@@ -60,6 +61,7 @@ class LLMResponse extends Model
         'cost',
         'related_entity_id',
         'related_entity_type',
+        'temperature',
     ];
 
     public function relatedLLM(): BelongsTo

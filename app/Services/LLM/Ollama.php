@@ -3,10 +3,11 @@
 namespace App\Services\LLM;
 
 use App\Models\LLMResponse;
-use App\Models\SeedableEnums\LLMEnum;
+use Carbon\Carbon;
 use Http;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Client\ConnectionException;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class Ollama
@@ -21,14 +22,24 @@ class Ollama
     /**
      * @throws ConnectionException
      */
-    public function prompt(string $llm, string $prompt, Model $relatedEntity = null): LLMResponse
-    {
+    public function prompt(
+        string $llm,
+        string $prompt,
+        Model $relatedEntity = null,
+        float $temperature = 0.7,
+    ): LLMResponse {
+        Carbon::setTestNow(null);
+        Carbon::serializeUsing(function ($carbon) {
+            return $carbon->format('Y-m-d H:i:s.u');
+        });
+
         $uuid = Str::uuid();
-        $promptTimestamp = now();
-        $response = Http::post('http://ollama:11434/api/generate', [
-            'model' => LLMEnum::LLAMA3_2_3B->value,
+        $promptTimestamp = DB::raw("to_timestamp(" . microtime(true) . ")");
+        $response = Http::timeout(0)->post('http://ollama:11434/api/generate', [
+            'model' => $llm,
             'prompt' => $prompt,
-            'stream' => false
+            'stream' => false,
+            'temperature' => $temperature,
         ]);
 
         $responseBody = json_decode($response->body());
@@ -36,10 +47,11 @@ class Ollama
         $LLMResponse = new LLMResponse();
         $LLMResponse->id = $uuid;
         $LLMResponse->prompt = $prompt;
+        $LLMResponse->temperature = $temperature;
         $LLMResponse->prompt_timestamp = $promptTimestamp;
         $LLMResponse->llm = $llm;
         $LLMResponse->response = $responseBody->response;
-        $LLMResponse->response_timestamp = now();
+        $LLMResponse->response_timestamp = DB::raw("to_timestamp(" . microtime(true) . ")");
         $LLMResponse->input_tokens = 0;
         $LLMResponse->output_tokens = 0;
         $LLMResponse->cost = 0;

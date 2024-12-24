@@ -19,11 +19,57 @@ class AskAllQuestions
     {
         $question = Question::where('id', QuestionEnum::LIST_ROLES->value)->first();
 
-        $llm = LLM::where('slug', LLMEnum::LLAMA3_2_3B_INSTRUCT_Q80->value)->first();
-        Ask::dispatch($llm, $rawJob, $question)->onQueue('prompt-llm');
+        $llm = LLM::where('slug', LLMEnum::LLAMA3_3_70B->value)->first();
 
-        $llm = LLM::where('slug', LLMEnum::LLAMA3_1_70B->value)->first();
-        Ask::dispatch($llm, $rawJob, $question)->onQueue('prompt-llm');
+        Ask::dispatch($llm, $rawJob, $question, 0)->onQueue('prompt-llm');
+        Ask::dispatch($llm, $rawJob, $question, 0)->onQueue('prompt-llm');
+        Ask::dispatch($llm, $rawJob, $question, 0)->onQueue('prompt-llm');
+        Ask::dispatch($llm, $rawJob, $question, 0)->onQueue('prompt-llm');
+        Ask::dispatch($llm, $rawJob, $question, 0.5)->onQueue('prompt-llm');
+        Ask::dispatch($llm, $rawJob, $question, 0.5)->onQueue('prompt-llm');
+        Ask::dispatch($llm, $rawJob, $question, 0.5)->onQueue('prompt-llm');
+        Ask::dispatch($llm, $rawJob, $question, 0.5)->onQueue('prompt-llm');
+        Ask::dispatch($llm, $rawJob, $question, 1)->onQueue('prompt-llm');
+        Ask::dispatch($llm, $rawJob, $question, 1)->onQueue('prompt-llm');
+        Ask::dispatch($llm, $rawJob, $question, 1)->onQueue('prompt-llm');
+        Ask::dispatch($llm, $rawJob, $question, 1)->onQueue('prompt-llm');
+        Ask::dispatch($llm, $rawJob, $question, 1.5)->onQueue('prompt-llm');
+        Ask::dispatch($llm, $rawJob, $question, 1.5)->onQueue('prompt-llm');
+        Ask::dispatch($llm, $rawJob, $question, 1.5)->onQueue('prompt-llm');
+        Ask::dispatch($llm, $rawJob, $question, 1.5)->onQueue('prompt-llm');
+        Ask::dispatch($llm, $rawJob, $question, 2)->onQueue('prompt-llm');
+        Ask::dispatch($llm, $rawJob, $question, 2)->onQueue('prompt-llm');
+        Ask::dispatch($llm, $rawJob, $question, 2)->onQueue('prompt-llm');
+        Ask::dispatch($llm, $rawJob, $question, 2)->onQueue('prompt-llm');
+        Ask::dispatch($llm, $rawJob, $question, 2.5)->onQueue('prompt-llm');
+        Ask::dispatch($llm, $rawJob, $question, 2.5)->onQueue('prompt-llm');
+        Ask::dispatch($llm, $rawJob, $question, 2.5)->onQueue('prompt-llm');
+        Ask::dispatch($llm, $rawJob, $question, 2.5)->onQueue('prompt-llm');
+        Ask::dispatch($llm, $rawJob, $question, 3)->onQueue('prompt-llm');
+        Ask::dispatch($llm, $rawJob, $question, 3)->onQueue('prompt-llm');
+        Ask::dispatch($llm, $rawJob, $question, 3)->onQueue('prompt-llm');
+        Ask::dispatch($llm, $rawJob, $question, 3)->onQueue('prompt-llm');
+        Ask::dispatch($llm, $rawJob, $question, 3.5)->onQueue('prompt-llm');
+        Ask::dispatch($llm, $rawJob, $question, 3.5)->onQueue('prompt-llm');
+        Ask::dispatch($llm, $rawJob, $question, 3.5)->onQueue('prompt-llm');
+        Ask::dispatch($llm, $rawJob, $question, 3.5)->onQueue('prompt-llm');
+
+//        $llm = LLM::where('slug', LLMEnum::LLAMA3_2_3B_INSTRUCT_Q80->value)->first();
+//        Ask::dispatch($llm, $rawJob, $question)->onQueue('prompt-llm');
+//        Ask::dispatch($llm, $rawJob, $question)->onQueue('prompt-llm');
+//        Ask::dispatch($llm, $rawJob, $question)->onQueue('prompt-llm');
+//        Ask::dispatch($llm, $rawJob, $question)->onQueue('prompt-llm');
+
+//        $llm = LLM::where('slug', LLMEnum::LLAMA3_1_70B->value)->first();
+//        Ask::dispatch($llm, $rawJob, $question)->onQueue('prompt-llm');
+//        Ask::dispatch($llm, $rawJob, $question)->onQueue('prompt-llm');
+
+//        $llm = LLM::where('slug', LLMEnum::MIXTRAL_8X7B->value)->first();
+//        Ask::dispatch($llm, $rawJob, $question)->onQueue('prompt-llm');
+//        Ask::dispatch($llm, $rawJob, $question)->onQueue('prompt-llm');
+//        Ask::dispatch($llm, $rawJob, $question)->onQueue('prompt-llm');
+//        Ask::dispatch($llm, $rawJob, $question)->onQueue('prompt-llm');
+
     }
 
     public function asJob(RawJob $rawJob): void
