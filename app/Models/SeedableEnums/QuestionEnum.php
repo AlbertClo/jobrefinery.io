@@ -61,30 +61,51 @@ enum QuestionEnum: string implements SeedableEnum
 
                     The question is \"What role or roles is this job description hiring for?\"
 
-                    Example answers
+                    Please write the roles in title case. E.g. Software Engineer, Data Analyst, Product Manager, Operations Manager
+
+                    Please expand the following abbreviations:
+                    \"Eng\" should become \"Engineer\",
+
+                    Make sure not to include trailing commas in the JSON array. Because that's not valid JSON.
+
+                    Examples of answers in the correct format:
                     ---
                     {
                         \"answer\": [
-                            \"software engineer\",
-                            \"data analyst\",
-                            \"product manager\",
-                            \"operations manager\",
+                            \"Software Engineer\",
+                            \"Data Analyst\",
+                            \"Product Manager\",
+                            \"Operations Manager\"
                     }
                     ---
                     {
                         \"answer\": [
-                            \"full stack developer\",
+                            \"Full Stack Developer\"
                     }
                     ---
                     {
                         \"answer\": [
-                            \"Node.js developer\",
-                            \"React developer\",
+                            \"Node.js Developer\",
+                            \"React Developer\"
                     }
                     {
                         \"answer\": [
-                            \"Engineering team lead\",
+                            \"Engineering Team Lead\"
                     }
+
+                    Examples of answers in with incorrect format:
+                    ---
+                    {\"answer\":[{\"role\":\"Full-Stack Software Engineer\"},{\"role\":\"Data Scientist\"},{\"role\":\"Technical Product Manager\"}]}
+                    The role array should just be a list of simple strings. It should not be a list an objects.
+
+                    {
+                        \"answer\": [
+                            \"Software Engineer\",
+                            \"Data Analyst\",
+                            \"Product Manager\",
+                            \"Operations Manager\",
+                    }
+                    Notice the trailing comma after the last role. This is incorrect. Not valid JSON.
                 ",
             ],
         };
