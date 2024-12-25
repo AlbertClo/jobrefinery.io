@@ -121,13 +121,15 @@ class Ask
             return null;
         }
 
-        if (!$responseArray['answer']) {
+        if (!isset($responseArray['answer'])) {
             return null;
         }
 
         if (is_string($responseArray['answer'])) {
             return [$responseArray['answer']];
         }
+
+        sort($responseArray['answer']);
 
         return $responseArray['answer'];
     }
