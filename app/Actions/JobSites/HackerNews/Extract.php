@@ -2,7 +2,7 @@
 
 namespace App\Actions\JobSites\HackerNews;
 
-use App\Actions\Jobs\AskAllQuestions;
+use App\Actions\Jobs\AskListRolesQuestion;
 use App\Models\CachedPage;
 use App\Models\RawJob;
 use App\Models\SeedableEnums\JobSiteEnum;
@@ -61,7 +61,7 @@ class Extract
             } else {
                 $job->update($jobPost);
             }
-            AskAllQuestions::dispatch($job);
+            AskListRolesQuestion::dispatch($job);
         }
     }
 
