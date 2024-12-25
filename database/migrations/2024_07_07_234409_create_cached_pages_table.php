@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('url_full');
             $table->string('url_origin');
             $table->string('url_pathname');
-            $table->json('query_params')->nullable();
+            $table->jsonb('query_params')->nullable();
             $table->text('document');
             $table->timestamp('created_at')->useCurrent();
         });

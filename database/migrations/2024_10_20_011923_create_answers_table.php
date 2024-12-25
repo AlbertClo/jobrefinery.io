@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->string('author_id')->index();
             $table->string('author_type');
             $table->float('temperature')->nullable();
-            $table->json('answer')->nullable();
+            $table->jsonb('answer')->nullable();
             $table->timestamps();
         });
     }
