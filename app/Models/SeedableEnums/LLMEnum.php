@@ -19,10 +19,14 @@ enum LLMEnum: string implements SeedableEnum
     case GPT_4O = "gpt-4o";
     case LLAMA3_1_70B = "llama3.1:70b";
     case LLAMA3_2_1B = "llama3.2:1b";
-    case LLAMA3_2_3B = "llama3.2:3b";
+    case LLAMA3_2_3B = "llama3.2:3b"; // best
     case LLAMA3_2_3B_INSTRUCT_Q80 = "llama3.2:3b-instruct-q8_0";
-    case LLAMA3_3_70B = "llama3.3";
-    case MIXTRAL_8X7B = "mixtral:8x7b";
+    case LLAMA3_3_70B = "llama3.3"; // very slow
+    case MIXTRAL_8X7B = "mixtral:8x7b"; // quite slow
+    case PHI3_MINI = "phi3:mini"; // quite dumb
+    case GEMMA_2B = "gemma:2b"; // ok
+    case QWEN_4B = "qwen:4b"; // doesn't understand to answer in JSON
+    case GEMMA2_2B = "gemma2:2b"; // good and light on VRAM usage
 
     public static function getModelClass(): string
     {
@@ -123,6 +127,38 @@ enum LLMEnum: string implements SeedableEnum
             self::LLAMA3_3_70B => [
                 "slug" => $this->value,
                 "name" => 'Llama 3.3 70B',
+                "provider" => LLMProviderEnum::OLLAMA,
+                "description" => null,
+                "input_token_cost_per_million" => 0,
+                "output_token_cost_per_million" => 0,
+            ],
+            self::PHI3_MINI => [
+                "slug" => $this->value,
+                "name" => 'Phi-3 Mini',
+                "provider" => LLMProviderEnum::OLLAMA,
+                "description" => null,
+                "input_token_cost_per_million" => 0,
+                "output_token_cost_per_million" => 0,
+            ],
+            self::GEMMA_2B => [
+                "slug" => $this->value,
+                "name" => 'Gemma 2B',
+                "provider" => LLMProviderEnum::OLLAMA,
+                "description" => null,
+                "input_token_cost_per_million" => 0,
+                "output_token_cost_per_million" => 0,
+            ],
+            self::QWEN_4B => [
+                "slug" => $this->value,
+                "name" => 'Qwen 4B',
+                "provider" => LLMProviderEnum::OLLAMA,
+                "description" => null,
+                "input_token_cost_per_million" => 0,
+                "output_token_cost_per_million" => 0,
+            ],
+            self::GEMMA2_2B => [
+                "slug" => $this->value,
+                "name" => 'Gemma 2 2B',
                 "provider" => LLMProviderEnum::OLLAMA,
                 "description" => null,
                 "input_token_cost_per_million" => 0,
