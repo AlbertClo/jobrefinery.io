@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string $summary
@@ -43,5 +43,10 @@ class Question extends Model
     public function answers(): HasMany
     {
         return $this->hasMany(Answer::class);
+    }
+
+    public function answerAnalyticsSummaries(): HasMany
+    {
+        return $this->hasMany(AnswerAnalyticsSummary::class);
     }
 }

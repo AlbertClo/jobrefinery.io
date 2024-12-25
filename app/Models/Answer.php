@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 
 /**
- *
+ * 
  *
  * @property string $id
  * @property string $question_id
@@ -39,6 +39,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Answer whereRawJobId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Answer whereRefinedAnswer($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Answer whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Answer whereTemperature($value)
  * @mixin \Eloquent
  */
 class Answer extends Model

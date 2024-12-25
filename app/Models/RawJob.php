@@ -6,11 +6,12 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string $cached_page_id
@@ -73,5 +74,15 @@ class RawJob extends Model
     public function llmResponses(): MorphMany
     {
         return $this->morphMany(LLMResponse::class, 'related_entity');
+    }
+
+    public function refinedJob(): HasMany
+    {
+        return $this->hasMany(RefinedJob::class, 'raw_job_id');
+    }
+
+    public function answerAnalyticsSummaries(): HasMany
+    {
+        return $this->hasMany(AnswerAnalyticsSummary::class);
     }
 }
