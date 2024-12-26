@@ -2,8 +2,10 @@
 
 namespace App\Actions\Jobs;
 
+use App\Models\Answer;
 use App\Models\AnswerAnalyticsSummary;
 use App\Models\RawJob;
+use App\Models\RefinedJob;
 use App\Models\SeedableEnums\QuestionEnum;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -38,6 +40,44 @@ class CreateRefinedJobsFromRoles
             ->orderBy('percentage', 'desc')
             ->get();
 
+        $this->saveAnswerAnalyticsSummary($rawJob, $answersSummary);
+
+        if ($answersSummary[0]->count > $this->minimumMatches && $answersSummary[0]->percentage > $this->minimumConsensusPercentage) {
+            $answer = Answer::query()
+                ->whereRaw("LOWER(answer::varchar) = ?", [$answersSummary[0]->answer])
+                ->first();
+            $this->createRefinedJobs($rawJob, $answer->answer);
+        }
+    }
+
+    public function asJob(RawJob $rawJob): void
+    {
+        $this->handle($rawJob);
+    }
+
+    public string $commandSignature = 'jobs:create-refined-jobs-from-roles {rawJobId}';
+    public string $commandDescription = 'Use the roles in a raw job specification to create refined jobs';
+    public string $commandHelp = 'Use the roles in a raw job specification to create refined jobs';
+    public bool $commandHidden = false;
+
+    public function asCommand(Command $command): int
+    {
+        $rawJobId = $command->argument('rawJobId');
+        if ($rawJobId === null) {
+            $command->error('No job id provided');
+
+            return $command::FAILURE;
+        }
+
+        $rawJob = RawJob::where('id', $rawJobId)->firstOrFail();
+
+        $this->handle($rawJob);
+
+        return $command::SUCCESS;
+    }
+
+    private function saveAnswerAnalyticsSummary(RawJob $rawJob, $answersSummary): void
+    {
         $answerAnalyticsSummary = AnswerAnalyticsSummary::query()
             ->where('raw_job_id', $rawJob->id)
             ->where('question_id', QuestionEnum::LIST_ROLES->getData()['id'])
@@ -72,29 +112,23 @@ class CreateRefinedJobsFromRoles
         $answerAnalyticsSummary->save();
     }
 
-    public function asJob(RawJob $rawJob): void
+    private function createRefinedJobs(RawJob $rawJob, $roles): void
     {
-        $this->handle($rawJob);
-    }
+        foreach ($roles as $role) {
+            $refinedJob = RefinedJob::query()
+                ->where('raw_job_id', $rawJob->id)
+                ->where('heading', $role)
+                ->first();
 
-    public string $commandSignature = 'jobs:create-refined-jobs-from-roles {rawJobId}';
-    public string $commandDescription = 'Use the roles in a raw job specification to create refined jobs';
-    public string $commandHelp = 'Use the roles in a raw job specification to create refined jobs';
-    public bool $commandHidden = false;
+            if ($refinedJob === null) {
+                $refinedJob = new RefinedJob();
+                $refinedJob->raw_job_id = $rawJob->id;
+                $refinedJob->cached_page_id = $rawJob->cached_page_id;
+                $refinedJob->job_site_id = $rawJob->job_site_id;
+                $refinedJob->heading = $role;
+            }
 
-    public function asCommand(Command $command): int
-    {
-        $rawJobId = $command->argument('rawJobId');
-        if ($rawJobId === null) {
-            $command->error('No job id provided');
-
-            return $command::FAILURE;
+            $refinedJob->save();
         }
-
-        $rawJob = RawJob::where('id', $rawJobId)->firstOrFail();
-
-        $this->handle($rawJob);
-
-        return $command::SUCCESS;
     }
 }

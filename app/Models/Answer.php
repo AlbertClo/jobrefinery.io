@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string $question_id
@@ -55,6 +55,10 @@ class Answer extends Model
         'author_id',
         'author_type',
         'answer'
+    ];
+
+    protected $casts = [
+        'answer' => 'array',
     ];
 
     public function question(): BelongsTo
