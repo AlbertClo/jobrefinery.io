@@ -103,7 +103,7 @@ class Extract
 
         // Replace block elements with newlines
         $html = str_replace(['</p>', '</div>', '</br>', '<br>', '<br/>', '</h1>', '</h2>', '</h3>', '</h4>', '</h5>', '</h6>'], "\n\n", $html);
-        $html = str_replace(['< p>', '<div>', '<br>', '<br>', '<br/>', '<h1>', '<h2>', '<h3>', '<h4>', '<h5>', '<h6>'], "\n\n", $html);
+        $html = str_replace(['<p>', '<div>', '<br>', '<br>', '<br/>', '<h1>', '<h2>', '<h3>', '<h4>', '<h5>', '<h6>'], "\n\n", $html);
 
         // Strip all HTML tags
         $text = strip_tags($html);
