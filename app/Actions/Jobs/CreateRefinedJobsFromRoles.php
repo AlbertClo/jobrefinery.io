@@ -28,6 +28,11 @@ class CreateRefinedJobsFromRoles
 
     public function handle(RawJob $rawJob): void
     {
+        /**
+         * We select in lowercase, to so that answers with different casing but same text are counted as the same
+         * answer. We do this to increase the consensus percentage, so that more answers are accepted automatically
+         * without human input.
+         */
         $answersSummary = DB::query()
             ->select([
                 DB::raw('lower(answer::varchar) as answer'),
@@ -43,9 +48,14 @@ class CreateRefinedJobsFromRoles
         $this->saveAnswerAnalyticsSummary($rawJob, $answersSummary);
 
         if ($answersSummary[0]->count > $this->minimumMatches && $answersSummary[0]->percentage > $this->minimumConsensusPercentage) {
+            /**
+             * To get the correct casing for the answer, we need to select from the database again. Because previously,
+             * we selected answers in lowercase only.
+             */
             $answer = Answer::query()
                 ->whereRaw("LOWER(answer::varchar) = ?", [$answersSummary[0]->answer])
                 ->first();
+
             $this->createRefinedJobs($rawJob, $answer->answer);
         }
     }

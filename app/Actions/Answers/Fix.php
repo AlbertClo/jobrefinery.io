@@ -13,6 +13,9 @@ class Fix
     use AsAction;
 
     /**
+     * We sort the answers alphabetically because we want to string compare and group by whole answers later.
+     * E.g. if we have ["a", "b", "c"] and ["c", "b", "a"], we want to consider them as the same answer.
+     *
      * @throws ConnectionException
      * @throws Exception
      */
@@ -22,7 +25,6 @@ class Fix
 
         foreach ($answers as $answer) {
             $a = $answer->answer;
-            dump($a);
             if (is_array($a)) {
                 sort($a);
             }
