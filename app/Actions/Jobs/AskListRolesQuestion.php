@@ -20,12 +20,11 @@ class AskListRolesQuestion
         $question = Question::where('id', QuestionEnum::LIST_ROLES->value)->first();
 
         $llm = LLM::where('slug', LLMEnum::GEMMA2_2B->value)->first();
-        Ask::dispatch($llm, $rawJob, $question)->onQueue('prompt-llm');
-        Ask::dispatch($llm, $rawJob, $question)->onQueue('prompt-llm');
-        Ask::dispatch($llm, $rawJob, $question)->onQueue('prompt-llm');
-        Ask::dispatch($llm, $rawJob, $question)->onQueue('prompt-llm');
-        Ask::dispatch($llm, $rawJob, $question)->onQueue('prompt-llm');
-        Ask::dispatch($llm, $rawJob, $question)->onQueue('prompt-llm');
+
+        $numberOfAsks = 12;
+        for ($i = 0; $i < $numberOfAsks; $i++) {
+            Ask::dispatch($llm, $rawJob, $question)->onQueue('prompt-llm');
+        }
     }
 
     public function asJob(RawJob $rawJob): void
