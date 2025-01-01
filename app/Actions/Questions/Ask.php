@@ -34,9 +34,6 @@ class Ask
         );
 
         $a = $this->extractAnswerObjectFromLLMResponse($LLMResponse);
-        if ($a !== null) {
-            $a = json_encode($a);
-        }
 
         $answer = new Answer();
         $answer->question_id = $question->id;
