@@ -17,7 +17,7 @@ screen -dmS debug
 
 screen -S vite -X stuff './vendor/bin/sail npm run dev\n'
 screen -S storybook -X stuff './vendor/bin/sail npm run storybook\n'
-screen -S queue-default -X stuff './vendor/bin/sail artisan queue:listen --tries=1\n'
-screen -S queue-llm -X stuff './vendor/bin/sail artisan queue:listen --queue=prompt-llm\n'
+screen -S queue-default -X stuff './vendor/bin/sail artisan queue:listen --tries=1 & ./vendor/bin/sail artisan queue:listen --tries=1 & ./vendor/bin/sail artisan queue:listen --tries=1 & ./vendor/bin/sail artisan queue:listen --tries=1 & ./vendor/bin/sail artisan queue:listen --tries=1 & ./vendor/bin/sail artisan queue:listen --tries=1 & ./vendor/bin/sail artisan queue:listen --tries=1\n'
+screen -S queue-llm -X stuff './vendor/bin/sail artisan queue:listen --queue=prompt-llm & ./vendor/bin/sail artisan queue:listen --queue=prompt-llm & ./vendor/bin/sail artisan queue:listen --queue=prompt-llm & ./vendor/bin/sail artisan queue:listen --queue=prompt-llm & ./vendor/bin/sail artisan queue:listen --queue=prompt-llm\n'
 screen -S pail -X stuff './vendor/bin/sail artisan pail\n'
 screen -S debug -X stuff './vendor/bin/sail artisan dump-server\n'
