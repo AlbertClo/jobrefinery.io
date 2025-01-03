@@ -27,6 +27,10 @@ enum LLMEnum: string implements SeedableEnum
     case GEMMA_2B = "gemma:2b"; // ok
     case QWEN_4B = "qwen:4b"; // doesn't understand to answer in JSON
     case GEMMA2_2B = "gemma2:2b"; // good and light on VRAM usage
+    case  GEMMA2_9B = "gemma2:9b";
+    case GEMMA2_27B = "gemma2:27b";
+    case SOLAR_PRO = "solar-pro";
+    case FALCON_40B = "falcon:40b";
 
     public static function getModelClass(): string
     {
@@ -159,6 +163,38 @@ enum LLMEnum: string implements SeedableEnum
             self::GEMMA2_2B => [
                 "slug" => $this->value,
                 "name" => 'Gemma 2 2B',
+                "provider" => LLMProviderEnum::OLLAMA,
+                "description" => null,
+                "input_token_cost_per_million" => 0,
+                "output_token_cost_per_million" => 0,
+            ],
+            self::GEMMA2_9B => [
+                "slug" => $this->value,
+                "name" => 'Gemma 2 9B',
+                "provider" => LLMProviderEnum::OLLAMA,
+                "description" => null,
+                "input_token_cost_per_million" => 0,
+                "output_token_cost_per_million" => 0,
+            ],
+            self::GEMMA2_27B => [
+                "slug" => $this->value,
+                "name" => 'Gemma 2 27B',
+                "provider" => LLMProviderEnum::OLLAMA,
+                "description" => null,
+                "input_token_cost_per_million" => 0,
+                "output_token_cost_per_million" => 0,
+            ],
+            self::SOLAR_PRO => [
+                "slug" => $this->value,
+                "name" => 'Solar Pro',
+                "provider" => LLMProviderEnum::OLLAMA,
+                "description" => null,
+                "input_token_cost_per_million" => 0,
+                "output_token_cost_per_million" => 0,
+            ],
+            self::FALCON_40B => [
+                "slug" => $this->value,
+                "name" => 'Falcon 40B',
                 "provider" => LLMProviderEnum::OLLAMA,
                 "description" => null,
                 "input_token_cost_per_million" => 0,

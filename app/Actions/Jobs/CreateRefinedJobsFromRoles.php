@@ -6,6 +6,7 @@ use App\Models\Answer;
 use App\Models\AnswerAnalyticsSummary;
 use App\Models\RawJob;
 use App\Models\RefinedJob;
+use App\Models\SeedableEnums\LLMEnum;
 use App\Models\SeedableEnums\QuestionEnum;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -19,19 +20,19 @@ class CreateRefinedJobsFromRoles
      * The minimum number of matching answers required to create refined jobs. Because the LLMs aren't very reliable,
      * we need a lot of matching responses to make sure there is a high likelihood correctness.
      */
-    private int $minimumMatches = 5;
+    private int $minimumMatches = 4;
 
     /**
      * At least this percentage of the total answers must agree to be accepted as likely correct.
      */
-    private int $minimumConsensusPercentage = 50;
+    private int $minimumConsensusPercentage = 10;
 
     public function handle(RawJob $rawJob): void
     {
         /**
-         * We select in lowercase, to so that answers with different casing but same text are counted as the same
-         * answer. We do this to increase the consensus percentage, so that more answers are accepted automatically
-         * without human input.
+         * We select in lowercase, so that answers with different casing but same text are counted as the same
+         * answer. We do this to increase the consensus percentage, so that more answers are accepted
+         * automatically without human input.
          */
         $answersSummary = DB::query()
             ->select([
@@ -41,6 +42,8 @@ class CreateRefinedJobsFromRoles
             ])
             ->from('answers')
             ->where('raw_job_id', $rawJob->id)
+            ->where('author_id', LLMEnum::GEMMA2_27B->value) // Gemma 2 27B has better answers than most other LLMs.
+            ->where('answers.created_at', '>=', now()->subHours(16))
             ->groupBy(DB::raw('lower(answer::varchar)'))
             ->orderBy('percentage', 'desc')
             ->get();
@@ -98,6 +101,19 @@ class CreateRefinedJobsFromRoles
             $answerAnalyticsSummary->raw_job_id = $rawJob->id;
             $answerAnalyticsSummary->question_id = QuestionEnum::LIST_ROLES->getData()['id'];
         }
+
+        /**
+         * Reset all values so that we don't have left over data when we run this command multiple times.
+         */
+        $answerAnalyticsSummary->answer_1 = null;
+        $answerAnalyticsSummary->answer_1_count = null;
+        $answerAnalyticsSummary->answer_1_percentage = null;
+        $answerAnalyticsSummary->answer_2 = null;
+        $answerAnalyticsSummary->answer_2_count = null;
+        $answerAnalyticsSummary->answer_2_percentage = null;
+        $answerAnalyticsSummary->answer_3 = null;
+        $answerAnalyticsSummary->answer_3_count = null;
+        $answerAnalyticsSummary->answer_3_percentage = null;
 
         if (isset($answersSummary[0]) && $answersSummary[0]?->answer) {
             $answerAnalyticsSummary->answer_1 = $answersSummary[0]->answer;

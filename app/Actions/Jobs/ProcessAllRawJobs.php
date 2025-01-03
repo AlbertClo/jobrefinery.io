@@ -12,10 +12,12 @@ class ProcessAllRawJobs
 
     public function handle(): void
     {
-        $unprocessedRawJobs = RawJob::get();
-        //$unprocessedRawJobs = RawJob::doesntHave('answerAnalyticsSummaries')->get();
+        /**
+         * Later we will select only raw jobs that haven't been processed yet.
+         */
+        $rawJobs = RawJob::whereHas('answers')->get();
 
-        foreach ($unprocessedRawJobs as $rawJob) {
+        foreach ($rawJobs as $rawJob) {
             CreateRefinedJobsFromRoles::dispatch($rawJob);
         }
     }

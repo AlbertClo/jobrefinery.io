@@ -61,6 +61,11 @@ class RawJob extends Model
         'original_description_text',
     ];
 
+    public function answers(): HasMany
+    {
+        return $this->hasMany(Answer::class, 'raw_job_id');
+    }
+
     public function cachedPage(): BelongsTo
     {
         return $this->belongsTo(CachedPage::class, 'cached_page_id');

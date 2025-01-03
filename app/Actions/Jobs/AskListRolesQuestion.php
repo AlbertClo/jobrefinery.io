@@ -19,9 +19,9 @@ class AskListRolesQuestion
     {
         $question = Question::where('id', QuestionEnum::LIST_ROLES->value)->first();
 
-        $llm = LLM::where('slug', LLMEnum::GEMMA2_2B->value)->first();
+        $llm = LLM::where('slug', LLMEnum::GEMMA2_27B->value)->first();
 
-        $numberOfAsks = 12;
+        $numberOfAsks = 24;
         for ($i = 0; $i < $numberOfAsks; $i++) {
             Ask::dispatch($llm, $rawJob, $question)->onQueue('prompt-llm');
         }
