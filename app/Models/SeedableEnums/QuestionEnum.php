@@ -65,6 +65,7 @@ enum QuestionEnum: string implements SeedableEnum
 
                     Please expand the following abbreviations:
                     \"Eng\" should become \"Engineer\",
+                    \"Sr\" should become \"Senior\",
 
                     Make sure not to include trailing commas in the JSON array. Because that's not valid JSON.
 
