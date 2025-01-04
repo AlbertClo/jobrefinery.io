@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string $job_site_id
@@ -131,6 +131,11 @@ class RefinedJob extends Model
     public function jobSite(): BelongsTo
     {
         return $this->belongsTo(JobSite::class);
+    }
+
+    public function rawJob(): BelongsTo
+    {
+        return $this->belongsTo(RawJob::class);
     }
 
     public function cities(): BelongsTo

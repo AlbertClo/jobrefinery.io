@@ -40,6 +40,10 @@ class Question extends Model
 
     protected $fillable = ['question'];
 
+    protected $casts = [
+        'parameters' => 'array',
+    ];
+
     public function answers(): HasMany
     {
         return $this->hasMany(Answer::class);

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Jobs;
+namespace App\Actions\Jobs\Raw;
 
 use App\Models\Answer;
 use App\Models\AnswerAnalyticsSummary;
@@ -12,7 +12,10 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Lorisleiva\Actions\Concerns\AsAction;
 
-class CreateRefinedJobsFromRoles
+/**
+ * Use the roles extracted from the raw job to create refined jobs. For each role, we create a refined job.
+ */
+class CreateRefinedJobs
 {
     use AsAction;
 
@@ -68,7 +71,7 @@ class CreateRefinedJobsFromRoles
         $this->handle($rawJob);
     }
 
-    public string $commandSignature = 'jobs:create-refined-jobs-from-roles {rawJobId}';
+    public string $commandSignature = 'jobs:raw:create-refined-jobs {rawJobId}';
     public string $commandDescription = 'Use the roles in a raw job specification to create refined jobs';
     public string $commandHelp = 'Use the roles in a raw job specification to create refined jobs';
     public bool $commandHidden = false;

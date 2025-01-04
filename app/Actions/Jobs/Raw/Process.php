@@ -1,24 +1,21 @@
 <?php
 
-namespace App\Actions\Jobs;
+namespace App\Actions\Jobs\Raw;
 
 use App\Models\RawJob;
 use Illuminate\Console\Command;
 use Lorisleiva\Actions\Concerns\AsAction;
 
-class ProcessAllRawJobs
+class Process
 {
     use AsAction;
 
     public function handle(): void
     {
-        /**
-         * Later we will select only raw jobs that haven't been processed yet.
-         */
-        $rawJobs = RawJob::whereHas('answers')->get();
+        $unprocessedRawJobs = RawJob::whereHas('answers')->get();
 
-        foreach ($rawJobs as $rawJob) {
-            CreateRefinedJobsFromRoles::dispatch($rawJob);
+        foreach ($unprocessedRawJobs as $rawJob) {
+            CreateRefinedJobs::dispatch($rawJob);
         }
     }
 
@@ -27,7 +24,7 @@ class ProcessAllRawJobs
         $this->handle($rawJob);
     }
 
-    public string $commandSignature = 'jobs:process-all-raw-jobs';
+    public string $commandSignature = 'jobs:raw:process';
     public string $commandDescription = 'Create refined jobs for all unprocessed raw jobs';
     public string $commandHelp = 'Create refined jobs for all unprocessed raw jobs';
     public bool $commandHidden = false;

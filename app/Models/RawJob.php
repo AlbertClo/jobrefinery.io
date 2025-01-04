@@ -81,7 +81,7 @@ class RawJob extends Model
         return $this->morphMany(LLMResponse::class, 'related_entity');
     }
 
-    public function refinedJob(): HasMany
+    public function refinedJobs(): HasMany
     {
         return $this->hasMany(RefinedJob::class, 'raw_job_id');
     }

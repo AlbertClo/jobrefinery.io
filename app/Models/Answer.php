@@ -75,4 +75,9 @@ class Answer extends Model
     {
         return $this->morphTo(__FUNCTION__, 'author_type', 'author_id');
     }
+
+    public function relatedEntity(): MorphTo
+    {
+        return $this->morphTo(__FUNCTION__, 'related_entity_type', 'related_entity_id');
+    }
 }

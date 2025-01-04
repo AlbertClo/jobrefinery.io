@@ -2,7 +2,7 @@
 
 namespace App\Actions\JobSites\HackerNews;
 
-use App\Actions\Jobs\AskListRolesQuestion;
+use App\Actions\Jobs\Raw\AskListRolesQuestion;
 use App\Models\CachedPage;
 use App\Models\RawJob;
 use App\Models\SeedableEnums\JobSiteEnum;

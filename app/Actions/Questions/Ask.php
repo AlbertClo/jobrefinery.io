@@ -10,6 +10,7 @@ use App\Models\Question;
 use App\Services\LLM\Ollama;
 use Exception;
 use Illuminate\Console\Command;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Client\ConnectionException;
 use Lorisleiva\Actions\Concerns\AsAction;
 
@@ -21,15 +22,18 @@ class Ask
      * @throws ConnectionException
      * @throws Exception
      */
-    public function handle(LLM $llm, RawJob $rawJob, Question $question, float $temperature = 0.7): void
+    public function handle(LLM $llm, Model $relatedEntity, Question $question, array $parameters, float $temperature = 0.7): void
     {
-        $q = str_replace("\{\$jobDescription\}", $rawJob->original_description_text, $question->question);
+        $q = $question->question;
+        foreach ($parameters as $key => $parameter) {
+            $q = str_replace("\{\$$key\}", $parameter, $q);
+        }
 
         $ollama = new Ollama();
         $LLMResponse = $ollama->prompt(
             llm: $llm->slug,
             prompt: $q,
-            relatedEntity: $rawJob,
+            relatedEntity: $relatedEntity,
             temperature: $temperature
         );
 
@@ -37,21 +41,23 @@ class Ask
 
         $answer = new Answer();
         $answer->question_id = $question->id;
-        $answer->raw_job_id = $rawJob->id;
         $answer->llm_response_id = $LLMResponse->id;
         $answer->temperature = $LLMResponse->temperature;
         $answer->author_id = $llm->slug;
         $answer->author_type = $llm->getMorphClass();
         $answer->answer = $a;
         $answer->save();
+
+        $relatedEntity?->llmResponses()->save($answer);
     }
 
-    public function asJob(LLM $llm, RawJob $job, Question $question, float $temperature = 0.7): void
+    public function asJob(LLM $llm, Model $relatedEntity, Question $question, array $parameters, float $temperature = 0.7): void
     {
         $this->handle(
             llm: $llm,
-            rawJob: $job,
+            relatedEntity: $relatedEntity,
             question: $question,
+            parameters: $parameters,
             temperature: $temperature
         );
     }
@@ -89,10 +95,15 @@ class Ask
         $rawJob = RawJob::where('id', $rawJobId)->firstOrFail();
         $question = Question::where('id', $questionId)->firstOrFail();
 
+        $parameters = [
+            "jobDescription" => $rawJob->original_description_text,
+        ];
+
         $this->handle(
             llm: $llm,
-            rawJob: $rawJob,
+            relatedEntity: $rawJob,
             question: $question,
+            parameters: $parameters,
             temperature: 0.7
         );
 

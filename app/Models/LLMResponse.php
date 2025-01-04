@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string $prompt
@@ -65,7 +65,7 @@ class LLMResponse extends Model
         'temperature',
     ];
 
-    public function relatedLLM(): BelongsTo
+    public function LLM(): BelongsTo
     {
         return $this->belongsTo(LLM::class, 'llm', 'slug');
     }

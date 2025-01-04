@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Jobs;
+namespace App\Actions\Jobs\Raw;
 
 use App\Actions\Questions\Ask;
 use App\Models\LLM;
@@ -21,9 +21,18 @@ class AskListRolesQuestion
 
         $llm = LLM::where('slug', LLMEnum::GEMMA2_27B->value)->first();
 
+        $parameters = [
+            "jobDescription" => $rawJob->original_description_text,
+        ];
+
         $numberOfAsks = 24;
         for ($i = 0; $i < $numberOfAsks; $i++) {
-            Ask::dispatch($llm, $rawJob, $question)->onQueue('prompt-llm');
+            Ask::dispatch(
+                $llm,
+                $rawJob,
+                $question,
+                $parameters,
+            )->onQueue('prompt-llm');
         }
     }
 
@@ -32,9 +41,9 @@ class AskListRolesQuestion
         $this->handle($rawJob);
     }
 
-    public string $commandSignature = 'jobs:ask-list-roles-question {rawJobId}';
-    public string $commandDescription = 'Ask various LLMs to list the roles in a raw job specification';
-    public string $commandHelp = 'Ask various LLMs to list the roles in a raw job specification';
+    public string $commandSignature = 'jobs:raw:ask-roles-question {rawJobId}';
+    public string $commandDescription = 'Ask LLM to list the roles in a raw job specification';
+    public string $commandHelp = 'Ask LLM to list the roles in a raw job specification';
     public bool $commandHidden = false;
 
     public function asCommand(Command $command): int
