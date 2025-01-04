@@ -30,7 +30,7 @@ class AskSalaryQuestion
             "refinedJobHeading" => $refinedJob->heading,
         ];
 
-        $numberOfAsks = 8;
+        $numberOfAsks = 5;
         for ($i = 0; $i < $numberOfAsks; $i++) {
             Ask::dispatch(
                 $llm,

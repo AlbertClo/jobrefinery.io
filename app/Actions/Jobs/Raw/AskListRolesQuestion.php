@@ -25,7 +25,7 @@ class AskListRolesQuestion
             "jobDescription" => $rawJob->original_description_text,
         ];
 
-        $numberOfAsks = 24;
+        $numberOfAsks = 9;
         for ($i = 0; $i < $numberOfAsks; $i++) {
             Ask::dispatch(
                 $llm,
