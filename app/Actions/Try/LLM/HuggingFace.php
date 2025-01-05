@@ -17,7 +17,7 @@ class HuggingFace
     public function handle(string $prompt, bool $terse): object
     {
         $openAI = new \App\Services\LLM\HuggingFace();
-        return $openAI->prompt(LLMEnum::HF_LLAMA3_2_3B_INSTRUCT->value, $prompt . ($terse ? '. Be terse.' : ''));
+        return $openAI->prompt(LLMEnum::HF_GEMMA2_27B->value, $prompt . ($terse ? '. Be terse.' : ''));
     }
 
     public string $commandSignature = 'try:llm:hugging-face {prompt : e.g. What is the capital of France?} {--terse : Be terse}';
