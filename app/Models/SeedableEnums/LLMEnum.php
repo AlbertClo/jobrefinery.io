@@ -11,12 +11,17 @@ enum LLMEnum: string implements SeedableEnum
 {
     use SeedableEnumTrait;
 
+    // OpenAI
     case CLAUDE_3_HAIKU = "claude-3-haiku-20240307";
     case CLAUDE_3_SONNET = "claude-3-5-sonnet-20240620";
     case CLAUDE_3_OPUS = "claude-3-opus-20240229";
+
+    // Anthropic
     case GPT_4O_MINI = "gpt-4o-mini";
     case GPT_4_TURBO = "gpt-4-turbo";
     case GPT_4O = "gpt-4o";
+
+    // Ollama
     case LLAMA3_1_70B = "llama3.1:70b";
     case LLAMA3_2_1B = "llama3.2:1b";
     case LLAMA3_2_3B = "llama3.2:3b"; // best
@@ -33,6 +38,10 @@ enum LLMEnum: string implements SeedableEnum
     case FALCON_40B = "falcon:40b";
     case NEZAHATKORKMAZ_DEEPSEEK_V3 = "nezahatkorkmaz/deepseek-v3";
 
+    // Hugging Face
+    case HF_GEMMA2_27B = "google/gemma-2-27b-it";
+    case HF_LLAMA3_2_3B_INSTRUCT = "meta-llama/Llama-3.2-3B-Instruct";
+
     public static function getModelClass(): string
     {
         return LLM::class;
@@ -40,7 +49,7 @@ enum LLMEnum: string implements SeedableEnum
 
     public function getData(): array
     {
-        return match($this) {
+        return match ($this) {
             self::CLAUDE_3_HAIKU => [
                 "slug" => $this->value,
                 "name" => 'Claude 3.0 Haiku',
@@ -205,6 +214,22 @@ enum LLMEnum: string implements SeedableEnum
                 "slug" => $this->value,
                 "name" => 'Nezahatkorkmaz Deepseek V3',
                 "provider" => LLMProviderEnum::OLLAMA,
+                "description" => null,
+                "input_token_cost_per_million" => 0,
+                "output_token_cost_per_million" => 0,
+            ],
+            self::HF_GEMMA2_27B => [
+                "slug" => $this->value,
+                "name" => 'Hugging Face Gemma 2.7B',
+                "provider" => LLMProviderEnum::HUGGING_FACE,
+                "description" => null,
+                "input_token_cost_per_million" => 0,
+                "output_token_cost_per_million" => 0,
+            ],
+            self::HF_LLAMA3_2_3B_INSTRUCT => [
+                "slug" => $this->value,
+                "name" => 'Hugging Face Llama 3.2 3B Instruct',
+                "provider" => LLMProviderEnum::HUGGING_FACE,
                 "description" => null,
                 "input_token_cost_per_million" => 0,
                 "output_token_cost_per_million" => 0,

@@ -7,4 +7,5 @@ enum LLMProviderEnum: string
     case OPEN_AI = "OpenAI";
     case ANTHROPIC = "Anthropic";
     case OLLAMA = "Ollama";
+    case HUGGING_FACE = "Hugging Face";
 }

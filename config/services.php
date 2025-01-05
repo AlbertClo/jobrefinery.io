@@ -43,6 +43,10 @@ return [
         'api_key' => env('OPENAI_API_KEY'),
     ],
 
+    'hugging-face' => [
+        'api_key' => env('HUGGING_FACE_KEY'),
+    ],
+
     'ollama' => [
         'base_url' => env('REPLICATE_API_KEY', 'http://ollama:11434'),
     ],
