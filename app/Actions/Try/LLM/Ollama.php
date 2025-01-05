@@ -17,7 +17,7 @@ class Ollama
     public function handle(string $prompt, bool $terse): object
     {
         $ollama = new \App\Services\LLM\Ollama();
-        return $ollama->prompt(LLMEnum::LLAMA3_2_3B_INSTRUCT_Q80->value, $prompt . ($terse ? '. Be terse.' : ''));
+        return $ollama->prompt(LLMEnum::GEMMA2_27B->value, $prompt . ($terse ? '. Be terse.' : ''));
     }
 
     public string $commandSignature = 'try:llm:ollama {prompt : e.g. What is the capital of France?} {--terse : Be terse}';

@@ -35,7 +35,7 @@ class Ollama
 
         $uuid = Str::uuid();
         $promptTimestamp = DB::raw("to_timestamp(" . microtime(true) . ")");
-        $response = Http::timeout(0)->post('http://ollama:11434/api/generate', [
+        $response = Http::timeout(0)->post($this->url, [
             'model' => $llm,
             'prompt' => $prompt,
             'stream' => false,
