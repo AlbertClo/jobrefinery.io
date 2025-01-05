@@ -21,6 +21,10 @@ enum LLMEnum: string implements SeedableEnum
     case GPT_4_TURBO = "gpt-4-turbo";
     case GPT_4O = "gpt-4o";
 
+    // Hugging Face
+    case HF_GEMMA2_27B = "google/gemma-2-27b-it";
+    case HF_LLAMA3_2_3B_INSTRUCT = "meta-llama/Llama-3.2-3B-Instruct";
+
     // Ollama
     case LLAMA3_1_70B = "llama3.1:70b";
     case LLAMA3_2_1B = "llama3.2:1b";
@@ -37,10 +41,6 @@ enum LLMEnum: string implements SeedableEnum
     case SOLAR_PRO = "solar-pro";
     case FALCON_40B = "falcon:40b";
     case NEZAHATKORKMAZ_DEEPSEEK_V3 = "nezahatkorkmaz/deepseek-v3";
-
-    // Hugging Face
-    case HF_GEMMA2_27B = "google/gemma-2-27b-it";
-    case HF_LLAMA3_2_3B_INSTRUCT = "meta-llama/Llama-3.2-3B-Instruct";
 
     public static function getModelClass(): string
     {
@@ -97,6 +97,22 @@ enum LLMEnum: string implements SeedableEnum
                 "description" => null,
                 "input_token_cost_per_million" => 5,
                 "output_token_cost_per_million" => 15,
+            ],
+            self::HF_GEMMA2_27B => [
+                "slug" => $this->value,
+                "name" => 'Hugging Face Gemma 2.7B',
+                "provider" => LLMProviderEnum::HUGGING_FACE,
+                "description" => null,
+                "input_token_cost_per_million" => 0,
+                "output_token_cost_per_million" => 0,
+            ],
+            self::HF_LLAMA3_2_3B_INSTRUCT => [
+                "slug" => $this->value,
+                "name" => 'Hugging Face Llama 3.2 3B Instruct',
+                "provider" => LLMProviderEnum::HUGGING_FACE,
+                "description" => null,
+                "input_token_cost_per_million" => 0,
+                "output_token_cost_per_million" => 0,
             ],
             self::LLAMA3_1_70B => [
                 "slug" => $this->value,
@@ -214,22 +230,6 @@ enum LLMEnum: string implements SeedableEnum
                 "slug" => $this->value,
                 "name" => 'Nezahatkorkmaz Deepseek V3',
                 "provider" => LLMProviderEnum::OLLAMA,
-                "description" => null,
-                "input_token_cost_per_million" => 0,
-                "output_token_cost_per_million" => 0,
-            ],
-            self::HF_GEMMA2_27B => [
-                "slug" => $this->value,
-                "name" => 'Hugging Face Gemma 2.7B',
-                "provider" => LLMProviderEnum::HUGGING_FACE,
-                "description" => null,
-                "input_token_cost_per_million" => 0,
-                "output_token_cost_per_million" => 0,
-            ],
-            self::HF_LLAMA3_2_3B_INSTRUCT => [
-                "slug" => $this->value,
-                "name" => 'Hugging Face Llama 3.2 3B Instruct',
-                "provider" => LLMProviderEnum::HUGGING_FACE,
                 "description" => null,
                 "input_token_cost_per_million" => 0,
                 "output_token_cost_per_million" => 0,
