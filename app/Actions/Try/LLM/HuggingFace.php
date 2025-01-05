@@ -16,7 +16,7 @@ class HuggingFace
      */
     public function handle(string $prompt, bool $terse): object
     {
-        $openAI = new \App\Services\LLM\HuggingFace();
+        $openAI = new \App\Services\LLM\Providers\HuggingFace();
         return $openAI->prompt(LLMEnum::HF_GEMMA2_27B->value, $prompt . ($terse ? '. Be terse.' : ''));
     }
 

@@ -16,7 +16,7 @@ class OpenAI
      */
     public function handle(string $prompt, bool $terse): object
     {
-        $openAI = new \App\Services\LLM\OpenAI();
+        $openAI = new \App\Services\LLM\Providers\OpenAI();
         return $openAI->prompt(LLMEnum::GPT_4O_MINI->value, $prompt . ($terse ? '. Be terse.' : ''));
     }
 

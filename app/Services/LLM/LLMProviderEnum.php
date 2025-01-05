@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Enums;
+namespace App\Services\LLM;
 
-use App\Services\LLM\LLMInterface;
 use App\Services\LLM\Providers\Anthropic;
 use App\Services\LLM\Providers\HuggingFace;
 use App\Services\LLM\Providers\Ollama;

@@ -28,7 +28,7 @@ enum LLMEnum: string implements SeedableEnum
     // Ollama
     case LLAMA3_1_70B = "llama3.1:70b";
     case LLAMA3_2_1B = "llama3.2:1b";
-    case LLAMA3_2_3B = "llama3.2:3b"; // best
+    case LLAMA3_2_3B = "llama3.2:3b"; // fast
     case LLAMA3_2_3B_INSTRUCT_Q80 = "llama3.2:3b-instruct-q8_0";
     case LLAMA3_3_70B = "llama3.3"; // very slow
     case MIXTRAL_8X7B = "mixtral:8x7b"; // quite slow
@@ -37,7 +37,7 @@ enum LLMEnum: string implements SeedableEnum
     case QWEN_4B = "qwen:4b"; // doesn't understand to answer in JSON
     case GEMMA2_2B = "gemma2:2b"; // good and light on VRAM usage
     case GEMMA2_9B = "gemma2:9b";
-    case GEMMA2_27B = "gemma2:27b";
+    case GEMMA2_27B = "gemma2:27b"; // best one that fits in 24GB VRAM
     case SOLAR_PRO = "solar-pro";
     case FALCON_40B = "falcon:40b";
     case NEZAHATKORKMAZ_DEEPSEEK_V3 = "nezahatkorkmaz/deepseek-v3";

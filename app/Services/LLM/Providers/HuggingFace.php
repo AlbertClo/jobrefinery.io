@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Services\LLM;
+namespace App\Services\LLM\Providers;
 
 use App\Models\LLM;
 use App\Models\LLMResponse;
+use App\Services\LLM\LLMInterface;
 use Http;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Str;
 
-class HuggingFace
+class HuggingFace implements LLMInterface
 {
     private string $apiKey;
     private string $baseUrl = 'https://api-inference.huggingface.co/models/';
@@ -24,7 +25,6 @@ class HuggingFace
      */
     public function prompt(string $llm, string $prompt, Model $relatedEntity = null): LLMResponse
     {
-        dump($llm);
         $uuid = Str::uuid();
         $promptTimestamp = now();
         $response = Http::withHeaders([
@@ -39,8 +39,6 @@ class HuggingFace
         ]);
 
         $responseBody = json_decode($response->body());
-
-        dump($responseBody);
 
         $llmModel = LLM::where('slug', $llm)->first();
         $cost = $llmModel->input_token_cost_per_million * $responseBody->usage->prompt_tokens / 1000000 +

@@ -16,7 +16,7 @@ class Ollama
      */
     public function handle(string $prompt, bool $terse): object
     {
-        $ollama = new \App\Services\LLM\Ollama();
+        $ollama = new \App\Services\LLM\Providers\Ollama();
         return $ollama->prompt(LLMEnum::GEMMA2_27B->value, $prompt . ($terse ? '. Be terse.' : ''));
     }
 

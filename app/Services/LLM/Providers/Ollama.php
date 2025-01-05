@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Services\LLM;
+namespace App\Services\LLM\Providers;
 
 use App\Models\LLMResponse;
+use App\Services\LLM\LLMInterface;
 use Carbon\Carbon;
 use Http;
 use Illuminate\Database\Eloquent\Model;
@@ -10,7 +11,7 @@ use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-class Ollama
+class Ollama implements LLMInterface
 {
     private string $url;
 

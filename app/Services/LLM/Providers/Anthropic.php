@@ -1,22 +1,23 @@
 <?php
 
-namespace App\Services\LLM;
+namespace App\Services\LLM\Providers;
 
 use App\Models\LLM;
 use App\Models\LLMResponse;
+use App\Services\LLM\LLMInterface;
 use Http;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Str;
 
-class OpenAI
+class Anthropic implements LLMInterface
 {
     private string $apiKey;
-    private string $baseUrl = 'https://api.openai.com/v1/chat/completions';
+    private string $baseUrl = 'https://api.anthropic.com/v1/messages';
 
     public function __construct()
     {
-        $this->apiKey = config('services.openai.api_key');
+        $this->apiKey = config('services.anthropic.api_key');
     }
 
     /**
@@ -27,9 +28,11 @@ class OpenAI
         $uuid = Str::uuid();
         $promptTimestamp = now();
         $response = Http::withHeaders([
-            "Authorization" => "Bearer $this->apiKey",
+            "x-api-key" => $this->apiKey,
+            "anthropic-version" => "2023-06-01",
         ])->post($this->baseUrl, [
             "model" => $llm,
+            "max_tokens" => 1024,
             "messages" => [
                 ["role" => "user", "content" => $prompt]
             ]
@@ -38,18 +41,18 @@ class OpenAI
         $responseBody = json_decode($response->body());
 
         $llmModel = LLM::where('slug', $llm)->first();
-        $cost = $llmModel->input_token_cost_per_million * $responseBody->usage->prompt_tokens / 1000000 +
-            $llmModel->output_token_cost_per_million * $responseBody->usage->completion_tokens / 1000000;
+        $cost = $llmModel->input_token_cost_per_million * $responseBody->usage->input_tokens / 1000000 +
+            $llmModel->output_token_cost_per_million * $responseBody->usage->output_tokens / 1000000;
 
         $LLMResponse = new LLMResponse();
         $LLMResponse->id = $uuid;
         $LLMResponse->prompt = $prompt;
         $LLMResponse->prompt_timestamp = $promptTimestamp;
         $LLMResponse->llm = $llm;
-        $LLMResponse->response = $responseBody->choices[0]->message->content;
+        $LLMResponse->response = $responseBody->content[0]->text;
         $LLMResponse->response_timestamp = now();
-        $LLMResponse->input_tokens = $responseBody->usage->prompt_tokens;
-        $LLMResponse->output_tokens = $responseBody->usage->completion_tokens;
+        $LLMResponse->input_tokens = $responseBody->usage->input_tokens;
+        $LLMResponse->output_tokens = $responseBody->usage->output_tokens;
         $LLMResponse->cost = $cost;
         $LLMResponse->save();
 

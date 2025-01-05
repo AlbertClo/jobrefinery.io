@@ -16,7 +16,7 @@ class Anthropic
      */
     public function handle(string $prompt, bool $terse): object
     {
-        $anthropic = new \App\Services\LLM\Anthropic();
+        $anthropic = new \App\Services\LLM\Providers\Anthropic();
         return $anthropic->prompt(LLMEnum::CLAUDE_3_HAIKU->value ,$prompt . ($terse ? '. Be terse.' : ''));
     }
 
