@@ -15,20 +15,23 @@ class Fetch
 
     public function handle($url): void
     {
-        $response = Http::get($url);
+        $cachedPage = CachedPage::where('url_full', $url)->firstOrFail();
 
-        $parsedUrl = parse_url($url);
-        parse_str($parsedUrl['query'], $queryParams);
+        if (!$cachedPage) {
+            $response = Http::get($url);
 
-        $cachedPage = CachedPage::firstOrCreate([
-            'job_site_id' => JobSiteEnum::HACKER_NEWS->id(),
-            'url_full' => $url
-        ], [
-            'url_origin' => $parsedUrl['scheme'] . '://' . $parsedUrl['host'],
-            'url_pathname' => $parsedUrl['path'],
-            'query_params' => $queryParams,
-            'document' => $response->body()
-        ]);
+            $parsedUrl = parse_url($url);
+            parse_str($parsedUrl['query'], $queryParams);
+
+            $cachedPage = new CachedPage();
+            $cachedPage->job_site_id = JobSiteEnum::HACKER_NEWS->id();
+            $cachedPage->url_full = $url;
+            $cachedPage->url_origin = $parsedUrl['scheme'] . '://' . $parsedUrl['host'];
+            $cachedPage->url_pathname = $parsedUrl['path'];
+            $cachedPage->query_params = $queryParams;
+            $cachedPage->document = $response->body();
+            $cachedPage->save();
+        }
 
         Extract::dispatch($cachedPage);
     }
