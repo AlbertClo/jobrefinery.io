@@ -159,7 +159,7 @@ enum QuestionEnum: string implements SeedableEnum
 
                     Make sure not to include trailing commas in the JSON array. Because that's not valid JSON.
 
-                    salary_period should be either 'yearly' or 'monthly'. Not 'annually' or 'weekly'.
+                    salary_period should be one of these values: hourly, daily, weekly, monthly, yearly.
                     If not specified, assume 'yearly'.
 
                     Examples of answers in the correct format:

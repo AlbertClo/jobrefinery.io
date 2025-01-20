@@ -16,7 +16,7 @@ class JobsListController extends Controller
     {
         $rawJobs = DB::query()
             ->from('raw_jobs')
-            ->join('answers', 'answers.raw_job_id', '=', 'raw_jobs.id')
+            ->join('answers', 'answers.related_entity_id', '=', 'raw_jobs.id')
             ->join('questions', 'questions.id', '=', 'answers.question_id')
             ->select('raw_jobs.id', 'raw_jobs.original_description_html')
             ->selectRaw(

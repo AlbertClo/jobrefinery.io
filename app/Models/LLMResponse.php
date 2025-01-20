@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 /**
- *
+ * 
  *
  * @property string $id
  * @property string $prompt
@@ -41,6 +41,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
  * @method static \Illuminate\Database\Eloquent\Builder|LLMResponse whereResponse($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LLMResponse whereResponseTimestamp($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LLMResponse whereTemperature($value)
+ * @property-read \App\Models\LLM|null $LLM
  * @mixin \Eloquent
  */
 class LLMResponse extends Model

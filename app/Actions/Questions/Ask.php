@@ -7,7 +7,7 @@ use App\Models\RawJob;
 use App\Models\LLM;
 use App\Models\LLMResponse;
 use App\Models\Question;
-use App\Services\LLM\Ollama;
+use App\Services\LLM\LLMService;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Model;
@@ -22,15 +22,20 @@ class Ask
      * @throws ConnectionException
      * @throws Exception
      */
-    public function handle(LLM $llm, Model $relatedEntity, Question $question, array $parameters, float $temperature = 0.7): void
-    {
+    public function handle(
+        LLM $llm,
+        Model $relatedEntity,
+        Question $question,
+        array $parameters,
+        float $temperature = 0.7
+    ): Answer {
         $q = $question->question;
         foreach ($parameters as $key => $parameter) {
             $q = str_replace("\{\$$key\}", $parameter, $q);
         }
 
-        $ollama = new Ollama();
-        $LLMResponse = $ollama->prompt(
+        $llmService = new LLMService();
+        $LLMResponse = $llmService->prompt(
             llm: $llm->slug,
             prompt: $q,
             relatedEntity: $relatedEntity,
@@ -49,10 +54,17 @@ class Ask
         $answer->save();
 
         $relatedEntity?->llmResponses()->save($answer);
+
+        return $answer;
     }
 
-    public function asJob(LLM $llm, Model $relatedEntity, Question $question, array $parameters, float $temperature = 0.7): void
-    {
+    public function asJob(
+        LLM $llm,
+        Model $relatedEntity,
+        Question $question,
+        array $parameters,
+        float $temperature = 0.7
+    ): void {
         $this->handle(
             llm: $llm,
             relatedEntity: $relatedEntity,
@@ -113,7 +125,7 @@ class Ask
     /**
      * @throws Exception
      */
-    public function extractAnswerObjectFromLLMResponse(LLMResponse $llmResponse): array|null
+    public function extractAnswerObjectFromLLMResponse(LLMResponse $llmResponse): ?array
     {
         $response = $llmResponse->response;
         $start = strpos($response, '{');
@@ -125,20 +137,32 @@ class Ask
 
         $json = substr($response, $start, $end - $start + 1);
         $responseArray = json_decode($json, true);
-        if ($responseArray === null && json_last_error() !== JSON_ERROR_NONE) {
+
+        if ($responseArray === null || !isset($responseArray['answer'])) {
             return null;
         }
 
-        if (!isset($responseArray['answer'])) {
-            return null;
+        $responseArray['answer'] = $this->sortArraysRecursively($responseArray['answer']);
+
+        return $responseArray;
+    }
+
+    private function sortArraysRecursively($value)
+    {
+        if (!is_array($value)) {
+            return $value;
         }
 
-        if (is_string($responseArray['answer'])) {
-            return [$responseArray['answer']];
+        $isStringArray = array_is_list($value) && count(array_filter($value, 'is_string')) === count($value);
+
+        foreach ($value as $key => $item) {
+            $value[$key] = $this->sortArraysRecursively($item);
         }
 
-        sort($responseArray['answer']);
+        if ($isStringArray) {
+            sort($value);
+        }
 
-        return $responseArray['answer'];
+        return $value;
     }
 }

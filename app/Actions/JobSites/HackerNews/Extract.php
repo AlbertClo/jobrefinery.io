@@ -2,10 +2,13 @@
 
 namespace App\Actions\JobSites\HackerNews;
 
-use App\Actions\Jobs\Raw\AskListRolesQuestion;
+use App\Actions\Jobs\Raw\CreateRefinedJobs;
+use App\Actions\Questions\Resolve;
 use App\Models\CachedPage;
+use App\Models\Question;
 use App\Models\RawJob;
 use App\Models\SeedableEnums\JobSiteEnum;
+use App\Models\SeedableEnums\QuestionEnum;
 use Illuminate\Console\Command;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Symfony\Component\DomCrawler\Crawler;
@@ -55,13 +58,19 @@ class Extract
         $jobPosts = array_values(array_filter($jobPosts));
 
         foreach ($jobPosts as $jobPost) {
-            $job = RawJob::where('direct_link', $jobPost['direct_link'])->first();
-            if ($job === null) {
-                $job = RawJob::create($jobPost);
+            $rawJob = RawJob::where('direct_link', $jobPost['direct_link'])->first();
+            if ($rawJob === null) {
+                $rawJob = RawJob::create($jobPost);
             } else {
-                $job->update($jobPost);
+                $rawJob->update($jobPost);
             }
-            AskListRolesQuestion::dispatch($job);
+
+            Resolve::dispatch(
+                Question::where('id', QuestionEnum::LIST_ROLES->value)->first(),
+                ["jobDescription" => $rawJob->original_description_text], //todo can we move parameters somewhere else so we need to pass fewer args to Resolve?
+                $rawJob,
+                CreateRefinedJobs::class,
+            )->onQueue('prompt-llm');
         }
     }
 
@@ -102,8 +111,14 @@ class Extract
         $html = $node->html();
 
         // Replace block elements with newlines
-        $html = str_replace(['</p>', '</div>', '</br>', '<br>', '<br/>', '</h1>', '</h2>', '</h3>', '</h4>', '</h5>', '</h6>'], "\n\n", $html);
-        $html = str_replace(['<p>', '<div>', '<br>', '<br>', '<br/>', '<h1>', '<h2>', '<h3>', '<h4>', '<h5>', '<h6>'], "\n\n", $html);
+        $html = str_replace(
+            ['</p>', '</div>', '</br>', '<br>', '<br/>', '</h1>', '</h2>', '</h3>', '</h4>', '</h5>', '</h6>'],
+            "\n\n",
+            $html
+        );
+        $html = str_replace(['<p>', '<div>', '<br>', '<br>', '<br/>', '<h1>', '<h2>', '<h3>', '<h4>', '<h5>', '<h6>'],
+            "\n\n",
+            $html);
 
         // Strip all HTML tags
         $text = strip_tags($html);

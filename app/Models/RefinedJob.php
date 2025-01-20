@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Enums\SalaryPeriodEnum;
+use App\Models\SeedableEnums\CurrencyEnum;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -89,6 +91,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|RefinedJob whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|RefinedJob withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|RefinedJob withoutTrashed()
+ * @property-read \App\Models\RawJob $rawJob
+ * @property string|null $salary_period
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|RefinedJob whereSalaryPeriod($value)
  * @mixin \Eloquent
  */
 class RefinedJob extends Model
@@ -116,12 +121,19 @@ class RefinedJob extends Model
         'salary_from',
         'salary_to',
         'salary_currency',
+        'salary_period',
         'salary_in_usd_from',
         'salary_in_usd_to',
         'timezone_from',
         'timezone_to',
         'published_at',
     ];
+
+    protected $casts = [
+        'salary_currency' => CurrencyEnum::class,
+        'salary_period' => SalaryPeriodEnum::class,
+    ];
+
 
     public function cachedPage(): BelongsTo
     {

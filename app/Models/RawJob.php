@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- *
+ * 
  *
  * @property string $id
  * @property string $cached_page_id
@@ -45,6 +45,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|RawJob whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|RawJob withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|RawJob withoutTrashed()
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\AnswerAnalyticsSummary> $answerAnalyticsSummaries
+ * @property-read int|null $answer_analytics_summaries_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Answer> $answers
+ * @property-read int|null $answers_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\RefinedJob> $refinedJobs
+ * @property-read int|null $refined_jobs_count
  * @mixin \Eloquent
  */
 class RawJob extends Model

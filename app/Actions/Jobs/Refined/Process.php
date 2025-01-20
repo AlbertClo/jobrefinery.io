@@ -2,11 +2,15 @@
 
 namespace App\Actions\Jobs\Refined;
 
+use App\Actions\Questions\Resolve;
 use App\Models\RawJob;
 use App\Models\RefinedJob;
 use Illuminate\Console\Command;
 use Lorisleiva\Actions\Concerns\AsAction;
 
+/**
+ * @deprecated
+ */
 class Process
 {
     use AsAction;
@@ -17,6 +21,15 @@ class Process
 
         foreach ($refinedJobs as $refinedJob) {
             AskSalaryQuestion::dispatch($refinedJob);
+
+            Resolve::dispatch(
+                $question,
+                $parameters,
+                $relatedEntity,
+                $onConsensusCallback,
+                $consensusMatches,
+                $llmSlug,
+            )->onQueue('prompt-llm');
         }
     }
 

@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 
 /**
- *
+ * 
  *
  * @property string $id
  * @property string $summary
@@ -29,6 +29,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder|Question whereUpdatedAt($value)
  * @property string $related_field The related column in the refined_jobs table
  * @method static \Illuminate\Database\Eloquent\Builder|Question whereRelatedField($value)
+ * @property array|null $parameters
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\AnswerAnalyticsSummary> $answerAnalyticsSummaries
+ * @property-read int|null $answer_analytics_summaries_count
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Question whereParameters($value)
  * @mixin \Eloquent
  */
 class Question extends Model

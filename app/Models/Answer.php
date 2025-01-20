@@ -10,22 +10,22 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 
 /**
- *
+ * 
  *
  * @property string $id
  * @property string $question_id
- * @property string $raw_job_id
  * @property string $llm_response_id
- * @property float|null $temperature
  * @property string $author_id
  * @property string $author_type
- * @property string $answer
- * @property string|null $refined_answer
+ * @property float|null $temperature
+ * @property array|null $answer
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $related_entity_id
+ * @property string|null $related_entity_type
  * @property-read Model|\Eloquent $author
  * @property-read \App\Models\Question $question
- * @property-read \App\Models\RawJob $rawJob
+ * @property-read Model|\Eloquent|null $relatedEntity
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Answer newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Answer newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Answer query()
@@ -36,10 +36,12 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Answer whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Answer whereLlmResponseId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Answer whereQuestionId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Answer whereRawJobId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Answer whereRefinedAnswer($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Answer whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Answer whereRelatedEntityId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Answer whereRelatedEntityType($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Answer whereTemperature($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Answer whereUpdatedAt($value)
+ * @property string|null $salary_period
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Answer whereSalaryPeriod($value)
  * @mixin \Eloquent
  */
 class Answer extends Model
@@ -64,11 +66,6 @@ class Answer extends Model
     public function question(): BelongsTo
     {
         return $this->belongsTo(Question::class);
-    }
-
-    public function rawJob(): BelongsTo
-    {
-        return $this->belongsTo(RawJob::class);
     }
 
     public function author(): MorphTo
