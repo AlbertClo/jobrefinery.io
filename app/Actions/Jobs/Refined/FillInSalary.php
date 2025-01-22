@@ -14,10 +14,10 @@ class FillInSalary
 
     public function handle(RefinedJob $refinedJob, Answer $answer): void
     {
-        $refinedJob->salary_from = $answer->answer['answer']['salary_from'] ?? null;
-        $refinedJob->salary_to = $answer->answer['answer']['salary_to'] ?? null;
-        $refinedJob->salary_period = $answer->answer['answer']['salary_period'] ? SalaryPeriodEnum::from(strtolower($answer->answer['answer']['salary_period'])) : null;
-        $refinedJob->salary_currency = $answer->answer['answer']['salary_currency'] ? CurrencyEnum::from(strtoupper($answer->answer['answer']['salary_currency'])) : null;
+        $refinedJob->salary_from = $answer->answer['salary_from'] ?? null;
+        $refinedJob->salary_to = $answer->answer['salary_to'] ?? null;
+        $refinedJob->salary_period = $answer->answer['salary_period'] ? SalaryPeriodEnum::from(strtolower($answer->answer['salary_period'])) : null;
+        $refinedJob->salary_currency = $answer->answer['salary_currency'] ? CurrencyEnum::from(strtoupper($answer->answer['salary_currency'])) : null;
         $refinedJob->save();
     }
 

@@ -142,27 +142,37 @@ class Ask
             return null;
         }
 
-        $responseArray['answer'] = $this->sortArraysRecursively($responseArray['answer']);
+        $answer = $responseArray['answer'];
 
-        return $responseArray;
+        // Special case for single string answers
+        if (is_string($answer)) {
+            return [$answer];
+        }
+
+        return $this->sortArraysRecursively($answer);
     }
 
     private function sortArraysRecursively($value)
     {
+        // If not an array, return as is (including strings)
         if (!is_array($value)) {
             return $value;
         }
 
+        // Process all elements in the array/object
         $isStringArray = array_is_list($value) && count(array_filter($value, 'is_string')) === count($value);
+        $result = [];
 
         foreach ($value as $key => $item) {
-            $value[$key] = $this->sortArraysRecursively($item);
+            $result[$key] = $this->sortArraysRecursively($item);
         }
 
+        // Only sort if it's a plain array of strings
         if ($isStringArray) {
-            sort($value);
+            sort($result);
         }
 
-        return $value;
+        return $result;
     }
+
 }

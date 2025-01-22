@@ -64,13 +64,12 @@ test('it preserves salary object structure', function () {
 
     expect($result)
         ->toBeArray()
-        ->toHaveKey('answer')
-        ->and($result['answer'])
         ->toHaveKey('salary_from', 160000)
         ->toHaveKey('salary_to', 220000)
         ->toHaveKey('salary_currency', 'USD')
         ->toHaveKey('salary_period', 'yearly');
 });
+
 
 test('it preserves object structure', function () {
     $ask = new Ask();
@@ -95,17 +94,14 @@ test('it preserves object structure', function () {
 
     expect($result)
         ->toBeArray()
-        ->toHaveKey('answer')
-        ->and($result['answer'])
-        ->toBeArray()
         ->toHaveKey('id', 123)
         ->toHaveKey('name', 'Test')
         ->toHaveKey('details')
-        ->and($result['answer']['details'])
+        ->and($result['details'])
         ->toHaveKey('active', true)
         ->toHaveKey('count', 42)
         ->toHaveKey('tags', ['a', 'b', 'c'])
-        ->and($result['answer']['metadata'])
+        ->and($result['metadata'])
         ->toHaveKey('created_at', '2024-01-20')
         ->toHaveKey('status', 'active');
 });
@@ -126,8 +122,6 @@ test('it sorts nested string arrays while preserving structure', function () {
 
     expect($result)
         ->toBeArray()
-        ->toHaveKey('answer')
-        ->and($result['answer'])
         ->toHaveKey('categories', ['Backend Engineer', 'DevOps Engineer', 'Software Engineer'])
         ->toHaveKey('levels', ['Junior', 'Mid', 'Senior'])
         ->toHaveKey('location', 'Remote')
@@ -148,7 +142,8 @@ test('it sorts deeply nested string arrays', function () {
 
     $result = $ask->extractAnswerObjectFromLLMResponse($llmResponse);
 
-    expect($result['answer']['jobs'])
+    expect($result['jobs'])
         ->toHaveKey('engineering', ['Backend', 'DevOps', 'Frontend'])
         ->toHaveKey('design', ['Product', 'UI', 'UX']);
 });
+
