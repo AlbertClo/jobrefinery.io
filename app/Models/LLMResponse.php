@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string $prompt
@@ -64,6 +64,11 @@ class LLMResponse extends Model
         'related_entity_id',
         'related_entity_type',
         'temperature',
+        'extra',
+    ];
+
+    protected $casts = [
+        'extra' => 'array',
     ];
 
     public function LLM(): BelongsTo

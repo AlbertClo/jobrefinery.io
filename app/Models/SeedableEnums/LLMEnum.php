@@ -21,6 +21,9 @@ enum LLMEnum: string implements SeedableEnum
     case GPT_4_TURBO = "gpt-4-turbo";
     case GPT_4O = "gpt-4o";
 
+    // DeepSeek
+    case DEEPSEEK_V3 = "deepseek-chat";
+
     // Hugging Face
     case HF_GEMMA2_27B = "google/gemma-2-27b-it";
     case HF_LLAMA3_2_3B_INSTRUCT = "meta-llama/Llama-3.2-3B-Instruct";
@@ -97,6 +100,14 @@ enum LLMEnum: string implements SeedableEnum
                 "description" => null,
                 "input_token_cost_per_million" => 5,
                 "output_token_cost_per_million" => 15,
+            ],
+            self::DEEPSEEK_V3 => [
+                "slug" => $this->value,
+                "name" => 'DeepSeek V3',
+                "provider" => LLMProviderEnum::DEEPSEEK,
+                "description" => null,
+                "input_token_cost_per_million" => 0.27,
+                "output_token_cost_per_million" => 1.1,
             ],
             self::HF_GEMMA2_27B => [
                 "slug" => $this->value,

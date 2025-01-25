@@ -23,7 +23,7 @@ class Resolve
         Model $relatedEntity,
         string|null $consensusJobClass = null,
         int $consensusMatches = 3,
-        string $llmSlug = LLMEnum::GEMMA2_27B->value,
+        string $llmSlug = LLMEnum::DEEPSEEK_V3->value,
     ): void {
         $answersSummary = DB::query()
             ->select([
@@ -81,7 +81,7 @@ class Resolve
         Model $relatedEntity,
         string|null $consensusJobClass = null,
         int $consensusMatches = 3,
-        string $llmSlug = LLMEnum::GEMMA2_27B->value,
+        string $llmSlug = LLMEnum::DEEPSEEK_V3->value,
     ): void {
         $this->handle(
             $question,

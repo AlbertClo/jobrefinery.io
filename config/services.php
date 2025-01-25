@@ -43,6 +43,10 @@ return [
         'api_key' => env('OPENAI_API_KEY'),
     ],
 
+    'deepseek' => [
+        'api_key' => env('DEEPSEEK_API_KEY'),
+    ],
+
     'hugging-face' => [
         'api_key' => env('HUGGING_FACE_KEY'),
     ],
