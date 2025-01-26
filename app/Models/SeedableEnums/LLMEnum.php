@@ -24,6 +24,12 @@ enum LLMEnum: string implements SeedableEnum
     // DeepSeek
     case DEEPSEEK_V3 = "deepseek-chat";
 
+    // AWS Bedrock
+    case NOVA_MICRO = "amazon.nova-micro-v1:0";
+    case NOVA_LITE = "amazon.nova-lite-v1:0";
+    case TITAN_EXPRESS = "amazon.titan-text-express-v1";
+    case TITAN_PREMIER = "amazon.titan-text-premier-v1:0";
+
     // Hugging Face
     case HF_GEMMA2_27B = "google/gemma-2-27b-it";
     case HF_LLAMA3_2_3B_INSTRUCT = "meta-llama/Llama-3.2-3B-Instruct";
@@ -105,6 +111,38 @@ enum LLMEnum: string implements SeedableEnum
                 "slug" => $this->value,
                 "name" => 'DeepSeek V3',
                 "provider" => LLMProviderEnum::DEEPSEEK,
+                "description" => null,
+                "input_token_cost_per_million" => 0.27,
+                "output_token_cost_per_million" => 1.1,
+            ],
+            self::NOVA_MICRO => [
+                "slug" => $this->value,
+                "name" => 'Nova Micro',
+                "provider" => LLMProviderEnum::AWS_BEDROCK,
+                "description" => null,
+                "input_token_cost_per_million" => 0.035,
+                "output_token_cost_per_million" => 0.14,
+            ],
+            self::NOVA_LITE => [
+                "slug" => $this->value,
+                "name" => 'Nova Lite',
+                "provider" => LLMProviderEnum::AWS_BEDROCK,
+                "description" => null,
+                "input_token_cost_per_million" => 0.06,
+                "output_token_cost_per_million" => 0.24,
+            ],
+            self::TITAN_EXPRESS => [
+                "slug" => $this->value,
+                "name" => 'Titan Express',
+                "provider" => LLMProviderEnum::AWS_BEDROCK,
+                "description" => null,
+                "input_token_cost_per_million" => 0.27,
+                "output_token_cost_per_million" => 1.1,
+            ],
+            self::TITAN_PREMIER => [
+                "slug" => $this->value,
+                "name" => 'Titan Premier',
+                "provider" => LLMProviderEnum::AWS_BEDROCK,
                 "description" => null,
                 "input_token_cost_per_million" => 0.27,
                 "output_token_cost_per_million" => 1.1,
