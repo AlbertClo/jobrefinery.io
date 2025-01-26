@@ -81,7 +81,7 @@ class Resolve
         Model $relatedEntity,
         string|null $consensusJobClass = null,
         int $consensusMatches = 3,
-        string $llmSlug = LLMEnum::NOVA_LITE->value,
+        string $llmSlug = LLMEnum::NOVA_MICRO->value,
     ): void {
         $this->handle(
             $question,
