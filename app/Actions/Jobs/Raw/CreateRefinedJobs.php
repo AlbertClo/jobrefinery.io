@@ -30,6 +30,7 @@ class CreateRefinedJobs
                 $refinedJob->cached_page_id = $rawJob->cached_page_id;
                 $refinedJob->job_site_id = $rawJob->job_site_id;
                 $refinedJob->heading = $role;
+                $refinedJob->post_date = $rawJob->post_date;
             }
 
             $refinedJob->save();
