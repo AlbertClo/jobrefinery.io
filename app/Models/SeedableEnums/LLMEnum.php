@@ -24,6 +24,11 @@ enum LLMEnum: string implements SeedableEnum
     // DeepSeek
     case DEEPSEEK_V3 = "deepseek-chat";
 
+    // Alibaba Cloud
+    case QWEN_MAX = "qwen-max";
+    case QWEN_PLUS = "qwen-plus";
+    case QWEN_TURBO = "qwen-turbo";
+
     // AWS Bedrock
     case NOVA_MICRO = "amazon.nova-micro-v1:0";
     case NOVA_LITE = "amazon.nova-lite-v1:0";
@@ -114,6 +119,30 @@ enum LLMEnum: string implements SeedableEnum
                 "description" => null,
                 "input_token_cost_per_million" => 0.27,
                 "output_token_cost_per_million" => 1.1,
+            ],
+            self::QWEN_MAX => [
+                "slug" => $this->value,
+                "name" => 'Qwen Max',
+                "provider" => LLMProviderEnum::ALIBABA,
+                "description" => null,
+                "input_token_cost_per_million" => 10.00,
+                "output_token_cost_per_million" => 30.00,
+            ],
+            self::QWEN_PLUS => [
+                "slug" => $this->value,
+                "name" => 'Qwen Max',
+                "provider" => LLMProviderEnum::ALIBABA,
+                "description" => null,
+                "input_token_cost_per_million" => 3.00,
+                "output_token_cost_per_million" => 9.00,
+            ],
+            self::QWEN_TURBO => [
+                "slug" => $this->value,
+                "name" => 'Qwen Max',
+                "provider" => LLMProviderEnum::ALIBABA,
+                "description" => null,
+                "input_token_cost_per_million" => 0.40,
+                "output_token_cost_per_million" => 1.20,
             ],
             self::NOVA_MICRO => [
                 "slug" => $this->value,

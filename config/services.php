@@ -53,6 +53,10 @@ return [
         'api_key' => env('DEEPSEEK_API_KEY'),
     ],
 
+    'alibaba' => [
+        'api_key' => env('ALIBABA_API_KEY'),
+    ],
+
     'hugging-face' => [
         'api_key' => env('HUGGING_FACE_KEY'),
     ],
