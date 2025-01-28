@@ -1,14 +1,16 @@
 <?php
 
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\JobsListController;
+use App\Http\Controllers\Admin\StatsController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\JobsListController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\StatsController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', HomeController::class);
+
+Route::get('/jobs/{id}', App\Http\Controllers\Jobs\ShowController::class)->name('jobs.show');
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {

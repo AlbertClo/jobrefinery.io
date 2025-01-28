@@ -7,8 +7,8 @@ import { Link } from '@inertiajs/vue3';
 import ThemeCyclerButton from '@/components/job-refinery/theme-switchers/theme-cycler-button/ThemeCyclerButton.vue';
 
 const navigation = [
-	{ name: 'Jobs', href: '#' },
-	{ name: 'Features', href: '#' },
+	// { name: 'Jobs', href: '#' },
+	// { name: 'Features', href: '#' },
 ];
 
 const mobileMenuOpen = ref(false);
@@ -92,7 +92,7 @@ const mobileMenuOpen = ref(false);
 			</Dialog>
 		</header>
 
-		<div class="flex min-h-screen items-center justify-center">
+		<div class="flex min-h-screen flex-col items-center justify-start">
 			<slot></slot>
 		</div>
 	</div>

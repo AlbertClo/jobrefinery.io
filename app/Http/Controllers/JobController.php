@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-class HomeController extends Controller
+class JobController extends Controller
 {
     public function __invoke(Request $request)
     {
@@ -17,7 +17,7 @@ class HomeController extends Controller
             ->limit(3000)
             ->get();
 
-        return Inertia::render('Home', [
+        return Inertia::render('Welcome', [
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
             'laravelVersion' => Application::VERSION,
