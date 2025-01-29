@@ -63,12 +63,12 @@ const props = defineProps<{ rawJobs: RawJob[]; count: number }>();
 										class="flex flex-col gap-4 rounded-lg bg-background"
 									>
 										<div>
-											<span class="text-sm text-foreground/50">Author:</span><br />
+											<span class="text-foreground/50 text-sm">Author:</span><br />
 											<span class="text-nowrap text-primary">{{ answer.author }}</span>
 										</div>
 
 										<div>
-											<span class="text-sm text-foreground/50">Answer:</span><br />
+											<span class="text-foreground/50 text-sm">Answer:</span><br />
 											<ul class="ml-4 list-disc">
 												<li v-for="a in formatAnswer(answer.answer)" class="text-nowrap">
 													{{ a }}

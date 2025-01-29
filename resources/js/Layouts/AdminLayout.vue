@@ -254,7 +254,7 @@ const sidebarOpen = ref(false);
 				</button>
 
 				<!-- Separator -->
-				<div class="h-6 w-px bg-card-foreground/10 lg:hidden" aria-hidden="true" />
+				<div class="bg-card-foreground/10 h-6 w-px lg:hidden" aria-hidden="true" />
 
 				<div class="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
 					<form class="relative flex flex-1" action="#" method="GET">
@@ -279,7 +279,7 @@ const sidebarOpen = ref(false);
 						</button>
 
 						<!-- Separator -->
-						<div class="hidden lg:block lg:h-6 lg:w-px lg:bg-card-foreground/10" aria-hidden="true" />
+						<div class="lg:bg-card-foreground/10 hidden lg:block lg:h-6 lg:w-px" aria-hidden="true" />
 
 						<!-- Profile dropdown -->
 						<Menu as="div" class="relative">
