@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { Link } from '@inertiajs/vue3';
+import { Link, router } from '@inertiajs/vue3';
 import { Button } from '@/components/shadcn/button';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import { defineProps } from 'vue';
+import { Search } from 'lucide-vue-next';
 
 type RefinedJobType = {
 	id: number;
@@ -33,16 +34,18 @@ const props = defineProps<{
 				<!--				<div class="mx-auto max-w-2xl bg-cyan-400 text-center">a</div>-->
 			</div>
 		</div>
-		<div class="flex w-full flex-col justify-center bg-background p-4">
-			<div class="mx-auto flex w-[50rem] max-w-2xl flex-col gap-4 p-8">
-				<Link
-					v-for="job in refinedJobs"
-					:href="route('jobs.show', job.id)"
-					preserve-scroll
-					class="w-full rounded-md bg-foreground p-2 text-background"
-				>
-					{{ job.heading }}
-				</Link>
+		<div class="flex w-full flex-col items-center justify-center bg-background p-4">
+			<div class="z-100 -m-[14em]">
+				<div class="mx-auto flex w-[50rem] flex-col gap-4 py-8">
+					<Link
+						v-for="job in refinedJobs"
+						:href="route('jobs.show', job.id)"
+						preserve-scroll
+						class="w-full rounded bg-foreground p-2 text-background"
+					>
+						{{ job.heading }}
+					</Link>
+				</div>
 			</div>
 		</div>
 	</GuestLayout>

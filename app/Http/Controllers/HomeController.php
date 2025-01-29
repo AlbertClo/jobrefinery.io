@@ -12,10 +12,18 @@ class HomeController extends Controller
 {
     public function __invoke(Request $request)
     {
-        $refinedJobs = RefinedJob::query()
-            ->orderBy('post_date', 'desc')
-            ->limit(3000)
-            ->get();
+        $query = RefinedJob::query()
+            ->orderBy('post_date', 'desc');
+
+        if ($request->has('search')) {
+            $searchTerm = $request->input('search');
+            $query->where(function ($q) use ($searchTerm) {
+                $q->where('heading', 'like', "%{$searchTerm}%")
+                    ->orWhere('description', 'like', "%{$searchTerm}%");
+            });
+        }
+
+        $refinedJobs = $query->limit(100)->get();
 
         return Inertia::render('Home', [
             'canLogin' => Route::has('login'),
@@ -23,6 +31,10 @@ class HomeController extends Controller
             'laravelVersion' => Application::VERSION,
             'phpVersion' => PHP_VERSION,
             'refinedJobs' => $refinedJobs,
+            'filters' => [
+                'search' => $request->input('search'),
+            ],
         ]);
     }
 }
+

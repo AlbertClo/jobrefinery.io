@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { Dialog, DialogPanel } from '@headlessui/vue';
 import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline';
 import { Button } from '@/components/shadcn/button';
-import { Link } from '@inertiajs/vue3';
+import { Link, router, usePage } from '@inertiajs/vue3';
 import ThemeCyclerButton from '@/components/job-refinery/theme-switchers/theme-cycler-button/ThemeCyclerButton.vue';
+import { Search } from 'lucide-vue-next';
+import Input from '@/components/shadcn/ui/input/Input.vue';
 
 const navigation = [
 	// { name: 'Jobs', href: '#' },
@@ -12,6 +14,12 @@ const navigation = [
 ];
 
 const mobileMenuOpen = ref(false);
+
+const searchTerm = ref(new URLSearchParams(window.location.search).get('search') || '');
+
+const search = () => {
+	router.get(route('home'), { search: searchTerm.value });
+};
 </script>
 
 <template>
@@ -34,6 +42,19 @@ const mobileMenuOpen = ref(false);
 					</button>
 				</div>
 				<div class="hidden lg:flex lg:gap-x-12">
+					<div class="relative w-[50rem] items-center py-4">
+						<Input
+							id="search"
+							type="text"
+							placeholder="Search..."
+							v-model="searchTerm"
+							class="w-full rounded-full bg-muted-foreground pl-12 text-foreground placeholder:text-foreground focus:outline-none focus-visible:ring-1 focus-visible:ring-card-foreground focus-visible:ring-offset-0"
+							@keyup.enter="search"
+						/>
+						<span class="absolute inset-y-0 left-[0.45rem] start-0 flex items-center justify-center px-2">
+							<Search class="mr-12 size-5 text-popover-foreground" />
+						</span>
+					</div>
 					<a
 						v-for="item in navigation"
 						:key="item.name"
