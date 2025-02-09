@@ -29,6 +29,7 @@ class CreateRefinedJobs
                 $refinedJob->raw_job_id = $rawJob->id;
                 $refinedJob->cached_page_id = $rawJob->cached_page_id;
                 $refinedJob->job_site_id = $rawJob->job_site_id;
+                $refinedJob->description = $rawJob->original_description_text;
                 $refinedJob->heading = $role;
                 $refinedJob->post_date = $rawJob->post_date;
             }
@@ -36,14 +37,14 @@ class CreateRefinedJobs
             $refinedJob->save();
 
             Resolve::dispatch(
-                Question::where('id', QuestionEnum::DETERMINE_SALARY->value)->first(),
-                [
+                question: Question::where('id', QuestionEnum::DETERMINE_SALARY->value)->first(),
+                parameters: [
                     "rawJobDescription" => $rawJob->original_description_text,
                     "extractedRoles" => implode(', ', $answer->answer),
                     "refinedJobHeading" => $refinedJob->heading,
                 ], //todo can we handle parameters better? I.e. could we determine the parameters automatically from inside Resolve? Maybe a function can be added onto the Question enum to determine the parameters?
-                $refinedJob,
-                FillInSalary::class,
+                relatedEntity: $refinedJob,
+                consensusJobClass: FillInSalary::class,
             )->onQueue('prompt-llm');
         }
     }
