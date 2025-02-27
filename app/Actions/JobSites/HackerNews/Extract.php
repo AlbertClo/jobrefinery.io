@@ -69,7 +69,7 @@ class Extract
                 question: Question::where('id', QuestionEnum::LIST_ROLES->value)->first(),
                 parameters: ["jobDescription" => $rawJob->original_description_text], //todo can we move parameters somewhere else so we need to pass fewer args to Resolve?
                 relatedEntity: $rawJob,
-                consensusJobClass: CreateRefinedJobs::class,
+                next: CreateRefinedJobs::class,
             )->onQueue('prompt-llm');
         }
     }

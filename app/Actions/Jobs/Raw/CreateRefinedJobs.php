@@ -44,7 +44,7 @@ class CreateRefinedJobs
                     "refinedJobHeading" => $refinedJob->heading,
                 ], //todo can we handle parameters better? I.e. could we determine the parameters automatically from inside Resolve? Maybe a function can be added onto the Question enum to determine the parameters?
                 relatedEntity: $refinedJob,
-                consensusJobClass: FillInSalary::class,
+                next: FillInSalary::class,
             )->onQueue('prompt-llm');
         }
     }

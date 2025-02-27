@@ -21,7 +21,7 @@ class Resolve
         Question $question,
         array $parameters,
         Model $relatedEntity,
-        string|null $consensusJobClass = null,
+        string|null $next = null,
         int $consensusMatches = 3,
         string $llmSlug = LLMEnum::DEEPSEEK_V3->value,
     ): void {
@@ -51,8 +51,8 @@ class Resolve
                 ->whereRaw("LOWER(answer::varchar) = ?", [$answersSummary[0]->answer])
                 ->first();
 
-            if ($consensusJobClass) {
-                $consensusJobClass::dispatch($relatedEntity, $answer)->onQueue('default');
+            if ($next) {
+                $next::dispatch($relatedEntity, $answer)->onQueue('default');
             }
         } else {
             $llm = LLM::where('slug', $llmSlug)->first();
@@ -68,7 +68,7 @@ class Resolve
                 $question,
                 $parameters,
                 $relatedEntity,
-                $consensusJobClass,
+                $next,
                 $consensusMatches,
                 $llmSlug,
             )->onQueue('prompt-llm');
